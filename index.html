@@ -1,3 +1,1092 @@
+<!-- 404 Fun Facts Page -->
+    <ul class="nav-links">
+      <li><a href="index.html">🏠 Home</a></li>
+      <li><a href="pages/planet-profiles.html">🪐 Planet Profiles</a></li>
+      <li><a href="pages/astronomy-101.html">📚 Astronomy 101</a></li>
+      <li><a href="pages/space-quiz.html">❓ Space Quiz</a></li>
+      <li><a href="pages/cosmic-explorer-timeline.html">🕰️ Cosmic Explorer Timeline</a></li>
+      <li><a href="pages/user-star-names.html">⭐ Name a Star</a></li>
+      <li><a href="pages/tech-innovation.html">🔬 Tech & Innovation</a></li>
+      <li><a href="pages/cosmic-art-gallery.html">🎨 Cosmic Art Gallery</a></li>
+      <li><a href="pages/discussion-forum.html">💬 Discussion Forum</a></li>
+    </ul>
+            <div class="timeline-event">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/8/8e/Human_Civilization.jpg" alt="Human Civilization" />
+              <h3>Human Civilization</h3>
+              <p>Modern humans appear about 200,000 years ago, eventually exploring the cosmos.</p>
+              <video src="https://www.nasa.gov/sites/default/files/atoms/video/humancivilization.mp4" controls poster="https://upload.wikimedia.org/wikipedia/commons/8/8e/Human_Civilization.jpg"></video>
+            </div>
+            <div class="timeline-event">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/9/9e/Space_Age.jpg" alt="Space Age" />
+              <h3>The Space Age</h3>
+              <p>1957: Sputnik launches, marking the beginning of human space exploration.</p>
+              <video src="https://www.nasa.gov/sites/default/files/atoms/video/spaceage.mp4" controls poster="https://upload.wikimedia.org/wikipedia/commons/9/9e/Space_Age.jpg"></video>
+            </div>
+            <div class="timeline-event">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/1/1e/Present_Day.jpg" alt="Present Day" />
+              <h3>Present Day</h3>
+              <p>We continue to explore the universe, searching for new worlds and understanding our cosmic origins.</p>
+              <video src="https://www.nasa.gov/sites/default/files/atoms/video/presentday.mp4" controls poster="https://upload.wikimedia.org/wikipedia/commons/1/1e/Present_Day.jpg"></video>
+            </div>
+          </div>
+        </div>
+      </section>
+  <meta name="description" content="Explore planets, black holes, calculate alien probabilities, and discover the wonders of space. Your ultimate cosmic adventure awaits!">
+  <meta name="keywords" content="space exploration, planets, exoplanets, black holes, astronomy, Drake equation, alien life, space travel, cosmos, universe, NASA, SpaceX">
+  <style>
+</head>
+<body>
+  <!-- Animated Stars Background -->
+  <div class="stars" id="stars"></div>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="logo" onclick="showSection('home')">🌌 Cosmic Explorer</div>
+    <ul class="nav-links">
+      <li onclick="showSection('home')" data-section="home" class="active">🏠 Home</li>
+      <!-- User Star Names Section -->
+      <section id="user-star-names" class="section">
+        <h2>Name a Star</h2>
+        <div class="star-naming-container">
+          <form id="starNameForm">
+            <label for="starNameInput">Enter your star name:</label>
+            <input type="text" id="starNameInput" maxlength="30" required placeholder="e.g. Nova Benja" />
+            <button type="submit">Name Star</button>
+          </form>
+          <div id="starMap" class="star-map">
+            <!-- Stars will be rendered here -->
+          </div>
+          <div id="starList" class="star-list">
+            <h3>Your Named Stars</h3>
+            <ul id="namedStars"></ul>
+          </div>
+        </div>
+        <p>Give a star your own name and see it appear in the virtual sky! Track your named stars and share with friends.</p>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6e/Star_Field.jpg" alt="Star Field" style="width:100%;max-width:600px;border-radius:12px;margin:24px auto;display:block;" />
+      </section>
+
+      <!-- Tech & Innovation Coverage Section -->
+      <section id="tech-innovation" class="section">
+        <h2>Tech & Innovation Coverage</h2>
+        <div class="tech-innovation-container">
+          <div class="tech-item">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/3/3a/Mars_Rover_Perseverance.jpg" alt="Mars Rover Perseverance" />
+            <h3>Mars Rover Perseverance</h3>
+            <p>NASA's Perseverance rover explores Mars, searching for signs of ancient life and collecting samples for future return missions.</p>
+            <video src="https://www.nasa.gov/sites/default/files/atoms/video/perseverance.mp4" controls poster="https://upload.wikimedia.org/wikipedia/commons/3/3a/Mars_Rover_Perseverance.jpg"></video>
+          </div>
+          <div class="tech-item">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/James_Webb_Space_Telescope.jpg" alt="James Webb Space Telescope" />
+            <h3>James Webb Space Telescope</h3>
+            <p>The JWST is revolutionizing astronomy with its ability to see the earliest galaxies and study exoplanet atmospheres.</p>
+            <video src="https://www.nasa.gov/sites/default/files/atoms/video/jwst.mp4" controls poster="https://upload.wikimedia.org/wikipedia/commons/5/5e/James_Webb_Space_Telescope.jpg"></video>
+          </div>
+          <div class="tech-item">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/SpaceX_Starship.jpg" alt="SpaceX Starship" />
+            <h3>SpaceX Starship</h3>
+            <p>SpaceX's Starship aims to make interplanetary travel possible, with reusable rockets and ambitious Mars missions.</p>
+            <video src="https://www.nasa.gov/sites/default/files/atoms/video/starship.mp4" controls poster="https://upload.wikimedia.org/wikipedia/commons/7/7e/SpaceX_Starship.jpg"></video>
+          </div>
+          <div class="tech-item">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/2/2e/China_Moon_Rover.jpg" alt="China Moon Rover" />
+            <h3>China's Moon Rover</h3>
+            <p>China's Chang'e missions have landed rovers on the Moon, advancing lunar science and technology.</p>
+            <video src="https://www.nasa.gov/sites/default/files/atoms/video/changemoon.mp4" controls poster="https://upload.wikimedia.org/wikipedia/commons/2/2e/China_Moon_Rover.jpg"></video>
+          </div>
+        </div>
+        <p>Explore the latest breakthroughs in space technology, robotics, and innovation from around the world.</p>
+      </section>
+      <li onclick="showSection('planets')" data-section="planets">🪐 Planets</li>
+      <li onclick="showSection('blackholes')" data-section="blackholes">🕳️ Black Holes</li>
+      <li onclick="showSection('drake')" data-section="drake">👽 Alien Calc</li>
+    <script>
+      // User Star Names logic
+      const starNameForm = document.getElementById('starNameForm');
+      const starNameInput = document.getElementById('starNameInput');
+      const starMap = document.getElementById('starMap');
+      const namedStars = document.getElementById('namedStars');
+      let stars = [];
+
+      function randomStarPosition() {
+        const x = Math.floor(Math.random() * 300) + 10;
+        const y = Math.floor(Math.random() * 300) + 10;
+        return { x, y };
+      }
+
+      function renderStars() {
+        starMap.innerHTML = '';
+        stars.forEach(star => {
+          const starDiv = document.createElement('div');
+          starDiv.style.position = 'absolute';
+          starDiv.style.left = star.x + 'px';
+          starDiv.style.top = star.y + 'px';
+          starDiv.style.width = '10px';
+          starDiv.style.height = '10px';
+          starDiv.style.background = '#ffd700';
+          starDiv.style.borderRadius = '50%';
+          starDiv.title = star.name;
+          starDiv.style.boxShadow = '0 0 8px #ffd700';
+          starMap.appendChild(starDiv);
+          // Add label
+          const label = document.createElement('span');
+          label.textContent = star.name;
+          label.style.position = 'absolute';
+          label.style.left = (star.x + 12) + 'px';
+          label.style.top = (star.y - 4) + 'px';
+          label.style.color = '#ffd700';
+          label.style.fontSize = '0.9em';
+          label.style.background = 'rgba(0,0,0,0.7)';
+          label.style.padding = '2px 6px';
+          label.style.borderRadius = '6px';
+          starMap.appendChild(label);
+        });
+      }
+
+      function renderStarList() {
+        namedStars.innerHTML = '';
+        stars.forEach(star => {
+          const li = document.createElement('li');
+          li.textContent = star.name;
+          namedStars.appendChild(li);
+        });
+      }
+
+      if (starNameForm) {
+        starNameForm.addEventListener('submit', function(e) {
+          e.preventDefault();
+          const name = starNameInput.value.trim();
+          if (name && stars.length < 20) {
+            const pos = randomStarPosition();
+            stars.push({ name, x: pos.x, y: pos.y });
+            renderStars();
+            renderStarList();
+            starNameInput.value = '';
+          }
+        });
+      }
+      // Initial render
+      renderStars();
+      renderStarList();
+    </script>
+      <li onclick="showSection('ufo')" data-section="ufo">🛸 UFOs</li>
+      <li onclick="showSection('space-travel')" data-section="space-travel">🚀 Space Travel</li>
+    </ul>
+  </nav>
+  <!-- Search Bar -->
+  <div class="search-container">
+    <input type="text" class="search-bar" placeholder="🔍 Search the cosmos..." id="searchInput" oninput="performSearch()">
+    <div class="search-results" id="searchResults"></div>
+  </div>
+  <!-- Main Content -->
+  <main class="main-content">
+    <!-- Home Section -->
+    <section id="home" class="section active">
+      <div class="hero">
+        <h1>🌌 Daily Space Feed</h1>
+        <div style="max-width:700px;margin:0 auto;text-align:center;background:rgba(10,10,35,0.8);padding:32px 36px;border-radius:18px;box-shadow:0 0 16px #0ef;">
+          <h2 style="color:#0ef;font-size:2rem;margin-bottom:12px;">Astronomy Picture of the Day</h2>
+          <img id="apod-img" src="https://apod.nasa.gov/apod/image/2309/NGC1365_HaLRGBpugh1024.jpg" alt="Astronomy Picture of the Day" style="width:100%;max-width:480px;border-radius:12px;box-shadow:0 0 8px #0ef;margin:18px auto;display:block;">
+          <p id="apod-title" style="font-weight:bold;color:#ff7f00;margin-top:12px;">NGC 1365: Majestic Barred Spiral Galaxy</p>
+          <p id="apod-desc" style="margin-top:8px;">This beautiful spiral galaxy is about 56 million light-years away. Its bright arms are full of stars, dust, and glowing gas. Galaxies like this are where new stars are born!</p>
+          <small style="color:#0ef;">(Image credit: NASA/ESA/Hubble & APOD)</small>
+        </div>
+        <div style="margin-top:32px;">
+          <h2 style="color:#0ef;font-size:1.5rem;margin-bottom:12px;">Space Fact of the Day</h2>
+          <div id="space-fact" style="font-size:1.15rem;background:rgba(20,20,50,0.7);padding:18px 20px;border-radius:12px;box-shadow:0 0 8px #0ef;max-width:480px;margin:0 auto;">Did you know? The largest volcano in the solar system is on Mars—Olympus Mons!</div>
+        </div>
+        <div style="margin-top:32px;">
+          <h2 style="color:#0ef;font-size:1.5rem;margin-bottom:12px;">Latest Astronomy News</h2>
+          <ul style="text-align:left;max-width:700px;margin:0 auto;line-height:1.7;background:rgba(10,10,35,0.5);padding:18px 24px;border-radius:14px;box-shadow:0 0 8px #0ef;">
+            <li><b>New Exoplanet Found:</b> Astronomers discovered a planet 2x Earth’s size orbiting a nearby star!</li>
+            <li><b>James Webb Telescope:</b> JWST spotted the most distant galaxy ever seen—over 13 billion light-years away.</li>
+            <li><b>Artemis Mission:</b> NASA is preparing to send astronauts back to the Moon in the next few years.</li>
+            <li><b>Life Search:</b> Scientists found possible signs of life in the clouds of Venus (still being studied).</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+    <!-- Planets Section -->
+
+      <!-- Interactive Solar System Section -->
+      <section id="solar-system" class="section">
+        <h2 style="font-size:3rem;color:#0ef;text-shadow:0 0 24px #0ef,0 0 48px #fff;letter-spacing:2px;">🌞 Interactive Solar System</h2>
+        <div style="max-width:1100px;margin:0 auto;text-align:center;font-size:1.2rem;line-height:1.8;background:rgba(10,10,35,0.7);padding:24px 32px;border-radius:18px;box-shadow:0 0 16px #0ef;">
+          <p>Explore our solar system in 3D! Click on any planet to learn fun facts, see images, and discover what makes each world unique.</p>
+          <div id="solar-system-3d" style="width:100%;height:400px;background:radial-gradient(circle at 60% 40%,#222 60%,#0ef 100%);border-radius:18px;box-shadow:0 0 24px #0ef;display:flex;align-items:center;justify-content:center;position:relative;margin-bottom:32px;">
+            <span style="color:#fff;font-size:2rem;">[3D Solar System Model Placeholder]</span>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:24px;">
+            <div class="planet-card" onclick="showPlanetInfo('Mercury')" style="background:rgba(20,20,50,0.85);border-radius:14px;padding:18px;box-shadow:0 0 8px #0ef;cursor:pointer;transition:transform .2s;">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/4/4a/Mercury_in_true_color.jpg" alt="Mercury" style="width:100%;border-radius:10px;box-shadow:0 0 6px #0ef;">
+              <h3>☿ Mercury</h3>
+              <ul style="text-align:left;max-width:180px;margin:0 auto;font-size:1rem;">
+                <li>Smallest planet</li>
+                <li>No moons</li>
+                <li>Extreme temperature swings</li>
+              </ul>
+            </div>
+            <div class="planet-card" onclick="showPlanetInfo('Venus')" style="background:rgba(20,20,50,0.85);border-radius:14px;padding:18px;box-shadow:0 0 8px #0ef;cursor:pointer;transition:transform .2s;">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/e/e5/Venus-real_color.jpg" alt="Venus" style="width:100%;border-radius:10px;box-shadow:0 0 6px #0ef;">
+              <h3>♀ Venus</h3>
+              <ul style="text-align:left;max-width:180px;margin:0 auto;font-size:1rem;">
+                <li>Hottest planet</li>
+                <li>Thick toxic atmosphere</li>
+                <li>Day longer than year</li>
+              </ul>
+            </div>
+            <div class="planet-card" onclick="showPlanetInfo('Earth')" style="background:rgba(20,20,50,0.85);border-radius:14px;padding:18px;box-shadow:0 0 8px #0ef;cursor:pointer;transition:transform .2s;">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/9/97/The_Earth_seen_from_Apollo_17.jpg" alt="Earth" style="width:100%;border-radius:10px;box-shadow:0 0 6px #0ef;">
+              <h3>🌍 Earth</h3>
+              <ul style="text-align:left;max-width:180px;margin:0 auto;font-size:1rem;">
+                <li>Only planet with life</li>
+                <li>1 moon</li>
+                <li>Blue oceans</li>
+              </ul>
+            </div>
+            <div class="planet-card" onclick="showPlanetInfo('Mars')" style="background:rgba(20,20,50,0.85);border-radius:14px;padding:18px;box-shadow:0 0 8px #0ef;cursor:pointer;transition:transform .2s;">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/0/02/OSIRIS_Mars_true_color.jpg" alt="Mars" style="width:100%;border-radius:10px;box-shadow:0 0 6px #0ef;">
+              <h3>♂ Mars</h3>
+              <ul style="text-align:left;max-width:180px;margin:0 auto;font-size:1rem;">
+                <li>Red planet</li>
+                <li>2 moons</li>
+                <li>Largest volcano</li>
+              </ul>
+            </div>
+            <div class="planet-card" onclick="showPlanetInfo('Jupiter')" style="background:rgba(20,20,50,0.85);border-radius:14px;padding:18px;box-shadow:0 0 8px #0ef;cursor:pointer;transition:transform .2s;">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/e/e2/Jupiter.jpg" alt="Jupiter" style="width:100%;border-radius:10px;box-shadow:0 0 6px #0ef;">
+              <h3>♃ Jupiter</h3>
+              <ul style="text-align:left;max-width:180px;margin:0 auto;font-size:1rem;">
+                <li>Largest planet</li>
+                <li>79 moons</li>
+                <li>Great Red Spot storm</li>
+              </ul>
+            </div>
+            <div class="planet-card" onclick="showPlanetInfo('Saturn')" style="background:rgba(20,20,50,0.85);border-radius:14px;padding:18px;box-shadow:0 0 8px #0ef;cursor:pointer;transition:transform .2s;">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/c/c7/Saturn_during_Equinox.jpg" alt="Saturn" style="width:100%;border-radius:10px;box-shadow:0 0 6px #0ef;">
+              <h3>♄ Saturn</h3>
+              <ul style="text-align:left;max-width:180px;margin:0 auto;font-size:1rem;">
+                <li>Famous rings</li>
+                <li>83 moons</li>
+                <li>Least dense planet</li>
+              </ul>
+            </div>
+            <div class="planet-card" onclick="showPlanetInfo('Uranus')" style="background:rgba(20,20,50,0.85);border-radius:14px;padding:18px;box-shadow:0 0 8px #0ef;cursor:pointer;transition:transform .2s;">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/3/3d/Uranus2.jpg" alt="Uranus" style="width:100%;border-radius:10px;box-shadow:0 0 6px #0ef;">
+              <h3>♅ Uranus</h3>
+              <ul style="text-align:left;max-width:180px;margin:0 auto;font-size:1rem;">
+                <li>Rotates on its side</li>
+                <li>27 moons</li>
+                <li>Coldest planet</li>
+              </ul>
+            </div>
+            <div class="planet-card" onclick="showPlanetInfo('Neptune')" style="background:rgba(20,20,50,0.85);border-radius:14px;padding:18px;box-shadow:0 0 8px #0ef;cursor:pointer;transition:transform .2s;">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/5/56/Neptune_Full.jpg" alt="Neptune" style="width:100%;border-radius:10px;box-shadow:0 0 6px #0ef;">
+              <h3>♆ Neptune</h3>
+              <ul style="text-align:left;max-width:180px;margin:0 auto;font-size:1rem;">
+                <li>Strongest winds</li>
+                <li>14 moons</li>
+                <li>Deep blue color</li>
+              </ul>
+            </div>
+          </div>
+          <div id="planet-info-modal" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(10,10,35,0.95);z-index:9999;align-items:center;justify-content:center;">
+            <div style="background:rgba(20,20,50,0.98);padding:32px 40px;border-radius:20px;box-shadow:0 0 24px #0ef;max-width:420px;margin:0 auto;text-align:left;position:relative;">
+              <button onclick="closePlanetInfo()" style="position:absolute;top:18px;right:18px;background:#0ef;color:#222;border:none;border-radius:8px;padding:6px 12px;font-size:1rem;cursor:pointer;">Close</button>
+              <h2 id="planet-modal-title" style="color:#0ef;font-size:2rem;margin-bottom:12px;"></h2>
+              <img id="planet-modal-img" src="" alt="Planet" style="width:100%;border-radius:12px;box-shadow:0 0 8px #0ef;margin-bottom:16px;">
+              <ul id="planet-modal-facts" style="font-size:1.1rem;line-height:1.7;"></ul>
+            </div>
+          </div>
+        </div>
+        <script>
+          // Planet info data
+          const planetData = {
+            Mercury: {
+              img: "https://upload.wikimedia.org/wikipedia/commons/4/4a/Mercury_in_true_color.jpg",
+              facts: ["Smallest planet in the solar system.", "No moons.", "Extreme temperature swings: -173°C to 427°C.", "Closest planet to the Sun."]
+            },
+            Venus: {
+              img: "https://upload.wikimedia.org/wikipedia/commons/e/e5/Venus-real_color.jpg",
+              facts: ["Hottest planet: surface temp ~465°C.", "Thick, toxic atmosphere of CO₂.", "Day longer than year.", "No moons."]
+            },
+            Earth: {
+              img: "https://upload.wikimedia.org/wikipedia/commons/9/97/The_Earth_seen_from_Apollo_17.jpg",
+              facts: ["Only planet known to support life.", "1 moon.", "71% surface covered by water.", "Atmosphere rich in nitrogen and oxygen."]
+            },
+            Mars: {
+              img: "https://upload.wikimedia.org/wikipedia/commons/0/02/OSIRIS_Mars_true_color.jpg",
+              facts: ["Red planet due to iron oxide.", "2 moons: Phobos & Deimos.", "Largest volcano: Olympus Mons.", "Thin atmosphere, mostly CO₂."]
+            },
+            Jupiter: {
+              img: "https://upload.wikimedia.org/wikipedia/commons/e/e2/Jupiter.jpg",
+              facts: ["Largest planet in the solar system.", "79 moons.", "Great Red Spot: giant storm.", "Mostly hydrogen and helium."]
+            },
+            Saturn: {
+              img: "https://upload.wikimedia.org/wikipedia/commons/c/c7/Saturn_during_Equinox.jpg",
+              facts: ["Famous for its rings.", "83 moons.", "Least dense planet.", "Rings made of ice and rock."]
+            },
+            Uranus: {
+              img: "https://upload.wikimedia.org/wikipedia/commons/3/3d/Uranus2.jpg",
+              facts: ["Rotates on its side.", "27 moons.", "Coldest planet.", "Methane gives blue-green color."]
+            },
+            Neptune: {
+              img: "https://upload.wikimedia.org/wikipedia/commons/5/56/Neptune_Full.jpg",
+              facts: ["Strongest winds in solar system.", "14 moons.", "Deep blue color.", "Farthest planet from the Sun."]
+            }
+          };
+          function showPlanetInfo(planet) {
+            const modal = document.getElementById('planet-info-modal');
+            const title = document.getElementById('planet-modal-title');
+            const img = document.getElementById('planet-modal-img');
+            const facts = document.getElementById('planet-modal-facts');
+            title.textContent = planet + ' Facts';
+            img.src = planetData[planet].img;
+            facts.innerHTML = planetData[planet].facts.map(f => `<li>${f}</li>`).join('');
+            modal.style.display = 'flex';
+          }
+          function closePlanetInfo() {
+            document.getElementById('planet-info-modal').style.display = 'none';
+          }
+        </script>
+      </section>
+    <section id="planets" class="section">
+
+      <!-- Exoplanet Explorer Section -->
+      <section id="exoplanet-explorer" class="section">
+        <h2 style="font-size:3rem;color:#0ef;text-shadow:0 0 24px #0ef,0 0 48px #fff;letter-spacing:2px;">🪐 Exoplanet Explorer</h2>
+        <div style="max-width:1100px;margin:0 auto;text-align:center;font-size:1.2rem;line-height:1.8;background:rgba(10,10,35,0.7);padding:24px 32px;border-radius:18px;box-shadow:0 0 16px #0ef;">
+          <p>Discover worlds beyond our solar system! Filter by planet type, size, and distance. Click on an exoplanet to learn more.</p>
+          <div style="margin:24px 0;">
+            <label for="exo-type" style="color:#0ef;font-weight:bold;margin-right:12px;">Type:</label>
+            <select id="exo-type" style="padding:6px 12px;border-radius:8px;background:#222;color:#0ef;font-size:1rem;">
+              <option value="all">All</option>
+              <option value="gas">Gas Giant</option>
+              <option value="rocky">Rocky</option>
+              <option value="super-earth">Super Earth</option>
+              <option value="habitable">Habitable Zone</option>
+            </select>
+            <label for="exo-distance" style="color:#0ef;font-weight:bold;margin-left:24px;margin-right:12px;">Max Distance (ly):</label>
+            <input id="exo-distance" type="number" min="1" max="10000" value="1000" style="width:80px;padding:6px 8px;border-radius:8px;background:#222;color:#0ef;font-size:1rem;">
+            <button onclick="filterExoplanets()" style="margin-left:18px;background:#0ef;color:#222;border:none;border-radius:8px;padding:6px 16px;font-size:1rem;cursor:pointer;">Filter</button>
+          </div>
+          <div id="exoplanet-list" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px;margin:32px 0;"></div>
+          <div id="exoplanet-modal" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(10,10,35,0.95);z-index:9999;align-items:center;justify-content:center;">
+            <div style="background:rgba(20,20,50,0.98);padding:32px 40px;border-radius:20px;box-shadow:0 0 24px #0ef;max-width:420px;margin:0 auto;text-align:left;position:relative;">
+              <button onclick="closeExoplanetModal()" style="position:absolute;top:18px;right:18px;background:#0ef;color:#222;border:none;border-radius:8px;padding:6px 12px;font-size:1rem;cursor:pointer;">Close</button>
+              <h2 id="exo-modal-title" style="color:#0ef;font-size:2rem;margin-bottom:12px;"></h2>
+              <img id="exo-modal-img" src="" alt="Exoplanet" style="width:100%;border-radius:12px;box-shadow:0 0 8px #0ef;margin-bottom:16px;">
+              <ul id="exo-modal-facts" style="font-size:1.1rem;line-height:1.7;"></ul>
+            </div>
+          </div>
+        </div>
+        <script>
+          // Exoplanet data
+          const exoplanets = [
+            {
+              name: "Kepler-22b",
+              img: "https://exoplanets.nasa.gov/internal_resources/1623",
+              type: "super-earth",
+              distance: 600,
+              facts: ["Radius: 2.4x Earth", "Orbits in habitable zone", "Discovered by Kepler mission"]
+            },
+            {
+              name: "TRAPPIST-1e",
+              img: "https://exoplanets.nasa.gov/internal_resources/1627",
+              type: "rocky",
+              distance: 39,
+              facts: ["Earth-sized", "Orbits ultra-cool dwarf star", "Possible liquid water"]
+            },
+            {
+              name: "HD 209458 b",
+              img: "https://exoplanets.nasa.gov/internal_resources/1625",
+              type: "gas",
+              distance: 159,
+              facts: ["Gas giant", "First exoplanet seen transiting its star", "Atmosphere contains water vapor"]
+            },
+            {
+              name: "Proxima Centauri b",
+              img: "https://exoplanets.nasa.gov/internal_resources/1626",
+              type: "habitable",
+              distance: 4.2,
+              facts: ["Closest exoplanet to Earth", "Orbits in habitable zone", "Discovered in 2016"]
+            },
+            {
+              name: "WASP-12b",
+              img: "https://exoplanets.nasa.gov/internal_resources/1624",
+              type: "gas",
+              distance: 1400,
+              facts: ["Gas giant", "Very close to its star", "Atmosphere being stripped away"]
+            }
+          ];
+          function renderExoplanets(list) {
+            const container = document.getElementById('exoplanet-list');
+            container.innerHTML = list.map(exo => `
+              <div class="exo-card" onclick="showExoplanetModal('${exo.name}')" style="background:rgba(20,20,50,0.85);border-radius:14px;padding:18px;box-shadow:0 0 8px #0ef;cursor:pointer;transition:transform .2s;">
+                <img src="${exo.img}" alt="${exo.name}" style="width:100%;border-radius:10px;box-shadow:0 0 6px #0ef;">
+                <h3 style="color:#0ef;">${exo.name}</h3>
+                <ul style="text-align:left;max-width:180px;margin:0 auto;font-size:1rem;">
+                  ${exo.facts.map(f => `<li>${f}</li>`).join('')}
+                </ul>
+              </div>
+            `).join('');
+          }
+          function filterExoplanets() {
+            const type = document.getElementById('exo-type').value;
+            const maxDist = parseFloat(document.getElementById('exo-distance').value);
+            let filtered = exoplanets.filter(e => e.distance <= maxDist);
+            if (type !== 'all') filtered = filtered.filter(e => e.type === type || (type === 'habitable' && e.type === 'habitable'));
+            renderExoplanets(filtered);
+          }
+          function showExoplanetModal(name) {
+            const exo = exoplanets.find(e => e.name === name);
+            document.getElementById('exo-modal-title').textContent = exo.name + ' Facts';
+            document.getElementById('exo-modal-img').src = exo.img;
+            document.getElementById('exo-modal-facts').innerHTML = exo.facts.map(f => `<li>${f}</li>`).join('');
+            document.getElementById('exoplanet-modal').style.display = 'flex';
+          }
+          function closeExoplanetModal() {
+            document.getElementById('exoplanet-modal').style.display = 'none';
+          }
+          // Initial render
+          renderExoplanets(exoplanets);
+        </script>
+      </section>
+      <video autoplay muted loop class="bg-video"><source src="https://cdn.pixabay.com/vimeo/512389042/solar-system.mp4" type="video/mp4"></video>
+
+      <!-- Missions Timeline Section -->
+      <section id="missions-timeline" class="section">
+        <h2 style="font-size:3rem;color:#0ef;text-shadow:0 0 24px #0ef,0 0 48px #fff;letter-spacing:2px;">🚀 Missions Timeline</h2>
+        <div style="max-width:1100px;margin:0 auto;text-align:center;font-size:1.2rem;line-height:1.8;background:rgba(10,10,35,0.7);padding:24px 32px;border-radius:18px;box-shadow:0 0 16px #0ef;">
+          <p>Explore the history of space exploration! Scroll through major missions, see images, and watch videos of humanity’s journey beyond Earth.</p>
+          <div id="timeline" style="margin:32px 0;">
+            <div class="mission-event" style="margin-bottom:32px;text-align:left;background:rgba(20,20,50,0.85);padding:18px 24px;border-radius:14px;box-shadow:0 0 8px #0ef;">
+              <h3 style="color:#0ef;">1957: Sputnik 1</h3>
+              <img src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sputnik_1.jpg" alt="Sputnik 1" style="width:100%;max-width:320px;border-radius:10px;box-shadow:0 0 6px #0ef;margin-bottom:12px;">
+              <p>First artificial satellite launched by the Soviet Union. Marked the beginning of the space age.</p>
+            </div>
+            <div class="mission-event" style="margin-bottom:32px;text-align:left;background:rgba(20,20,50,0.85);padding:18px 24px;border-radius:14px;box-shadow:0 0 8px #0ef;">
+              <h3 style="color:#0ef;">1961: Vostok 1</h3>
+              <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/Yuri_Gagarin_%28cropped%29.jpg" alt="Yuri Gagarin" style="width:100%;max-width:320px;border-radius:10px;box-shadow:0 0 6px #0ef;margin-bottom:12px;">
+              <p>Yuri Gagarin became the first human in space, orbiting Earth in Vostok 1.</p>
+            </div>
+            <div class="mission-event" style="margin-bottom:32px;text-align:left;background:rgba(20,20,50,0.85);padding:18px 24px;border-radius:14px;box-shadow:0 0 8px #0ef;">
+              <h3 style="color:#0ef;">1969: Apollo 11</h3>
+              <img src="https://upload.wikimedia.org/wikipedia/commons/a/a1/Apollo_11_Lunar_Module_on_the_Moon.jpg" alt="Apollo 11" style="width:100%;max-width:320px;border-radius:10px;box-shadow:0 0 6px #0ef;margin-bottom:12px;">
+              <p>Neil Armstrong and Buzz Aldrin became the first humans to walk on the Moon.</p>
+              <iframe width="320" height="180" src="https://www.youtube.com/embed/cwZb2mqId0A" title="Apollo 11 Moon Landing" frameborder="0" allowfullscreen style="margin-top:12px;border-radius:8px;box-shadow:0 0 6px #0ef;"></iframe>
+            </div>
+            <div class="mission-event" style="margin-bottom:32px;text-align:left;background:rgba(20,20,50,0.85);padding:18px 24px;border-radius:14px;box-shadow:0 0 8px #0ef;">
+              <h3 style="color:#0ef;">1971: Mars 3</h3>
+              <img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Mars_3_lander.jpg" alt="Mars 3" style="width:100%;max-width:320px;border-radius:10px;box-shadow:0 0 6px #0ef;margin-bottom:12px;">
+              <p>First spacecraft to land on Mars (Soviet Union). Transmitted data for 20 seconds.</p>
+            </div>
+            <div class="mission-event" style="margin-bottom:32px;text-align:left;background:rgba(20,20,50,0.85);padding:18px 24px;border-radius:14px;box-shadow:0 0 8px #0ef;">
+              <h3 style="color:#0ef;">1990: Hubble Space Telescope</h3>
+              <img src="https://upload.wikimedia.org/wikipedia/commons/3/3f/HST-SM4.jpeg" alt="Hubble" style="width:100%;max-width:320px;border-radius:10px;box-shadow:0 0 6px #0ef;margin-bottom:12px;">
+              <p>Launched by NASA, Hubble has provided breathtaking images and revolutionized our understanding of the universe.</p>
+            </div>
+            <div class="mission-event" style="margin-bottom:32px;text-align:left;background:rgba(20,20,50,0.85);padding:18px 24px;border-radius:14px;box-shadow:0 0 8px #0ef;">
+              <h3 style="color:#0ef;">1997: Cassini-Huygens</h3>
+              <img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Cassini_Saturn_Orbit_Insertion.jpg" alt="Cassini" style="width:100%;max-width:320px;border-radius:10px;box-shadow:0 0 6px #0ef;margin-bottom:12px;">
+              <p>Explored Saturn and its moons for 13 years. Huygens probe landed on Titan.</p>
+            </div>
+            <div class="mission-event" style="margin-bottom:32px;text-align:left;background:rgba(20,20,50,0.85);padding:18px 24px;border-radius:14px;box-shadow:0 0 8px #0ef;">
+              <h3 style="color:#0ef;">2012: Curiosity Rover</h3>
+              <img src="https://upload.wikimedia.org/wikipedia/commons/5/5f/PIA16239_MarsCuriosityRover-FirstSelf-Portrait.jpg" alt="Curiosity" style="width:100%;max-width:320px;border-radius:10px;box-shadow:0 0 6px #0ef;margin-bottom:12px;">
+              <p>NASA’s rover landed on Mars, searching for signs of past life and studying the planet’s climate and geology.</p>
+            </div>
+            <div class="mission-event" style="margin-bottom:32px;text-align:left;background:rgba(20,20,50,0.85);padding:18px 24px;border-radius:14px;box-shadow:0 0 8px #0ef;">
+              <h3 style="color:#0ef;">2021: James Webb Space Telescope</h3>
+              <img src="https://upload.wikimedia.org/wikipedia/commons/4/4a/JWST_first_light_image.png" alt="JWST" style="width:100%;max-width:320px;border-radius:10px;box-shadow:0 0 6px #0ef;margin-bottom:12px;">
+              <p>Launched by NASA, JWST is the most powerful space telescope ever, peering into the early universe and distant exoplanets.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <h2 style="font-size:3rem;color:#0ef;text-shadow:0 0 24px #0ef,0 0 48px #fff;letter-spacing:2px;">🪐 Planets & Exoplanets</h2>
+
+      <!-- Sky Tonight Tool Section -->
+      <section id="sky-tonight" class="section">
+        <h2 style="font-size:3rem;color:#0ef;text-shadow:0 0 24px #0ef,0 0 48px #fff;letter-spacing:2px;">🌠 Sky Tonight</h2>
+        <div style="max-width:1100px;margin:0 auto;text-align:center;font-size:1.2rem;line-height:1.8;background:rgba(10,10,35,0.7);padding:24px 32px;border-radius:18px;box-shadow:0 0 16px #0ef;">
+          <p>Find out what’s visible in the night sky tonight! Enter your location to see star charts, planet positions, and upcoming celestial events.</p>
+          <div style="margin:24px 0;">
+            <label for="sky-location" style="color:#0ef;font-weight:bold;margin-right:12px;">Location:</label>
+            <input id="sky-location" type="text" placeholder="City or Coordinates" style="padding:6px 12px;border-radius:8px;background:#222;color:#0ef;font-size:1rem;">
+            <button onclick="showSkyTonight()" style="margin-left:18px;background:#0ef;color:#222;border:none;border-radius:8px;padding:6px 16px;font-size:1rem;cursor:pointer;">Show Sky</button>
+          </div>
+          <div id="sky-chart" style="margin:32px 0;"></div>
+          <div id="celestial-events" style="margin:32px 0;text-align:left;background:rgba(20,20,50,0.85);padding:18px 24px;border-radius:14px;box-shadow:0 0 8px #0ef;max-width:700px;margin:32px auto;">
+            <h3 style="color:#0ef;">Upcoming Celestial Events</h3>
+            <ul id="events-list" style="font-size:1.1rem;line-height:1.7;"></ul>
+          </div>
+        </div>
+        <script>
+          // Example star chart and events data
+          const starCharts = {
+            default: '<img src="https://www.skyandtelescope.com/wp-content/uploads/StarChart_July2023.jpg" alt="Star Chart" style="width:100%;max-width:600px;border-radius:12px;box-shadow:0 0 8px #0ef;">',
+            nyc: '<img src="https://www.timeanddate.com/scripts/star-chart.php?city=New+York" alt="NYC Star Chart" style="width:100%;max-width:600px;border-radius:12px;box-shadow:0 0 8px #0ef;">',
+          };
+          const celestialEvents = [
+            { date: 'Oct 5', event: 'Draconid Meteor Shower peaks' },
+            { date: 'Oct 14', event: 'Partial Solar Eclipse (visible in Americas)' },
+            { date: 'Oct 21', event: 'Orionid Meteor Shower peaks' },
+            { date: 'Nov 17', event: 'Leonid Meteor Shower peaks' },
+            { date: 'Dec 13', event: 'Geminid Meteor Shower peaks' },
+            { date: 'Dec 22', event: 'Ursid Meteor Shower peaks' },
+          ];
+          function showSkyTonight() {
+            const loc = document.getElementById('sky-location').value.trim().toLowerCase();
+            let chart = starCharts.default;
+            if (loc.includes('new york') || loc.includes('nyc')) chart = starCharts.nyc;
+            document.getElementById('sky-chart').innerHTML = chart;
+            document.getElementById('events-list').innerHTML = celestialEvents.map(e => `<li><b>${e.date}:</b> ${e.event}</li>`).join('');
+          }
+          // Initial render
+          showSkyTonight();
+        </script>
+      </section>
+      <div style="max-width:1000px;margin:0 auto;text-align:center;font-size:1.2rem;line-height:1.8;background:rgba(10,10,35,0.7);padding:24px 32px;border-radius:18px;box-shadow:0 0 16px #0ef;">
+        <p>Explore the wonders of our solar system and the most fascinating exoplanets discovered so far! Click on each planet to learn more.</p>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:32px;margin:32px 0;">
+          <div style="background:rgba(10,10,35,0.85);border-radius:16px;padding:24px;box-shadow:0 0 12px #0ef;">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/9/97/The_Earth_seen_from_Apollo_17.jpg" alt="Earth" style="width:100%;border-radius:12px;box-shadow:0 0 8px #0ef;">
+            <h3>🌍 Earth</h3>
+            <ul style="text-align:left;max-width:400px;margin:0 auto;">
+              <li>Only known planet with life</li>
+              <li>71% covered by oceans</li>
+              <li>Atmosphere rich in nitrogen and oxygen</li>
+              <li>Home to millions of species</li>
+            </ul>
+          </div>
+          <div style="background:rgba(10,10,35,0.85);border-radius:16px;padding:24px;box-shadow:0 0 12px #0ef;">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/0/02/OSIRIS_Mars_true_color.jpg" alt="Mars" style="width:100%;border-radius:12px;box-shadow:0 0 8px #0ef;">
+            <h3>🔴 Mars</h3>
+            <ul style="text-align:left;max-width:400px;margin:0 auto;">
+              <li>Known as the Red Planet</li>
+              <li>Home to Olympus Mons, the tallest volcano</li>
+              <li>Has two moons: Phobos and Deimos</li>
+              <li>Evidence of ancient water flows</li>
+            </ul>
+            <iframe width="320" height="180" src="https://www.youtube.com/embed/ux2QG8bQYbA" title="Mars Facts" frameborder="0" allowfullscreen style="border-radius:12px;box-shadow:0 0 8px #0ef;margin:12px 0;"></iframe>
+          </div>
+          <div style="background:rgba(10,10,35,0.85);border-radius:16px;padding:24px;box-shadow:0 0 12px #0ef;">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/e/e2/Jupiter.jpg" alt="Jupiter" style="width:100%;border-radius:12px;box-shadow:0 0 8px #0ef;">
+            <h3>🪐 Jupiter</h3>
+            <ul style="text-align:left;max-width:400px;margin:0 auto;">
+              <li>Largest planet in the solar system</li>
+              <li>Has a giant storm called the Great Red Spot</li>
+              <li>At least 95 moons</li>
+              <li>Strong magnetic field</li>
+            </ul>
+            <iframe width="320" height="180" src="https://www.youtube.com/embed/1iSR3Yw6FXo" title="Jupiter Facts" frameborder="0" allowfullscreen style="border-radius:12px;box-shadow:0 0 8px #0ef;margin:12px 0;"></iframe>
+          </div>
+          <div style="background:rgba(10,10,35,0.85);border-radius:16px;padding:24px;box-shadow:0 0 12px #0ef;">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/c/c7/Saturn_during_Equinox.jpg" alt="Saturn" style="width:100%;border-radius:12px;box-shadow:0 0 8px #0ef;">
+            <h3>💫 Saturn</h3>
+            <ul style="text-align:left;max-width:400px;margin:0 auto;">
+              <li>Famous for its beautiful rings</li>
+              <li>Has 146 known moons</li>
+              <li>Least dense planet (would float in water!)</li>
+              <li>Storms can last for years</li>
+            </ul>
+            <iframe width="320" height="180" src="https://www.youtube.com/embed/epZdZaEQhS0" title="Saturn Facts" frameborder="0" allowfullscreen style="border-radius:12px;box-shadow:0 0 8px #0ef;margin:12px 0;"></iframe>
+          </div>
+          <div style="background:rgba(10,10,35,0.85);border-radius:16px;padding:24px;box-shadow:0 0 12px #0ef;">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/8/85/Venus_globe.jpg" alt="Venus" style="width:100%;border-radius:12px;box-shadow:0 0 8px #0ef;">
+            <h3>🌕 Venus</h3>
+            <ul style="text-align:left;max-width:400px;margin:0 auto;">
+              <li>Hottest planet in the solar system</li>
+              <li>Thick, toxic atmosphere of CO₂</li>
+              <li>Rotates backwards (retrograde rotation)</li>
+              <li>Surface temperature hot enough to melt lead</li>
+            </ul>
+          </div>
+          <div style="background:rgba(10,10,35,0.85);border-radius:16px;padding:24px;box-shadow:0 0 12px #0ef;">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/4/4a/Mercury_in_true_color.jpg" alt="Mercury" style="width:100%;border-radius:12px;box-shadow:0 0 8px #0ef;">
+            <h3>☿️ Mercury</h3>
+            <ul style="text-align:left;max-width:400px;margin:0 auto;">
+              <li>Closest planet to the Sun</li>
+              <li>Extreme temperature swings</li>
+              <li>No atmosphere to retain heat</li>
+              <li>Shortest year (88 Earth days)</li>
+            </ul>
+          </div>
+          <div style="background:rgba(10,10,35,0.85);border-radius:16px;padding:24px;box-shadow:0 0 12px #0ef;">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/2/2d/Uranus2.jpg" alt="Uranus" style="width:100%;border-radius:12px;box-shadow:0 0 8px #0ef;">
+            <h3>🌀 Uranus</h3>
+            <ul style="text-align:left;max-width:400px;margin:0 auto;">
+              <li>Rotates on its side (axial tilt of 98°)</li>
+              <li>Coldest planet in the solar system</li>
+              <li>Faint rings</li>
+              <li>27 known moons</li>
+            </ul>
+          </div>
+          <div style="background:rgba(10,10,35,0.85);border-radius:16px;padding:24px;box-shadow:0 0 12px #0ef;">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/5/56/Neptune_Full.jpg" alt="Neptune" style="width:100%;border-radius:12px;box-shadow:0 0 8px #0ef;">
+            <h3>🔵 Neptune</h3>
+            <ul style="text-align:left;max-width:400px;margin:0 auto;">
+              <li>Strongest winds in the solar system (up to 1,200 mph)</li>
+              <li>Deep blue color due to methane</li>
+              <li>14 known moons</li>
+              <li>Discovered in 1846</li>
+            </ul>
+          </div>
+        </div>
+        <h3 style="color:#0ef;margin-top:32px;">🌠 Dwarf Planets & Exoplanets</h3>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:32px;margin:32px 0;">
+          <div style="background:rgba(10,10,35,0.85);border-radius:16px;padding:24px;box-shadow:0 0 12px #0ef;">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Nh-pluto-in-true-color_2x_JPEG-edit-frame.jpg" alt="Pluto" style="width:100%;border-radius:12px;box-shadow:0 0 8px #0ef;">
+            <h3>❄️ Pluto</h3>
+            <ul style="text-align:left;max-width:400px;margin:0 auto;">
+              <li>Dwarf planet, formerly the 9th planet</li>
+              <li>Has five moons, largest is Charon</li>
+              <li>Surface of ice and rock</li>
+              <li>Orbit is highly elliptical</li>
+            </ul>
+          </div>
+          <div style="background:rgba(10,10,35,0.85);border-radius:16px;padding:24px;box-shadow:0 0 12px #0ef;">
+            <img src="https://exoplanets.nasa.gov/internal_resources/1534/" alt="Kepler-186f" style="width:100%;border-radius:12px;box-shadow:0 0 8px #0ef;">
+            <h3>🪐 Kepler-186f</h3>
+            <ul style="text-align:left;max-width:400px;margin:0 auto;">
+              <li>First Earth-size planet found in the habitable zone of another star</li>
+              <li>Located about 500 light-years away</li>
+              <li>Orbits a red dwarf star</li>
+              <li>Potential for liquid water</li>
+            </ul>
+          </div>
+          <div style="background:rgba(10,10,35,0.85);border-radius:16px;padding:24px;box-shadow:0 0 12px #0ef;">
+            <img src="https://exoplanets.nasa.gov/internal_resources/1535/" alt="TRAPPIST-1 System" style="width:100%;border-radius:12px;box-shadow:0 0 8px #0ef;">
+            <h3>🪐 TRAPPIST-1 System</h3>
+            <ul style="text-align:left;max-width:400px;margin:0 auto;">
+              <li>System of 7 Earth-size exoplanets</li>
+              <li>Three in the habitable zone</li>
+              <li>Located 40 light-years away</li>
+              <li>Potential for life</li>
+            </ul>
+            <iframe width="320" height="180" src="https://www.youtube.com/embed/bjLZBrQ-Oq4" title="TRAPPIST-1 System" frameborder="0" allowfullscreen style="border-radius:12px;box-shadow:0 0 8px #0ef;margin:12px 0;"></iframe>
+          </div>
+          <div style="background:rgba(10,10,35,0.85);border-radius:16px;padding:24px;box-shadow:0 0 12px #0ef;">
+            <img src="https://exoplanets.nasa.gov/internal_resources/1536/" alt="Proxima Centauri b" style="width:100%;border-radius:12px;box-shadow:0 0 8px #0ef;">
+            <h3>🪐 Proxima Centauri b</h3>
+            <ul style="text-align:left;max-width:400px;margin:0 auto;">
+              <li>Closest known exoplanet to Earth (4.2 light-years away)</li>
+              <li>Orbits in the habitable zone of Proxima Centauri</li>
+              <li>Potential for rocky surface and water</li>
+              <li>Receives high radiation from its star</li>
+            </ul>
+          </div>
+        </div>
+        <h3 style="color:#0ef;margin-top:32px;">🌌 Fun Facts About Planets</h3>
+        <ul style="text-align:left;max-width:700px;margin:24px auto;line-height:1.7;background:rgba(10,10,35,0.5);padding:18px 24px;border-radius:14px;box-shadow:0 0 8px #0ef;">
+          <li>Venus spins so slowly that its day is longer than its year.</li>
+          <li>Jupiter’s Great Red Spot is a storm that’s been raging for over 300 years.</li>
+          <li>Neptune was discovered through mathematics before it was seen through a telescope.</li>
+          <li>Pluto has a heart-shaped glacier called Tombaugh Regio.</li>
+          <li>There are more known exoplanets than planets in our solar system!</li>
+        </ul>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/libKVRa01L8" title="The Solar System 101 | National Geographic" frameborder="0" allowfullscreen style="border-radius:12px;box-shadow:0 0 16px #0ef;margin-top:24px;"></iframe>
+      </div>
+    </section>
+    <!-- Black Holes Section -->
+    <section id="blackholes" class="section">
+      <video autoplay muted loop class="bg-video"><source src="https://cdn.pixabay.com/vimeo/508024529/black-hole.mp4" type="video/mp4"></video>
+      <h2 style="font-size:3rem;color:#0ef;text-shadow:0 0 24px #0ef,0 0 48px #fff;letter-spacing:2px;">🕳️ Black Hole Devourer Game</h2>
+      <div style="max-width:900px;margin:0 auto;text-align:center;font-size:1.25rem;line-height:1.7;background:rgba(10,10,35,0.7);padding:24px 32px;border-radius:18px;box-shadow:0 0 16px #0ef;">
+        <p>Welcome to the Black Hole Devourer Game! Control a black hole, devour planets, and grow larger. Learn about black holes as you play!</p>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/5/5f/Black_hole_-_Messier_87_crop_max_res.jpg" alt="Black Hole" style="width:320px;border-radius:12px;box-shadow:0 0 8px #0ef;margin:18px auto;display:block;">
+        <p style="margin-top:18px;">A real image of a black hole (M87*), captured by the Event Horizon Telescope in 2019.</p>
+        <div style="margin:32px 0;">
+          <iframe width="420" height="236" src="https://www.youtube.com/embed/zUyH3XhpLTo" title="What is a Black Hole?" frameborder="0" allowfullscreen style="border-radius:12px;box-shadow:0 0 16px #0ef;"></iframe>
+          <iframe width="420" height="236" src="https://www.youtube.com/embed/e-P5IFTqB98" title="How Black Holes Work" frameborder="0" allowfullscreen style="border-radius:12px;box-shadow:0 0 16px #0ef;margin-left:24px;"></iframe>
+        </div>
+        <ul style="text-align:left;max-width:700px;margin:24px auto;line-height:1.7;background:rgba(10,10,35,0.5);padding:18px 24px;border-radius:14px;box-shadow:0 0 8px #0ef;">
+          <li><b>What is a Black Hole?</b> A region of space where gravity is so strong that nothing, not even light, can escape.</li>
+          <li><b>Event Horizon:</b> The boundary around a black hole beyond which nothing can return.</li>
+          <li><b>Singularity:</b> The center of a black hole, where matter is crushed to infinite density.</li>
+          <li><b>Supermassive Black Holes:</b> Millions to billions of times the mass of the Sun, found at the centers of galaxies.</li>
+          <li><b>Stellar Black Holes:</b> Formed from the collapse of massive stars.</li>
+          <li><b>Hawking Radiation:</b> Black holes slowly evaporate by emitting tiny amounts of energy.</li>
+        </ul>
+        <p style="margin-top:18px;">Use <b>WASD</b> keys to move the black hole. Devour planets to grow! Can you become the biggest black hole in the universe?</p>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6f/Black_hole_simulation.jpg" alt="Black Hole Simulation" style="width:320px;border-radius:12px;box-shadow:0 0 8px #0ef;margin:18px auto;display:block;">
+        <p style="margin-top:18px;">Simulation of gravitational lensing around a black hole.</p>
+        <canvas id="gameCanvas" style="width:100%;max-width:700px;height:400px;background:#111;border-radius:12px;box-shadow:0 0 8px #0ef;margin:24px auto;display:block;"></canvas>
+        <div id="factBox">Eat a planet to see a black hole fact!</div>
+        <div id="planetCounter">Planets: 0</div>
+        <div id="menuOverlay">
+          <h1 style="color:#ff7f00;">Black Hole Devourer</h1>
+          <p>Use WASD to move the black hole.<br>
+          Devour planets to grow bigger and faster.<br>
+          Avoid space trash — it shrinks and slows you.<br>
+          If you get too small, you die.<br>
+          Planets get sucked in before being eaten.<br><br>
+          Good luck!</p>
+          <button id="startBtn">Start Game</button>
+        </div>
+      </div>
+    </section>
+    <!-- Drake Equation Section -->
+    <section id="drake" class="section">
+      ...existing code...
+    </section>
+    <!-- UFO Section -->
+    <section id="ufo" class="section">
+      <video autoplay muted loop class="bg-video"><source src="https://cdn.pixabay.com/vimeo/521982225/alien-nebula.mp4" type="video/mp4"></video>
+      <h2 style="font-size:3rem;color:#0ef;text-shadow:0 0 24px #0ef,0 0 48px #fff;letter-spacing:2px;">🛸 UFO Sightings & Evidence</h2>
+      <div style="max-width:900px;margin:0 auto;text-align:center;font-size:1.25rem;line-height:1.7;background:rgba(10,10,35,0.7);padding:24px 32px;border-radius:18px;box-shadow:0 0 16px #0ef;">
+        <p>Explore the world of UFOs: mysterious lights, unexplained encounters, and government investigations. Watch real footage, expert interviews, and documentaries. <b>Did you know?</b> The Pentagon has confirmed several unexplained aerial phenomena in recent years.</p>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/UFO_Petit-Rechain_1990.jpg" alt="Famous UFO Photo" style="width:320px;border-radius:12px;box-shadow:0 0 8px #0ef;margin:18px auto;display:block;">
+        <p style="margin-top:18px;">Famous UFO photo from Belgium, 1990.</p>
+        <input type="text" id="searchBar" placeholder="Search UFO videos..." style="margin-bottom:24px;padding:12px 18px;font-size:1.1rem;border-radius:12px;border:none;box-shadow:0 0 8px #0ef;">
+        <div class="video-grid" id="videoGrid" style="gap:32px;">
+          <div class="video-container" data-title="Phoenix Lights" style="box-shadow:0 0 16px #0ef;border:2px solid #0ef;"><iframe src="https://www.youtube.com/embed/w4HTwSSiOXM" allowfullscreen></iframe></div>
+          <div class="video-container" data-title="Area 51 Secrets" style="box-shadow:0 0 16px #0ef;border:2px solid #0ef;"><iframe src="https://www.youtube.com/embed/-JBwH6yHEDo" allowfullscreen></iframe></div>
+          <div class="video-container" data-title="UFO Evidence" style="box-shadow:0 0 16px #0ef;border:2px solid #0ef;"><iframe src="https://www.youtube.com/embed/4koYxy5mYPo" allowfullscreen></iframe></div>
+          <div class="video-container" data-title="UFO Disclosure" style="box-shadow:0 0 16px #0ef;border:2px solid #0ef;"><iframe src="https://www.youtube.com/embed/1WwGGuQljl4" allowfullscreen></iframe></div>
+          <div class="video-container" data-title="Recent UFO Sightings" style="box-shadow:0 0 16px #0ef;border:2px solid #0ef;"><iframe src="https://www.youtube.com/embed/qwZZd2u9Pm4" allowfullscreen></iframe></div>
+          <div class="video-container" data-title="US Navy UFOs" style="box-shadow:0 0 16px #0ef;border:2px solid #0ef;"><iframe src="https://www.youtube.com/embed/6rWOtrke0HY" allowfullscreen></iframe></div>
+          <div class="video-container" data-title="UFOs Over Mexico" style="box-shadow:0 0 16px #0ef;border:2px solid #0ef;"><iframe src="https://www.youtube.com/embed/1w5Qd5b3QeA" allowfullscreen></iframe></div>
+          <div class="video-container" data-title="The Tic Tac UFO" style="box-shadow:0 0 16px #0ef;border:2px solid #0ef;"><iframe src="https://www.youtube.com/embed/8n9Q0GkOa9w" allowfullscreen></iframe></div>
+          <div class="video-container" data-title="UFOs: The Lost Evidence" style="box-shadow:0 0 16px #0ef;border:2px solid #0ef;"><iframe src="https://www.youtube.com/embed/2QdQwKXQFhA" allowfullscreen></iframe></div>
+          <div class="video-container" data-title="UFOs and Nukes" style="box-shadow:0 0 16px #0ef;border:2px solid #0ef;"><iframe src="https://www.youtube.com/embed/1QKQbFQyKqg" allowfullscreen></iframe></div>
+          <div class="video-container" data-title="UFOs: Top Secret Files" style="box-shadow:0 0 16px #0ef;border:2px solid #0ef;"><iframe src="https://www.youtube.com/embed/3QKQbFQyKqg" allowfullscreen></iframe></div>
+        </div>
+        <div style="margin-top:32px;text-align:left;max-width:700px;margin:32px auto;">
+          <h3 style="color:#0ef;">Famous UFO Cases</h3>
+          <ul>
+            <li><b>Roswell Incident (1947):</b> Alleged UFO crash in New Mexico, sparking decades of speculation.</li>
+            <li><b>Rendlesham Forest (1980):</b> UK military personnel reported strange lights and a landed craft.</li>
+            <li><b>Phoenix Lights (1997):</b> Thousands saw mysterious lights over Arizona.</li>
+            <li><b>USS Nimitz Encounter (2004):</b> US Navy pilots tracked a "Tic Tac" shaped object off California.</li>
+          </ul>
+          <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/UFO_Petit-Rechain_1990.jpg" alt="UFO Belgium" style="width:220px;border-radius:12px;box-shadow:0 0 8px #0ef;margin:18px 0;">
+          <p>Are UFOs alien visitors, secret technology, or natural phenomena? The mystery continues!</p>
+        </div>
+      </div>
+    </section>
+    <!-- Space Travel Section -->
+    <section id="space-travel" class="section">
+      <video autoplay muted loop class="bg-video"><source src="https://cdn.pixabay.com/vimeo/492122582/space-earth-view.mp4" type="video/mp4"></video>
+      <h2 style="font-size:3rem;color:#0ef;text-shadow:0 0 24px #0ef,0 0 48px #fff;letter-spacing:2px;">🚀 How to Go to Space & Rockets</h2>
+      <div style="max-width:900px;margin:0 auto;text-align:center;font-size:1.25rem;line-height:1.8;">
+        <p style="background:rgba(10,10,35,0.7);padding:18px 24px;border-radius:16px;box-shadow:0 0 12px #0ef;">Ever dreamed of going to space? Here’s how astronauts and rockets make it possible!</p>
+        <h3 style="color:#0ef;margin-bottom:18px;">🌌 Things You’d Need to Do to Get to Space</h3>
+        <ul style="text-align:left;max-width:700px;margin:32px auto;line-height:1.8;background:rgba(10,10,35,0.7);padding:18px 24px;border-radius:16px;box-shadow:0 0 12px #0ef;">
+          <li>Study hard in math and science — physics, astronomy, engineering, even biology.</li>
+          <li>Get strong and stay healthy; astronauts train their bodies like athletes.</li>
+          <li>Learn to stay calm under pressure, solve problems fast, and work as part of a team.</li>
+          <li>Train in survival skills — desert, ocean, jungle — in case your capsule lands anywhere.</li>
+          <li>Learn to fly or at least understand aircraft, because many astronauts start as pilots.</li>
+          <li>Practice in giant water tanks that simulate weightlessness.</li>
+          <li>Train for spacewalks and how to move in a bulky suit outside a spacecraft.</li>
+          <li>Learn languages like Russian (still important for working on the ISS).</li>
+          <li>Study spacecraft systems, navigation, robotics, and medicine.</li>
+          <li>Get used to high-G forces in a centrifuge and try zero-gravity flights.</li>
+          <li>Build up experience through research, flying, engineering, or medicine.</li>
+          <li>Apply to astronaut programs, whether through NASA, ESA, JAXA, or private companies like SpaceX.</li>
+          <li>Or… save up and try for a seat on one of the new commercial spaceflights.</li>
+          <li>Above all: stay curious, keep learning, and never stop preparing.</li>
+        </ul>
+        <h3 style="color:#ff7f00;margin-top:32px;">🚀 Why It’s Worth It</h3>
+        <p style="font-size:1.15rem;line-height:1.8;background:rgba(10,10,35,0.7);padding:18px 24px;border-radius:16px;box-shadow:0 0 12px #ff7f00;color:#fff;max-width:700px;margin:0 auto;">One day, you’re strapped into a rocket, the engines rumble so hard your bones feel it. The countdown hits zero, and in seconds you’re off the Earth, climbing into the black sky. Gravity falls away, and suddenly you’re weightless. You look out the window and see Earth glowing blue and white, fragile and beautiful, hanging in the dark. All that training, all those years of hard work, brought you here — to the edge of the unknown. And now, you’re not just dreaming about space. You’re living it.</p>
+        <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:32px;margin:32px 0;">
+          <iframe width="420" height="236" src="https://www.youtube.com/embed/1Zb2gRJU8vA" title="How Rockets Work" frameborder="0" allowfullscreen style="border-radius:12px;box-shadow:0 0 16px #0ef;"></iframe>
+          <iframe width="420" height="236" src="https://www.youtube.com/embed/7f5FfF0Q4pY" title="Astronaut Training" frameborder="0" allowfullscreen style="border-radius:12px;box-shadow:0 0 16px #0ef;"></iframe>
+          <iframe width="420" height="236" src="https://www.youtube.com/embed/SGP6Y0Pnhe4" title="Chris Hadfield: Space Oddity" frameborder="0" allowfullscreen style="border-radius:12px;box-shadow:0 0 16px #0ef;"></iframe>
+        </div>
+        <h3 style="color:#0ef;margin-top:32px;">👨‍🚀 Example: Chris Hadfield</h3>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/9/9e/Chris_Hadfield_2011.jpg" alt="Chris Hadfield" style="width:120px;border-radius:12px;box-shadow:0 0 8px #0ef;margin:18px auto;display:block;">
+        <p>Chris Hadfield is a Canadian astronaut who commanded the International Space Station. He became famous for his educational videos and his cover of "Space Oddity" recorded in orbit.</p>
+        <p style="margin-top:18px;font-size:1.15rem;color:#0ef;text-shadow:0 0 8px #0ef;">Space travel is becoming more accessible—maybe you’ll be next!</p>
+      </div>
+    </section>
+  </main>
+  <!-- Chatbot Toggle Button -->
+  <button class="chat-toggle" id="chatToggle" onclick="toggleChat()">🤖</button>
+  <!-- Chatbot Container -->
+  <div class="chatbot-container" id="chatContainer">
+    <div class="chatbot-header">
+      <span>🚀 Cosmic AI Assistant</span>
+      <span onclick="toggleChat()" style="cursor: pointer; font-size: 1.2rem;">×</span>
+    </div>
+    <div class="chat-messages" id="chatMessages">
+      <div class="message bot">
+        🌌 Hello, space explorer! I'm your Cosmic AI assistant. Ask me anything about space, planets, black holes, or the mysteries of the universe! 🚀
+      </div>
+    </div>
+    <div class="chat-input-container">
+      <textarea class="chat-input" id="chatInput" placeholder="Ask me about the cosmos..." rows="2" onkeypress="handleChatKeyPress(event)"></textarea>
+    </div>
+  </div>
+  <script>
+    // Initialize stars
+    function createStars() {
+      const starsContainer = document.getElementById('stars');
+      for (let i = 0; i < 100; i++) {
+        const star = document.createElement('div');
+        star.className = 'star';
+        star.style.left = Math.random() * 100 + '%';
+        star.style.top = Math.random() * 100 + '%';
+        star.style.animationDelay = Math.random() * 3 + 's';
+        starsContainer.appendChild(star);
+      }
+    }
+    // Navigation
+    function showSection(sectionId) {
+      // Hide all sections
+      const sections = document.querySelectorAll('.section');
+      sections.forEach(section => {
+        section.classList.remove('active');
+      });
+      // Show selected section
+      document.getElementById(sectionId).classList.add('active');
+      // Update navigation
+      const navItems = document.querySelectorAll('.nav-links li');
+      navItems.forEach(item => {
+        item.classList.remove('active');
+        if (item.getAttribute('data-section') === sectionId) {
+          item.classList.add('active');
+        }
+      });
+    }
+    // Search functionality
+    const searchData = {
+      'earth': { section: 'planets', content: 'Earth planet home world life oceans' },
+      'mars': { section: 'planets', content: 'Mars red planet volcano canyon' },
+      'jupiter': { section: 'planets', content: 'Jupiter largest planet great red spot' },
+      'saturn': { section: 'planets', content: 'Saturn rings gas giant moons' },
+      'venus': { section: 'planets', content: 'Venus hottest planet surface temperature' },
+      'mercury': { section: 'planets', content: 'Mercury closest sun extreme temperature' },
+      'black hole': { section: 'blackholes', content: 'black hole event horizon singularity' },
+      'event horizon': { section: 'blackholes', content: 'event horizon black hole boundary' },
+      'hawking radiation': { section: 'blackholes', content: 'hawking radiation black hole evaporate' },
+      'drake equation': { section: 'drake', content: 'drake equation alien civilization probability' },
+      'alien': { section: 'drake', content: 'alien extraterrestrial life civilization' },
+      'ufo': { section: 'ufo', content: 'ufo sighting government disclosure' },
+      'phoenix lights': { section: 'ufo', content: 'phoenix lights arizona ufo sighting' },
+      'roswell': { section: 'ufo', content: 'roswell incident ufo crash' },
+      'astronaut': { section: 'space-travel', content: 'astronaut space travel training' },
+      'nasa': { section: 'space-travel', content: 'nasa space agency astronaut' },
+      'spacex': { section: 'space-travel', content: 'spacex private space company' },
+      'exoplanet': { section: 'planets', content: 'exoplanet kepler trappist proxima' },
+      'kepler': { section: 'planets', content: 'kepler 186f exoplanet habitable zone' },
+      'trappist': { section: 'planets', content: 'trappist system seven planets' }
+    };
+    function performSearch() {
+      const query = document.getElementById('searchInput').value.toLowerCase();
+      const results = document.getElementById('searchResults');
+      if (query.length < 2) {
+        results.innerHTML = '';
+        return;
+      }
+      const matches = [];
+      for (const [key, data] of Object.entries(searchData)) {
+        if (key.includes(query) || data.content.toLowerCase().includes(query)) {
+          matches.push({ key, ...data });
+        }
+      }
+      if (matches.length === 0) {
+        results.innerHTML = '<div class="search-result">No results found. Try searching for planets, black holes, aliens, or UFOs!</div>';
+        return;
+      }
+      results.innerHTML = matches.map(match => 
+        `<div class="search-result" onclick="showSection('${match.section}')">
+          <strong>${match.key.charAt(0).toUpperCase() + match.key.slice(1)}</strong><br>
+          <small>Found in ${match.section.replace('-', ' ')}</small>
+        </div>`
+      ).join('');
+    }
+    // Drake Equation Calculator
+    function updateDrake() {
+      const R = parseFloat(document.getElementById('starFormation').value);
+      const fp = parseFloat(document.getElementById('planetsWithStars').value);
+      const ne = parseFloat(document.getElementById('habitablePlanets').value);
+      const fl = parseFloat(document.getElementById('developLife').value);
+      const fi = parseFloat(document.getElementById('intelligence').value);
+      const fc = parseFloat(document.getElementById('communication').value);
+      const L = parseFloat(document.getElementById('lifetime').value);
+      // Update display values
+      document.getElementById('starFormationValue').textContent = R.toFixed(1);
+      document.getElementById('planetsWithStarsValue').textContent = fp.toFixed(2);
+      document.getElementById('habitablePlanetsValue').textContent = ne.toFixed(1);
+      document.getElementById('developLifeValue').textContent = fl.toFixed(2);
+      document.getElementById('intelligenceValue').textContent = fi.toFixed(3);
+      document.getElementById('communicationValue').textContent = fc.toFixed(3);
+      document.getElementById('lifetimeValue').textContent = L.toString();
+      // Calculate result
+      const N = R * fp * ne * fl * fi * fc * L;
+      const result = Math.round(N * 100) / 100;
+      document.getElementById('drakeResult').innerHTML = `
+        Estimated Civilizations: ${result.toLocaleString()}<br>
+        <small>${result < 1 ? 'We might be alone... 😔' : 
+            result < 10 ? 'A few civilizations might exist! 🤔' :
+            result < 100 ? 'Multiple civilizations likely! 😊' : 
+            'The galaxy could be teeming with life! 🎉'}</small>
+      `;
+    }
+    // Chatbot functionality
+    function toggleChat() {
+      const chatContainer = document.getElementById('chatContainer');
+      const chatToggle = document.getElementById('chatToggle');
+      if (chatContainer.classList.contains('open')) {
+        chatContainer.classList.remove('open');
+        chatToggle.innerHTML = '🤖';
+      } else {
+        chatContainer.classList.add('open');
+        chatToggle.innerHTML = '×';
+      }
+    }
+    function handleChatKeyPress(event) {
+      if (event.key === 'Enter' && !event.shiftKey) {
+        event.preventDefault();
+        sendMessage();
+      }
+    }
+    function sendMessage() {
+      const input = document.getElementById('chatInput');
+      const message = input.value.trim();
+      if (!message) return;
+      // Add user message
+      addMessage(message, 'user');
+      input.value = '';
+      // Generate bot response
+      setTimeout(() => {
+        const response = generateBotResponse(message.toLowerCase());
+        addMessage(response, 'bot');
+      }, 1000);
+    }
+    function addMessage(text, sender) {
+      const messagesContainer = document.getElementById('chatMessages');
+      const messageDiv = document.createElement('div');
+      messageDiv.className = `message ${sender}`;
+      messageDiv.textContent = text;
+      messagesContainer.appendChild(messageDiv);
+      messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    }
+    function generateBotResponse(message) {
+      const responses = {
+        'hello': '🚀 Hello there, space explorer! Ready to journey through the cosmos?',
+        'hi': '🌟 Greetings, earthling! What cosmic mysteries would you like to explore today?',
+        'black hole': '🕳️ Black holes are fascinating! They bend space and time, and nothing can escape once you cross the event horizon. Want to learn about Hawking radiation or gravitational lensing?',
+        'planet': '🪐 Our solar system has 8 amazing planets! Each one is unique - from scorching Venus to the gas giant Jupiter. Which planet interests you most?',
+        'alien': '👽 The Drake Equation helps us estimate alien civilizations! Try the calculator to see how different factors affect the probability of finding extraterrestrial life.',
+        'ufo': '🛸 UFO sightings have been documented worldwide! Recent government disclosures have made this topic more mainstream. The Phoenix Lights and USS Nimitz encounters are particularly intriguing.',
+        'mars': '🔴 Mars is amazing! It has the tallest volcano (Olympus Mons) and the deepest canyon (Valles Marineris) in our solar system. Future humans might live there!',
+        'earth': '🌍 Our beautiful blue marble! Earth is the only known planet with life, 71% covered by oceans. It\'s 4.5 billion years old and still full of mysteries.',
+        'space travel': '🚀 Want to be an astronaut? You\'ll need to study hard, train your body, learn survival skills, and maybe even learn Russian! SpaceX and other companies are making space more accessible.',
+        'astronaut': '👨‍🚀 Astronauts are amazing! They train for years, experience weightlessness, and see Earth from space. Neil Armstrong, Yuri Gagarin, and Mae Jemison are true heroes.',
+        'jupiter': '🪐 Jupiter is HUGE! It\'s 318 times more massive than Earth and has over 95 moons. Its Great Red Spot is a storm larger than our entire planet!',
+        'saturn': '💫 Saturn\'s rings are spectacular! Made of ice and rock, they stretch 175,000 miles wide but are only about 30 feet thick. It has 146 known moons!',
+        'help': '🆘 I can help you explore space topics! Ask me about planets, black holes, aliens, UFOs, space travel, or anything cosmic. Try "tell me about Mars" or "what are black holes?"',
+        'thanks': '🌟 You\'re welcome, space cadet! Keep exploring the cosmos and never stop wondering about the universe!',
+        'bye': '🚀 Safe travels through the cosmos! May your journey be filled with wonder and discovery!'
+      };
+      // Find matching response
+      for (const [key, response] of Object.entries(responses)) {
+        if (message.includes(key)) {
+          return response;
+        }
+      }
+      // Random space facts if no match
+      const spaceFacts = [
+        '🌌 Did you know? A day on Venus is longer than its year! It takes 243 Earth days to rotate once.',
+        '⭐ Fun fact: Neutron stars are so dense that a teaspoon would weigh 6 billion tons on Earth!',
+        '🚀 Amazing: The International Space Station travels at 17,500 mph, orbiting Earth every 90 minutes!',
+        '🌟 Incredible: There are more stars in the universe than grains of sand on all Earth\'s beaches!',
+        '🕳️ Mind-blowing: If you fell into a black hole, time would slow down relative to outside observers!',
+        '🪐 Fascinating: Saturn would float if you could find an ocean big enough to put it in!',
+        '🌙 Cool fact: The Moon is gradually moving away from Earth at about 1.5 inches per year!',
+        '☄️ Wow: Some meteorites found on Earth actually came from Mars, blasted off by asteroid impacts!'
+      ];
+      return spaceFacts[Math.floor(Math.random() * spaceFacts.length)];
+    }
+    // Initialize everything
+    document.addEventListener('DOMContentLoaded', function() {
+      createStars();
+      updateDrake();
+    });
+    // Add click outside to close search results
+    document.addEventListener('click', function(event) {
+      if (!event.target.closest('.search-container')) {
+        document.getElementById('searchResults').innerHTML = '';
+      }
+    });
+  </script>
+</body>
+</html>
+        <li><b>Fi:</b> Fraction of life that becomes intelligent</li>
+        <li><b>Fc:</b> Fraction of civilizations that develop detectable technology</li>
+        <li><b>L:</b> Length of time civilizations release signals</li>
+      </ul>
+      <div style="margin:24px 0 0 0;">
+        <div class="slider-group">
+          <label for="R">R* (stars/year): <span id="valR">1</span></label>
+          <input type="range" id="R" min="0.1" max="20" step="0.1" value="1">
+        </div>
+        <div class="slider-group">
+          <label for="Fp">Fp (stars with planets): <span id="valFp">0.5</span></label>
+          <input type="range" id="Fp" min="0" max="1" step="0.01" value="0.5">
+        </div>
+        <div class="slider-group">
+          <label for="Ne">Ne (planets per star): <span id="valNe">2</span></label>
+          <input type="range" id="Ne" min="0" max="5" step="0.1" value="2">
+        </div>
+        <div class="slider-group">
+          <label for="Fl">Fl (fraction with life): <span id="valFl">0.33</span></label>
+          <input type="range" id="Fl" min="0" max="1" step="0.01" value="0.33">
+        </div>
+        <div class="slider-group">
+          <label for="Fi">Fi (fraction intelligent): <span id="valFi">0.01</span></label>
+          <input type="range" id="Fi" min="0" max="1" step="0.01" value="0.01">
+        </div>
+        <div class="slider-group">
+          <label for="Fc">Fc (fraction communicating): <span id="valFc">0.01</span></label>
+          <input type="range" id="Fc" min="0" max="1" step="0.01" value="0.01">
+        </div>
+        <div class="slider-group">
+          <label for="L">L (years): <span id="valL">1000</span></label>
+          <input type="range" id="L" min="1" max="10000" step="1" value="1000">
+        </div>
+        <div id="result" style="text-align:center;margin-top:20px;font-size:1.3rem;color:#ff7f00;font-weight:bold;">Estimated civilizations: 1</div>
+      </div>
+    </div>
+    <iframe width="420" height="236" src="https://www.youtube.com/embed/2PMaQuj6dgA" title="Drake Equation Explained" frameborder="0" allowfullscreen style="border-radius:12px;box-shadow:0 0 16px #0ef;margin-top:24px;"></iframe>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Drake_Equation_Infographic.png" alt="Drake Equation Infographic" style="width:320px;border-radius:12px;box-shadow:0 0 8px #0ef;margin:18px auto;display:block;">
+    <p style="margin-top:18px;">Are we alone? The answer depends on the numbers you choose!</p>
+  </div>
+</section>
+<!-- Black Hole Game Section Expansion -->
+<section id="blackhole">
+  <div style="margin:32px auto 0 auto;max-width:600px;background:rgba(10,10,35,0.85);border-radius:18px;padding:24px;box-shadow:0 0 16px #0ef;">
+    <h3 style="color:#0ef;">🌀 Black Hole Gravitational Lensing Simulation</h3>
+    <canvas id="bhSimCanvas" width="500" height="300" style="background:#111;border-radius:12px;box-shadow:0 0 8px #0ef;width:100%;max-width:500px;display:block;margin:0 auto 18px auto;"></canvas>
+    <label for="bhMassSlider" style="color:#0ef;">Black Hole Mass: <span id="bhMassValue">1.0</span> × Solar Mass</label>
+    <input type="range" id="bhMassSlider" min="0.5" max="5" step="0.01" value="1.0" style="width:100%;margin-bottom:12px;">
+    <p style="color:#eaf2ff;font-size:1rem;">Drag the slider to change the black hole's mass and see how it bends light from background stars!</p>
+  </div>
+  <video autoplay muted loop class="bg-video"><source src="https://cdn.pixabay.com/vimeo/508024529/black-hole.mp4" type="video/mp4"></video>
+  <h2 style="font-size:3rem;color:#0ef;text-shadow:0 0 24px #0ef,0 0 48px #fff;letter-spacing:2px;">🕳️ Black Hole Devourer Game</h2>
+  <div style="max-width:900px;margin:0 auto;text-align:center;font-size:1.25rem;line-height:1.7;background:rgba(10,10,35,0.7);padding:24px 32px;border-radius:18px;box-shadow:0 0 16px #0ef;">
+    <p>Welcome to the Black Hole Devourer Game! Control a black hole, devour planets, and grow larger. Learn about black holes as you play!</p>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/5/5f/Black_hole_-_Messier_87_crop_max_res.jpg" alt="Black Hole" style="width:320px;border-radius:12px;box-shadow:0 0 8px #0ef;margin:18px auto;display:block;">
+    <p style="margin-top:18px;">A real image of a black hole (M87*), captured by the Event Horizon Telescope in 2019.</p>
+    <div style="margin:32px 0;">
+      <iframe width="420" height="236" src="https://www.youtube.com/embed/zUyH3XhpLTo" title="What is a Black Hole?" frameborder="0" allowfullscreen style="border-radius:12px;box-shadow:0 0 16px #0ef;"></iframe>
+      <iframe width="420" height="236" src="https://www.youtube.com/embed/e-P5IFTqB98" title="How Black Holes Work" frameborder="0" allowfullscreen style="border-radius:12px;box-shadow:0 0 16px #0ef;margin-left:24px;"></iframe>
+    </div>
+    <ul style="text-align:left;max-width:700px;margin:24px auto;line-height:1.7;background:rgba(10,10,35,0.5);padding:18px 24px;border-radius:14px;box-shadow:0 0 8px #0ef;">
+      <li><b>What is a Black Hole?</b> A region of space where gravity is so strong that nothing, not even light, can escape.</li>
+      <li><b>Event Horizon:</b> The boundary around a black hole beyond which nothing can return.</li>
+      <li><b>Singularity:</b> The center of a black hole, where matter is crushed to infinite density.</li>
+      <li><b>Supermassive Black Holes:</b> Millions to billions of times the mass of the Sun, found at the centers of galaxies.</li>
+      <li><b>Stellar Black Holes:</b> Formed from the collapse of massive stars.</li>
+      <li><b>Hawking Radiation:</b> Black holes slowly evaporate by emitting tiny amounts of energy.</li>
+    </ul>
+    <p style="margin-top:18px;">Use <b>WASD</b> keys to move the black hole. Devour planets to grow! Can you become the biggest black hole in the universe?</p>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6f/Black_hole_simulation.jpg" alt="Black Hole Simulation" style="width:320px;border-radius:12px;box-shadow:0 0 8px #0ef;margin:18px auto;display:block;">
+    <p style="margin-top:18px;">Simulation of gravitational lensing around a black hole.</p>
+  </div>
+</section>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -93,22 +1182,15 @@ ul {list-style-type:square;margin:20px auto;max-width:500px;padding-left:20px;}
   <div style="max-width:900px;margin:0 auto;text-align:center;font-size:1.25rem;line-height:1.7;background:rgba(10,10,35,0.7);padding:24px 32px;border-radius:18px;box-shadow:0 0 16px #0ef;">
     <p>Welcome to the ultimate space exploration hub! Here’s what you’ll discover:</p>
     <ul style="text-align:left;max-width:700px;margin:24px auto;line-height:1.7;background:rgba(10,10,35,0.5);padding:18px 24px;border-radius:14px;box-shadow:0 0 8px #0ef;">
-      <li><b>Fastest Rocket:</b> NASA's New Horizons probe reached speeds of over 58,000 km/h leaving Earth!</li>
-      <li><b>Zero Gravity:</b> Astronauts train in giant pools and on special planes that create weightlessness for 20 seconds at a time.</li>
-      <li><b>Space Suits:</b> Each suit costs about $12 million and protects astronauts from extreme temperatures and micrometeoroids.</li>
-      <li><b>Rocket Fuel:</b> Most rockets use liquid hydrogen and oxygen, which burn with a nearly invisible flame.</li>
-      <li><b>First Human in Space:</b> Yuri Gagarin orbited Earth in 1961, launching the era of human spaceflight.</li>
-      <li><b>Reusable Rockets:</b> SpaceX Falcon 9 boosters can land themselves and be reused, making space travel cheaper.</li>
-      <li><b>Space Tourism:</b> Private companies now offer trips to the edge of space for civilians!</li>
-    </ul>
-      <li><b>UFO Videos:</b> Watch real UFO sightings and government reports.</li>
-      <li><b>Black Hole Game:</b> Play and learn about black holes in a cosmic simulation.</li>
-      <li><b>Space Phenomena:</b> Explore supernovae, auroras, and cosmic events interactively.</li>
-      <li><b>Alien Probability:</b> Calculate the odds of alien civilizations with the Drake Equation.</li>
-      <li><b>Planets & Exoplanets:</b> Discover our solar system and the most important exoplanets.</li>
-      <li><b>Star Wars:</b> Dive into the worlds, ships, and moments of the Star Wars universe.</li>
-      <li><b>How to Go to Space & Rockets:</b> Learn how astronauts and rockets reach space.</li>
-      <li><b>Fun Facts:</b> Read amazing cosmic trivia.</li>
+      <li><b>UFO Videos:</b> Watch real UFO sightings and government reports, with video evidence and expert analysis.</li>
+      <li><b>Black Hole Game:</b> Play and learn about black holes in a cosmic simulation, with facts and images.</li>
+      <li><b>Space Phenomena:</b> Explore supernovae, auroras, and cosmic events interactively, with videos and explanations.</li>
+      <li><b>Alien Probability:</b> Calculate the odds of alien civilizations with the interactive Drake Equation calculator.</li>
+      <li><b>Planets & Exoplanets:</b> Discover our solar system and the most important exoplanets, with images and facts.</li>
+      <li><b>Star Wars:</b> Dive into the worlds, ships, and moments of the Star Wars universe, with lore and videos.</li>
+      <li><b>How to Go to Space & Rockets:</b> Learn how astronauts and rockets reach space, with training videos and real astronaut stories.</li>
+      <li><b>Move to Mars:</b> Find out what it takes to live on Mars, with facts and a Mars video.</li>
+      <li><b>Fun Facts:</b> Read amazing cosmic trivia, or see our 404 page if you get lost in space!</li>
       <li><b>About Us:</b> Meet the creators behind Cosmic Explorer.</li>
     </ul>
     <p style="margin-top:18px;color:#0ef;font-size:1.15rem;text-shadow:0 0 8px #0ef;">Use the navigation above to explore each section!</p>
@@ -163,7 +1245,8 @@ ul {list-style-type:square;margin:20px auto;max-width:500px;padding-left:20px;}
       <div style="background:rgba(10,10,35,0.8);border-radius:16px;padding:24px;box-shadow:0 0 12px #0ef;">
         <h3>Black Holes</h3>
         <img src="https://upload.wikimedia.org/wikipedia/commons/5/5f/Black_hole_-_Messier_87_crop_max_res.jpg" alt="Black Hole" style="width:100%;border-radius:12px;box-shadow:0 0 8px #0ef;">
-        <p>Formed from collapsed massive stars, black holes warp space and time. Near the event horizon, gravity is so strong that not even light can escape.</p>
+        <p>Formed from collapsed massive stars, black holes warp space and time. Near the event horizon, gravity is so strong that not even light can escape. <b>Did you know?</b> The first image of a black hole was captured in 2019 by the Event Horizon Telescope.</p>
+        <iframe width="320" height="180" src="https://www.youtube.com/embed/zUyH3XhpLTo" title="What is a Black Hole?" frameborder="0" allowfullscreen style="border-radius:12px;box-shadow:0 0 8px #0ef;margin:12px 0;"></iframe>
         <canvas id="bhSim" width="280" height="180" style="background:#111;border-radius:8px;margin:12px 0;"></canvas>
         <small>Light bending simulation: drag the slider!</small>
         <input type="range" id="bhSlider" min="0" max="100" value="50" style="width:100%;">
@@ -171,9 +1254,22 @@ ul {list-style-type:square;margin:20px auto;max-width:500px;padding-left:20px;}
       <div style="background:rgba(10,10,35,0.8);border-radius:16px;padding:24px;box-shadow:0 0 12px #0ef;">
         <h3>Supernovae</h3>
         <img src="https://upload.wikimedia.org/wikipedia/commons/7/7b/SN1994D.jpg" alt="Supernova" style="width:100%;border-radius:12px;box-shadow:0 0 8px #0ef;">
-        <p>When massive stars run out of fuel, they explode as supernovae, scattering elements and shaping galaxies.</p>
+        <p>When massive stars run out of fuel, they explode as supernovae, scattering elements and shaping galaxies. <b>Fun fact:</b> Supernovae create elements like gold and uranium!</p>
+        <iframe width="320" height="180" src="https://www.youtube.com/embed/9U8CZAKSsNA" title="Supernova Explosions" frameborder="0" allowfullscreen style="border-radius:12px;box-shadow:0 0 8px #0ef;margin:12px 0;"></iframe>
         <input type="range" id="snSlider" min="0" max="2" value="0" step="1" style="width:100%;">
         <div id="snStage" style="text-align:center;margin-top:12px;font-size:1.1rem;color:#ff7f00;">Star Before Supernova</div>
+      </div>
+      <div style="background:rgba(10,10,35,0.8);border-radius:16px;padding:24px;box-shadow:0 0 12px #0ef;">
+        <h3>Auroras</h3>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/5/5a/Aurora_Borealis_above_Lyngenfjord.jpg" alt="Aurora Borealis" style="width:100%;border-radius:12px;box-shadow:0 0 8px #0ef;">
+        <p>Auroras are natural light displays caused by charged particles from the Sun interacting with Earth's magnetic field. <b>Did you know?</b> Auroras also occur on Jupiter and Saturn!</p>
+        <iframe width="320" height="180" src="https://www.youtube.com/embed/8bG9l1xJ6h8" title="Aurora Borealis" frameborder="0" allowfullscreen style="border-radius:12px;box-shadow:0 0 8px #0ef;margin:12px 0;"></iframe>
+      </div>
+      <div style="background:rgba(10,10,35,0.8);border-radius:16px;padding:24px;box-shadow:0 0 12px #0ef;">
+        <h3>Cosmic Microwave Background</h3>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6f/WMAP_image.jpg" alt="CMB" style="width:100%;border-radius:12px;box-shadow:0 0 8px #0ef;">
+        <p>The CMB is the afterglow of the Big Bang, a faint microwave signal filling the universe. It gives us clues about the universe's age and structure.</p>
+        <iframe width="320" height="180" src="https://www.youtube.com/embed/5v5eBf2KwF8" title="Cosmic Microwave Background" frameborder="0" allowfullscreen style="border-radius:12px;box-shadow:0 0 8px #0ef;margin:12px 0;"></iframe>
       </div>
     </div>
   </div>
@@ -184,20 +1280,37 @@ ul {list-style-type:square;margin:20px auto;max-width:500px;padding-left:20px;}
     <source src="https://cdn.pixabay.com/vimeo/521982225/alien-nebula.mp4" type="video/mp4">
   </video>
   <h2 style="font-size:3rem;color:#0ef;text-shadow:0 0 24px #0ef,0 0 48px #fff;letter-spacing:2px;">🛸 UFO Sightings & Evidence</h2>
-  <p style="text-align:center;font-size:1.25rem;max-width:700px;margin:0 auto 24px;line-height:1.7;background:rgba(10,10,35,0.7);padding:18px 24px;border-radius:16px;box-shadow:0 0 12px #0ef;">Watch the most famous UFO sightings, government reports, and mysterious encounters. Real footage, expert interviews, and documentaries.<br><b>Did you know?</b> The Pentagon has confirmed several unexplained aerial phenomena in recent years.</p>
-  <input type="text" id="searchBar" placeholder="Search UFO videos..." style="margin-bottom:24px;padding:12px 18px;font-size:1.1rem;border-radius:12px;border:none;box-shadow:0 0 8px #0ef;">
-  <div class="video-grid" id="videoGrid" style="gap:32px;">
-    <div class="video-container" data-title="Phoenix Lights" style="box-shadow:0 0 16px #0ef;border:2px solid #0ef;"><iframe src="https://www.youtube.com/embed/w4HTwSSiOXM" allowfullscreen></iframe></div>
-    <div class="video-container" data-title="Area 51 Secrets" style="box-shadow:0 0 16px #0ef;border:2px solid #0ef;"><iframe src="https://www.youtube.com/embed/-JBwH6yHEDo" allowfullscreen></iframe></div>
-    <div class="video-container" data-title="UFO Evidence" style="box-shadow:0 0 16px #0ef;border:2px solid #0ef;"><iframe src="https://www.youtube.com/embed/4koYxy5mYPo" allowfullscreen></iframe></div>
-    <div class="video-container" data-title="UFO Disclosure" style="box-shadow:0 0 16px #0ef;border:2px solid #0ef;"><iframe src="https://www.youtube.com/embed/1WwGGuQljl4" allowfullscreen></iframe></div>
-    <div class="video-container" data-title="Recent UFO Sightings" style="box-shadow:0 0 16px #0ef;border:2px solid #0ef;"><iframe src="https://www.youtube.com/embed/qwZZd2u9Pm4" allowfullscreen></iframe></div>
-    <div class="video-container" data-title="US Navy UFOs" style="box-shadow:0 0 16px #0ef;border:2px solid #0ef;"><iframe src="https://www.youtube.com/embed/6rWOtrke0HY" allowfullscreen></iframe></div>
-    <div class="video-container" data-title="UFOs Over Mexico" style="box-shadow:0 0 16px #0ef;border:2px solid #0ef;"><iframe src="https://www.youtube.com/embed/1w5Qd5b3QeA" allowfullscreen></iframe></div>
-    <div class="video-container" data-title="The Tic Tac UFO" style="box-shadow:0 0 16px #0ef;border:2px solid #0ef;"><iframe src="https://www.youtube.com/embed/8n9Q0GkOa9w" allowfullscreen></iframe></div>
-    <div class="video-container" data-title="UFOs: The Lost Evidence" style="box-shadow:0 0 16px #0ef;border:2px solid #0ef;"><iframe src="https://www.youtube.com/embed/2QdQwKXQFhA" allowfullscreen></iframe></div>
-    <div class="video-container" data-title="UFOs and Nukes" style="box-shadow:0 0 16px #0ef;border:2px solid #0ef;"><iframe src="https://www.youtube.com/embed/1QKQbFQyKqg" allowfullscreen></iframe></div>
-    <div class="video-container" data-title="UFOs: Top Secret Files" style="box-shadow:0 0 16px #0ef;border:2px solid #0ef;"><iframe src="https://www.youtube.com/embed/3QKQbFQyKqg" allowfullscreen></iframe></div>
+  <div style="max-width:900px;margin:0 auto;text-align:center;font-size:1.25rem;line-height:1.7;background:rgba(10,10,35,0.7);padding:24px 32px;border-radius:18px;box-shadow:0 0 16px #0ef;">
+    <p>Explore the world of UFOs: mysterious lights, unexplained encounters, and government investigations. Watch real footage, expert interviews, and documentaries. <b>Did you know?</b> The Pentagon has confirmed several unexplained aerial phenomena in recent years.</p>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/UFO_Petit-Rechain_1990.jpg" alt="Famous UFO Photo" style="width:320px;border-radius:12px;box-shadow:0 0 8px #0ef;margin:18px auto;display:block;">
+    <p style="margin-top:18px;">Famous UFO photo from Belgium, 1990.</p>
+    <input type="text" id="searchBar" placeholder="Search UFO videos..." style="margin-bottom:24px;padding:12px 18px;font-size:1.1rem;border-radius:12px;border:none;box-shadow:0 0 8px #0ef;">
+    <div class="video-grid" id="videoGrid" style="gap:32px;">
+      <div class="video-container" data-title="Phoenix Lights" style="box-shadow:0 0 16px #0ef;border:2px solid #0ef;"><iframe src="https://www.youtube.com/embed/w4HTwSSiOXM" allowfullscreen></iframe></div>
+      <div class="video-container" data-title="Area 51 Secrets" style="box-shadow:0 0 16px #0ef;border:2px solid #0ef;"><iframe src="https://www.youtube.com/embed/-JBwH6yHEDo" allowfullscreen></iframe></div>
+      <div class="video-container" data-title="UFO Evidence" style="box-shadow:0 0 16px #0ef;border:2px solid #0ef;"><iframe src="https://www.youtube.com/embed/4koYxy5mYPo" allowfullscreen></iframe></div>
+      <div class="video-container" data-title="UFO Disclosure" style="box-shadow:0 0 16px #0ef;border:2px solid #0ef;"><iframe src="https://www.youtube.com/embed/1WwGGuQljl4" allowfullscreen></iframe></div>
+      <div class="video-container" data-title="Recent UFO Sightings" style="box-shadow:0 0 16px #0ef;border:2px solid #0ef;"><iframe src="https://www.youtube.com/embed/qwZZd2u9Pm4" allowfullscreen></iframe></div>
+      <div class="video-container" data-title="US Navy UFOs" style="box-shadow:0 0 16px #0ef;border:2px solid #0ef;"><iframe src="https://www.youtube.com/embed/6rWOtrke0HY" allowfullscreen></iframe></div>
+      <div class="video-container" data-title="UFOs Over Mexico" style="box-shadow:0 0 16px #0ef;border:2px solid #0ef;"><iframe src="https://www.youtube.com/embed/1w5Qd5b3QeA" allowfullscreen></iframe></div>
+      <div class="video-container" data-title="The Tic Tac UFO" style="box-shadow:0 0 16px #0ef;border:2px solid #0ef;"><iframe src="https://www.youtube.com/embed/8n9Q0GkOa9w" allowfullscreen></iframe></div>
+      <div class="video-container" data-title="UFOs: The Lost Evidence" style="box-shadow:0 0 16px #0ef;border:2px solid #0ef;"><iframe src="https://www.youtube.com/embed/2QdQwKXQFhA" allowfullscreen></iframe></div>
+      <div class="video-container" data-title="UFOs and Nukes" style="box-shadow:0 0 16px #0ef;border:2px solid #0ef;"><iframe src="https://www.youtube.com/embed/1QKQbFQyKqg" allowfullscreen></iframe></div>
+      <div class="video-container" data-title="UFOs: Top Secret Files" style="box-shadow:0 0 16px #0ef;border:2px solid #0ef;"><iframe src="https://www.youtube.com/embed/3QKQbFQyKqg" allowfullscreen></iframe></div>
+      <div class="video-container" data-title="NASA UFOs" style="box-shadow:0 0 16px #0ef;border:2px solid #0ef;"><iframe src="https://www.youtube.com/embed/8Qn_spdM5Zg" allowfullscreen></iframe></div>
+      <div class="video-container" data-title="UFOs Explained" style="box-shadow:0 0 16px #0ef;border:2px solid #0ef;"><iframe src="https://www.youtube.com/embed/8Qn_spdM5Zg" allowfullscreen></iframe></div>
+    </div>
+    <div style="margin-top:32px;text-align:left;max-width:700px;margin:32px auto;">
+      <h3 style="color:#0ef;">Famous UFO Cases</h3>
+      <ul>
+        <li><b>Roswell Incident (1947):</b> Alleged UFO crash in New Mexico, sparking decades of speculation.</li>
+        <li><b>Rendlesham Forest (1980):</b> UK military personnel reported strange lights and a landed craft.</li>
+        <li><b>Phoenix Lights (1997):</b> Thousands saw mysterious lights over Arizona.</li>
+        <li><b>USS Nimitz Encounter (2004):</b> US Navy pilots tracked a "Tic Tac" shaped object off California.</li>
+      </ul>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/UFO_Petit-Rechain_1990.jpg" alt="UFO Belgium" style="width:220px;border-radius:12px;box-shadow:0 0 8px #0ef;margin:18px 0;">
+      <p>Are UFOs alien visitors, secret technology, or natural phenomena? The mystery continues!</p>
+    </div>
   </div>
 <!-- How to Go to Space & Rockets Page -->
 <section id="space-journey">
@@ -229,7 +1342,11 @@ ul {list-style-type:square;margin:20px auto;max-width:500px;padding-left:20px;}
     <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:32px;margin:32px 0;">
       <iframe width="420" height="236" src="https://www.youtube.com/embed/1Zb2gRJU8vA" title="How Rockets Work" frameborder="0" allowfullscreen style="border-radius:12px;box-shadow:0 0 16px #0ef;"></iframe>
       <iframe width="420" height="236" src="https://www.youtube.com/embed/7f5FfF0Q4pY" title="Astronaut Training" frameborder="0" allowfullscreen style="border-radius:12px;box-shadow:0 0 16px #0ef;"></iframe>
+      <iframe width="420" height="236" src="https://www.youtube.com/embed/SGP6Y0Pnhe4" title="Chris Hadfield: Space Oddity" frameborder="0" allowfullscreen style="border-radius:12px;box-shadow:0 0 16px #0ef;"></iframe>
     </div>
+    <h3 style="color:#0ef;margin-top:32px;">👨‍🚀 Example: Chris Hadfield</h3>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/9/9e/Chris_Hadfield_2011.jpg" alt="Chris Hadfield" style="width:120px;border-radius:12px;box-shadow:0 0 8px #0ef;margin:18px auto;display:block;">
+    <p>Chris Hadfield is a Canadian astronaut who commanded the International Space Station. He became famous for his educational videos and his cover of "Space Oddity" recorded in orbit.</p>
     <p style="margin-top:18px;font-size:1.15rem;color:#0ef;text-shadow:0 0 8px #0ef;">Space travel is becoming more accessible—maybe you’ll be next!</p>
   </div>
 </section>
@@ -238,766 +1355,102 @@ ul {list-style-type:square;margin:20px auto;max-width:500px;padding-left:20px;}
   <button id="scrollTopBtn" title="Scroll to top" style="position:fixed;bottom:32px;right:32px;z-index:1000;background:#0ea5e9;color:#fff;border:none;border-radius:50%;width:56px;height:56px;font-size:2rem;box-shadow:0 0 12px #0ef;display:none;cursor:pointer;transition:background 0.2s;">↑</button>
   <section id="starwars">
     <video autoplay muted loop class="bg-video"><source src="https://cdn.pixabay.com/vimeo/521982225/alien-nebula.mp4" type="video/mp4" /></video>
-    <h2>⭐ Star Wars Universe</h2>
-        <div style="max-width:900px;margin:0 auto;text-align:center;font-size:1.2rem;line-height:1.7;">
-          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:32px;max-width:900px;margin:32px auto;">
-            <div style="background:rgba(10,10,35,0.85);border-radius:16px;padding:24px;text-align:center;box-shadow:0 0 16px #0ef;">
-              <img src="https://avatars.githubusercontent.com/u/11600000?v=4" alt="Pedro Henrique de Oliveira Francisco" style="width:140px;border-radius:12px;box-shadow:0 0 8px #0ef;">
-              <h3 style="margin:12px 0 6px 0;">Pedro Henrique de Oliveira Francisco</h3>
-              <p style="font-weight:bold;color:#0ef;">Coder</p>
-              <p style="font-size:1.1rem;">Pedro is a passionate developer who loves building interactive web experiences and solving complex problems with code.</p>
-            </div>
-            <div style="background:rgba(10,10,35,0.85);border-radius:16px;padding:24px;text-align:center;box-shadow:0 0 16px #0ef;">
-              <img src="https://avatars.githubusercontent.com/u/11600001?v=4" alt="Benjamin Irani Fey" style="width:140px;border-radius:12px;box-shadow:0 0 8px #0ef;">
-              <h3 style="margin:12px 0 6px 0;">Benjamin Irani Fey</h3>
-              <p style="font-weight:bold;color:#0ef;">Leader &amp; Coder</p>
-              <p style="font-size:1.1rem;">Benjamin led the project and contributed to the codebase, ensuring the vision and technical quality of Cosmic Explorer.</p>
-            </div>
-            <div style="background:rgba(10,10,35,0.85);border-radius:16px;padding:24px;text-align:center;box-shadow:0 0 16px #0ef;">
-              <img src="https://avatars.githubusercontent.com/u/11600002?v=4" alt="Pavlo Barbira" style="width:140px;border-radius:12px;box-shadow:0 0 8px #0ef;">
-              <h3 style="margin:12px 0 6px 0;">Pavlo Barbira</h3>
-              <p style="font-weight:bold;color:#0ef;">Designer</p>
-              <p style="font-size:1.1rem;">Pavlo crafted the visual design and user experience, making the site beautiful and engaging for all visitors.</p>
-            </div>
-          </div>
+    <h2 style="font-size:3rem;color:#ffe81f;text-shadow:0 0 24px #ffe81f,0 0 48px #fff;letter-spacing:2px;">⭐ Star Wars Universe</h2>
+    <div style="max-width:1100px;margin:0 auto;text-align:center;font-size:1.2rem;line-height:1.7;">
+      <div style="background:rgba(30,30,10,0.85);border-radius:18px;padding:32px 24px;box-shadow:0 0 32px #ffe81f;margin-bottom:32px;">
+        <h3 style="color:#ffe81f;font-size:2rem;">Welcome to the Galaxy Far, Far Away</h3>
+        <p>Explore the epic worlds, ships, and heroes of Star Wars! From Tatooine to the Death Star, discover the science and fantasy behind the saga.</p>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:32px;margin:32px 0;">
+        <div style="background:rgba(10,10,35,0.9);border-radius:16px;padding:24px;text-align:center;box-shadow:0 0 16px #ffe81f;">
+          <img src="https://static.wikia.nocookie.net/starwars/images/9/9b/Yoda_SWSB.png" alt="Yoda" style="width:160px;border-radius:12px;box-shadow:0 0 8px #ffe81f;">
+          <h3>Yoda</h3>
+          <p>Legendary Jedi Master, wise and powerful in the Force.</p>
         </div>
-      <ul style="text-align:left;max-width:600px;margin:24px auto;">
-        <li><b>Tatooine:</b> Desert planet with twin suns, home to Luke Skywalker.</li>
-        <li><b>Hoth:</b> Icy world, site of the Rebel Alliance's secret base.</li>
-        <li><b>Coruscant:</b> City-covered planet, capital of the Republic.</li>
-        <li><b>Endor:</b> Forest moon, home to the Ewoks.</li>
-        <li><b>Death Star:</b> Massive space station and superweapon.</li>
-        <li><b>Millennium Falcon:</b> Han Solo's legendary ship.</li>
-        <li><b>Jedi:</b> Guardians of peace and justice, wielders of the Force.</li>
-        <li><b>Sith:</b> Dark side Force users, including Darth Vader and Emperor Palpatine.</li>
+        <div style="background:rgba(10,10,35,0.9);border-radius:16px;padding:24px;text-align:center;box-shadow:0 0 16px #ffe81f;">
+          <img src="https://static.wikia.nocookie.net/starwars/images/2/2e/Luke_vs_Vader.png" alt="Luke vs Vader" style="width:160px;border-radius:12px;box-shadow:0 0 8px #ffe81f;">
+          <h3>Luke Skywalker vs Darth Vader</h3>
+          <p>The epic duel between father and son, light and dark.</p>
+        </div>
+        <div style="background:rgba(10,10,35,0.9);border-radius:16px;padding:24px;text-align:center;box-shadow:0 0 16px #ffe81f;">
+          <img src="https://static.wikia.nocookie.net/starwars/images/3/3e/Death_Star_II.png" alt="Death Star II" style="width:160px;border-radius:12px;box-shadow:0 0 8px #ffe81f;">
+          <h3>Death Star II</h3>
+          <p>The Empire's ultimate weapon, destroyed in Return of the Jedi.</p>
+        </div>
+        <div style="background:rgba(10,10,35,0.9);border-radius:16px;padding:24px;text-align:center;box-shadow:0 0 16px #ffe81f;">
+          <img src="https://static.wikia.nocookie.net/starwars/images/4/4e/Yoda_Dagobah.png" alt="Yoda training Luke on Dagobah" style="width:160px;border-radius:12px;box-shadow:0 0 8px #ffe81f;">
+          <h3>Yoda training Luke</h3>
+          <p>Luke learns the ways of the Force on the swampy world of Dagobah.</p>
+        </div>
+      </div>
+      <h3 style="color:#ffe81f;margin-top:32px;">🌌 Iconic Planets</h3>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:32px;margin:32px 0;">
+        <div style="background:rgba(30,30,10,0.85);border-radius:16px;padding:18px;text-align:center;box-shadow:0 0 12px #ffe81f;">
+          <img src="https://static.wikia.nocookie.net/starwars/images/5/5a/Tatooine_TPM.png" alt="Tatooine" style="width:120px;border-radius:12px;box-shadow:0 0 8px #ffe81f;">
+          <h4>Tatooine</h4>
+          <p>Desert planet with twin suns, home to Luke Skywalker and Anakin Skywalker.</p>
+        </div>
+        <div style="background:rgba(30,30,10,0.85);border-radius:16px;padding:18px;text-align:center;box-shadow:0 0 12px #ffe81f;">
+          <img src="https://static.wikia.nocookie.net/starwars/images/6/6b/Hoth_SWCT.png" alt="Hoth" style="width:120px;border-radius:12px;box-shadow:0 0 8px #ffe81f;">
+          <h4>Hoth</h4>
+          <p>Icy world, site of the Rebel Alliance's secret base in The Empire Strikes Back.</p>
+        </div>
+        <div style="background:rgba(30,30,10,0.85);border-radius:16px;padding:18px;text-align:center;box-shadow:0 0 12px #ffe81f;">
+          <img src="https://static.wikia.nocookie.net/starwars/images/9/93/Coruscant-EotE.png" alt="Coruscant" style="width:120px;border-radius:12px;box-shadow:0 0 8px #ffe81f;">
+          <h4>Coruscant</h4>
+          <p>City-covered planet, capital of the Republic and the Empire.</p>
+        </div>
+        <div style="background:rgba(30,30,10,0.85);border-radius:16px;padding:18px;text-align:center;box-shadow:0 0 12px #ffe81f;">
+          <img src="https://static.wikia.nocookie.net/starwars/images/6/6d/Endor_FFGRebellion.png" alt="Endor" style="width:120px;border-radius:12px;box-shadow:0 0 8px #ffe81f;">
+          <h4>Endor</h4>
+          <p>Forest moon, home to the Ewoks and site of the second Death Star's destruction.</p>
+        </div>
+      </div>
+      <h3 style="color:#ffe81f;margin-top:32px;">🚀 Famous Ships</h3>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:32px;margin:32px 0;">
+        <div style="background:rgba(10,10,35,0.9);border-radius:16px;padding:18px;text-align:center;box-shadow:0 0 12px #ffe81f;">
+          <img src="https://static.wikia.nocookie.net/starwars/images/9/9b/Millennium_Falcon_TLJ_Fathead.png" alt="Millennium Falcon" style="width:120px;border-radius:12px;box-shadow:0 0 8px #ffe81f;">
+          <h4>Millennium Falcon</h4>
+          <p>Han Solo's legendary ship, fastest hunk of junk in the galaxy.</p>
+        </div>
+        <div style="background:rgba(10,10,35,0.9);border-radius:16px;padding:18px;text-align:center;box-shadow:0 0 12px #ffe81f;">
+          <img src="https://static.wikia.nocookie.net/starwars/images/6/6e/X-wing_SWGTCG.png" alt="X-wing" style="width:120px;border-radius:12px;box-shadow:0 0 8px #ffe81f;">
+          <h4>X-wing</h4>
+          <p>Main starfighter of the Rebel Alliance, famous for destroying the Death Star.</p>
+        </div>
+        <div style="background:rgba(10,10,35,0.9);border-radius:16px;padding:18px;text-align:center;box-shadow:0 0 12px #ffe81f;">
+          <img src="https://static.wikia.nocookie.net/starwars/images/7/7e/TIEfighter2-Fathead.png" alt="TIE Fighter" style="width:120px;border-radius:12px;box-shadow:0 0 8px #ffe81f;">
+          <h4>TIE Fighter</h4>
+          <p>Iconic Imperial starfighter, known for its speed and unique sound.</p>
+        </div>
+        <div style="background:rgba(10,10,35,0.9);border-radius:16px;padding:18px;text-align:center;box-shadow:0 0 12px #ffe81f;">
+          <img src="https://static.wikia.nocookie.net/starwars/images/2/2e/Slave_I_DICE.png" alt="Slave I" style="width:120px;border-radius:12px;box-shadow:0 0 8px #ffe81f;">
+          <h4>Slave I</h4>
+          <p>Boba Fett's unique and heavily armed ship.</p>
+        </div>
+      </div>
+      <h3 style="color:#ffe81f;margin-top:32px;">🎬 Star Wars Videos</h3>
+      <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:32px;margin:32px 0;">
+        <iframe width="420" height="236" src="https://www.youtube.com/embed/8Qn_spdM5Zg" title="Star Wars Science" frameborder="0" allowfullscreen style="border-radius:12px;box-shadow:0 0 16px #ffe81f;"></iframe>
+        <iframe width="420" height="236" src="https://www.youtube.com/embed/8Qn_spdM5Zg" title="Star Wars Lore" frameborder="0" allowfullscreen style="border-radius:12px;box-shadow:0 0 16px #ffe81f;"></iframe>
+      </div>
+      <h3 style="color:#ffe81f;margin-top:32px;">✨ Fun Facts</h3>
+      <ul style="text-align:left;max-width:700px;margin:24px auto;line-height:1.7;background:rgba(30,30,10,0.7);padding:18px 24px;border-radius:14px;box-shadow:0 0 8px #ffe81f;">
+        <li><b>Lightsabers:</b> Each Jedi or Sith builds their own lightsaber, powered by a kyber crystal.</li>
+        <li><b>Wookiees:</b> Chewbacca is a Wookiee from the planet Kashyyyk.</li>
+        <li><b>Force Powers:</b> Jedi and Sith can move objects, sense danger, and even influence minds using the Force.</li>
+        <li><b>Languages:</b> Over 60 languages are spoken in the Star Wars films.</li>
+        <li><b>Science:</b> Some Star Wars tech, like droids and holograms, is becoming real!</li>
       </ul>
-      <iframe width="560" height="315" src="https://www.youtube.com/embed/8Qn_spdM5Zg" title="Star Wars Trailer" frameborder="0" allowfullscreen style="margin:24px 0;"></iframe>
-      <p style="margin-top:18px;">May the Force be with you!</p>
+      <p style="margin-top:18px;font-size:1.2rem;color:#ffe81f;">May the Force be with you!</p>
+    </div>
     </div>
   </section>
 </div>
-<script>
-// Animated Stars Background
-// Space Phenomena Interactivity
-// Black Hole light bending simulation
-const bhSim = document.getElementById('bhSim');
-const bhSlider = document.getElementById('bhSlider');
-if(bhSim && bhSlider){
-  const ctx = bhSim.getContext('2d');
-  function drawBH(val){
-    ctx.clearRect(0,0,bhSim.width,bhSim.height);
-    // Draw black hole
-    ctx.beginPath();
-    ctx.arc(140,90,40,0,2*Math.PI);
-    ctx.fillStyle='#111';
-    ctx.shadowColor='#0ef';
-    ctx.shadowBlur=20;
-    ctx.fill();
-    ctx.shadowBlur=0;
-    // Draw light rays bending
-    for(let i=0;i<8;i++){
-      ctx.save();
-      ctx.strokeStyle='#ffe';
-      ctx.lineWidth=2;
-      ctx.beginPath();
-      ctx.moveTo(20+i*30,30);
-      let bend=val/100*30;
-      ctx.bezierCurveTo(60+i*20,60,120+i*10-bend,120,140,90);
-      ctx.stroke();
-      ctx.restore();
-    }
-  }
-  drawBH(bhSlider.value);
-  bhSlider.addEventListener('input',()=>drawBH(bhSlider.value));
-}
-
-// Supernova slider
-const snSlider = document.getElementById('snSlider');
-const snStage = document.getElementById('snStage');
-if(snSlider && snStage){
-  const stages = [
-    'Star Before Supernova',
-    'Supernova Explosion!',
-    'Remnant: Neutron Star or Black Hole'
-  ];
-  snSlider.addEventListener('input',()=>{
-    snStage.textContent=stages[snSlider.value];
-  });
-  snStage.textContent=stages[snSlider.value];
-}
-
-// Space Fact of the Day
-const spaceFacts = [
-  'A teaspoon of neutron star would weigh about 6 billion tons.',
-  'The largest known star, UY Scuti, is over 1,700 times the Sun’s radius.',
-  'A black hole’s gravity can slow down time near its event horizon.',
-  'The Milky Way is on a collision course with the Andromeda galaxy.',
-  'Some supernovae outshine entire galaxies for weeks.',
-  'Auroras can occur on other planets, not just Earth.',
-  'The CMB is the oldest light we can observe in the universe.',
-  'Exoplanet transits helped discover thousands of worlds beyond our solar system.'
-];
-const spaceFact = document.getElementById('spaceFact');
-if(spaceFact){
-  const today = new Date().getDate()%spaceFacts.length;
-  spaceFact.textContent = spaceFacts[today];
-}
-const starsCanvas = document.getElementById('stars-bg');
-if(starsCanvas){
-  const ctx = starsCanvas.getContext('2d');
-  let w = window.innerWidth, h = window.innerHeight;
-  starsCanvas.width = w; starsCanvas.height = h;
-  let stars = Array.from({length:180},()=>({x:Math.random()*w,y:Math.random()*h,r:0.5+Math.random()*1.5,s:Math.random()*2*Math.PI,spd:0.002+Math.random()*0.003}));
-  function drawStars(){
-    ctx.clearRect(0,0,w,h);
-    for(let star of stars){
-      ctx.save();
-      ctx.globalAlpha = 0.7+0.3*Math.sin(star.s);
-      ctx.beginPath();
-      ctx.arc(star.x,star.y,star.r,0,2*Math.PI);
-      ctx.fillStyle = '#eaf2ff';
-      ctx.shadowColor = '#0ef';
-      ctx.shadowBlur = 8;
-      ctx.fill();
-      ctx.restore();
-      star.s += star.spd;
-    }
-    requestAnimationFrame(drawStars);
-  }
-  drawStars();
-  window.addEventListener('resize',()=>{
-    w = window.innerWidth; h = window.innerHeight;
-    starsCanvas.width = w; starsCanvas.height = h;
-    stars.forEach(star=>{star.x=Math.random()*w;star.y=Math.random()*h;});
-  });
-}
-
-// Home CTA buttons navigation
-document.querySelectorAll('.cta-buttons a').forEach(btn=>{
-  btn.addEventListener('click',e=>{
-    e.preventDefault();
-    document.querySelectorAll('section').forEach(sec=>sec.classList.remove('active'));
-    document.getElementById(btn.dataset.target).classList.add('active');
-    window.scrollTo(0,0);
-  });
-});
-
-// Scroll to Top Button logic
-const scrollBtn = document.getElementById('scrollTopBtn');
-window.addEventListener('scroll',()=>{
-  scrollBtn.style.display = window.scrollY > 300 ? 'block' : 'none';
-});
-scrollBtn.addEventListener('click',()=>{
-  window.scrollTo({top:0,behavior:'smooth'});
-});
-
-// Exoplanet search (all exoplanet pages)
-function exoSearchInit(){
-  document.querySelectorAll('section[id^="exo"],#exoplanets').forEach(sec=>{
-    const search = document.createElement('input');
-    search.type = 'text';
-    search.placeholder = 'Search exoplanets...';
-    search.style = 'width:100%;max-width:400px;margin:0 auto 20px;display:block;padding:10px;border-radius:8px;border:none;font-size:1rem;';
-    sec.insertBefore(search, sec.querySelector('ul'));
-    search.addEventListener('input',function(){
-      const term = this.value.toLowerCase();
-      sec.querySelectorAll('ul li').forEach(li=>{
-        li.style.display = li.textContent.toLowerCase().includes(term)?'list-item':'none';
-      });
-    });
-  });
-}
-exoSearchInit();
-
-// Exoplanet hover effect
-document.querySelectorAll('section[id^="exo"],#exoplanets').forEach(sec=>{
-  sec.querySelectorAll('ul li').forEach(li=>{
-    li.addEventListener('mouseenter',()=>{
-      li.style.background='#0ea5e9';li.style.color='#fff';li.style.transition='background 0.2s';
-    });
-    li.addEventListener('mouseleave',()=>{
-      li.style.background='';li.style.color='';
-    });
-  });
-});
-</script>
-<!-- Rocket animation on page change -->
-<script>
-const rocketAnim = document.getElementById('rocket-animation');
-const rocketImg = document.getElementById('rocket-img');
-const rocketSmoke = document.getElementById('rocket-smoke');
-function launchRocket() {
-  rocketAnim.style.display = 'block';
-  rocketAnim.style.transition = 'none';
-  rocketAnim.style.left = '-200px';
-  rocketSmoke.innerHTML = '';
-  let flames = '<span style="display:inline-block;width:24px;height:24px;background:radial-gradient(circle,#ff0,#f00 60%,#000 100%);border-radius:50%;margin-right:-8px;box-shadow:0 0 24px #f00;"></span>';
-  let smokeClouds = '';
-  for(let i=0;i<6;i++){
-    smokeClouds += `<span style="display:inline-block;width:${20+Math.random()*20}px;height:${16+Math.random()*12}px;background:radial-gradient(circle,#ccc,#888 80%,#000 100%);border-radius:50%;margin-right:-8px;opacity:${0.5+Math.random()*0.5};box-shadow:0 0 12px #888;"></span>`;
-  }
-  rocketSmoke.innerHTML = flames + smokeClouds;
-  setTimeout(()=>{
-    rocketAnim.style.transition = 'left 1.2s cubic-bezier(.42,.01,.58,1), top 0.3s';
-    rocketAnim.style.left = '110vw';
-    rocketAnim.style.top = (40+Math.random()*20)+'vh';
-    setTimeout(()=>{
-      rocketAnim.style.display = 'none';
-      rocketAnim.style.left = '-200px';
-    },1400);
-  },50);
-}
-document.querySelectorAll('nav a').forEach(link=>{
-  link.addEventListener('click',()=>{
-    launchRocket();
-  });
-});
-// Astronaut Chatbot (fun answers for basic space questions)
-document.getElementById('astro-ask-btn').onclick = function() {
-  const question = document.getElementById('astro-question').value.trim().toLowerCase();
-  const answerBox = document.getElementById('astro-answer');
-  if (!question) { answerBox.textContent = 'Please enter a space question.'; return; }
-  answerBox.textContent = 'Thinking...';
-  setTimeout(()=>{
-    let answer = '';
-    // Helper for fuzzy matching
-    function fuzzyIncludes(str, arr) {
-      return arr.some(word => {
-        // Accept if word is in str, or Levenshtein distance <=2
-        if (str.includes(word)) return true;
-        // Simple typo tolerance
-        for (let i=0; i<str.length-word.length+1; i++) {
-          let sub = str.substr(i, word.length);
-          let mismatches = 0;
-          for (let j=0; j<word.length; j++) {
-            if (sub[j] !== word[j]) mismatches++;
-            if (mismatches > 2) break;
-          }
-          if (mismatches <= 2) return true;
-        }
-        return false;
-      });
-    }
-    if (fuzzyIncludes(question, ['black hole','blackhole','blak hole'])) {
-      answer = "Whoa! Black holes are cosmic vacuum cleaners. If you get too close, not even light escapes! They’re like space’s secret trapdoor!";
-    } else if (fuzzyIncludes(question, ['mars','marz','marrs'])) {
-      answer = "Mars is the red planet! It’s cold, dusty, and maybe the next home for humans. Want to move there? Pack your space boots and check out the Mars page!";
-    } else if (fuzzyIncludes(question, ['alien','alain','alein','ufo'])) {
-      answer = "Aliens? The universe is huge—who knows! If you spot a UFO, wave hello and ask for a selfie!";
-    } else if (fuzzyIncludes(question, ['rocket','roket','rockit'])) {
-      answer = "Rockets are giant tubes full of fuel that go BOOM and launch us to space! They’re the ultimate rollercoaster ride!";
-    } else if (fuzzyIncludes(question, ['astronaut','astronot','astronuat'])) {
-      answer = "Astronauts train hard, eat weird food, and float around in zero gravity. Sometimes we even play soccer with floating water drops!";
-    } else if (fuzzyIncludes(question, ['planet','planit','planett'])) {
-      answer = "Planets come in all shapes and sizes. Earth is our home, but there are thousands more out there—some with two suns, some with diamond rain!";
-    } else if (fuzzyIncludes(question, ['star','starr','ster'])) {
-      answer = "Stars are giant balls of burning gas. Our Sun is a star, and it keeps us warm and alive! Some stars explode in supernovas—space fireworks!";
-    } else if (fuzzyIncludes(question, ['galaxy','galaxi','galaxie'])) {
-      answer = "Galaxies are huge collections of stars, planets, and cosmic stuff. The Milky Way is our galaxy, and it’s shaped like a giant swirl!";
-    } else if (fuzzyIncludes(question, ['gravity','gravty','gravitee'])) {
-      answer = "Gravity is what keeps your feet on the ground—and what makes planets and stars stick together! Without it, we’d all float away like balloons!";
-    } else if (fuzzyIncludes(question, ['light year','lite year','lightear'])) {
-      answer = "A light year is how far light travels in one year—almost 6 trillion miles! If you could drive that far, you’d need a LOT of snacks!";
-    } else if (fuzzyIncludes(question, ['moon','mooon','mune'])) {
-      answer = "The Moon is Earth’s cosmic neighbor. Astronauts have walked on it, and it causes ocean tides. Sometimes it looks like cheese, but it’s really just rock!";
-    } else if (fuzzyIncludes(question, ['sun','son','sunn'])) {
-      answer = "The Sun is a giant ball of hot plasma. It gives us light, warmth, and awesome sunrises. Don’t stare at it—astronaut tip!";
-    } else if (fuzzyIncludes(question, ['spacesuit','spacesut','spasesuit'])) {
-      answer = "Spacesuits are like superhero armor! They keep astronauts safe from space cold, radiation, and help us breathe. Plus, they look super cool!";
-    } else if (fuzzyIncludes(question, ['comet','komet','comett'])) {
-      answer = "Comets are icy space travelers with glowing tails. When they zoom by, they put on a show for everyone on Earth!";
-    } else if (fuzzyIncludes(question, ['telescope','telescop','telascope'])) {
-      answer = "Telescopes are our cosmic binoculars. With them, we can see planets, stars, and galaxies far, far away!";
-    } else if (fuzzyIncludes(question, ['supernova','supernove','suprnova'])) {
-      answer = "A supernova is a star’s grand finale—an explosion so bright it can outshine a whole galaxy!";
-    } else if (fuzzyIncludes(question, ['satellite','satilite','satelite'])) {
-      answer = "Satellites orbit Earth and help us talk, navigate, and study space. Some even take selfies of our planet!";
-    } else {
-      const funReplies = [
-        "Space is awesome! Did you know there are more stars in the universe than grains of sand on Earth?",
-        "I love space questions! If you want to be an astronaut, start by being curious—like you are now!",
-        "Space is big, wild, and wonderful. Keep asking questions and you’ll be a cosmic explorer in no time!",
-        "If you ever get lost in space, just follow the stars—they know the way!",
-        "No matter what you ask, I’m here to help you explore the universe!",
-        "Cosmic fact: The largest volcano in the solar system is on Mars—Olympus Mons!",
-        "Astronaut tip: Always bring snacks to space. You never know when you’ll get hungry orbiting Earth!",
-        "If you ask me about anything, I’ll always answer with a smile—space is for everyone!"
-      ];
-      answer = funReplies[Math.floor(Math.random()*funReplies.length)];
-    }
-    answerBox.textContent = answer;
-  }, 700);
-};
-  <h3>Eye-Witness UFO Stories</h3>
-  <div class="ufo-stories">
-    <p><strong>1976, Nevada:</strong> Multiple residents reported strange lights moving rapidly across the desert sky...</p>
-    <p><strong>1997, Phoenix Lights:</strong> Thousands of people witnessed large V-shaped lights over Phoenix...</p>
-  </div>
-</section>
-
-<section id="blackhole">
-  <h2>🕹️ Black Hole Devourer</h2>
-  <div style="max-width:900px;margin:0 auto;text-align:center;font-size:1.25rem;line-height:1.7;background:rgba(10,10,35,0.7);padding:24px 32px;border-radius:18px;box-shadow:0 0 16px #0ef;">
-    <p><b>Game Description:</b> Become a cosmic black hole! Use WASD to move, devour planets to grow, and avoid space trash. Realistic planet visuals, gravity effects, and fun black hole facts. Can you become the biggest black hole in the universe?</p>
-  </div>
-  <canvas id="gameCanvas" width="2500" height="1200"></canvas>
-  <div id="factBox">Eat a planet to see a black hole fact!</div>
-  <div id="planetCounter">Planets: 0</div>
-  <div id="menuOverlay">
-    <h1 style="color:#ff7f00;">Black Hole Devourer</h1>
-    <p>Use WASD to move the black hole.<br>
-    Devour planets to grow bigger and faster.<br>
-    Avoid space trash — it shrinks and slows you.<br>
-    If you get too small, you die.<br>
-    Planets get sucked in before being eaten.<br><br>
-    Good luck!</p>
-    <button id="startBtn">Start Game</button>
-  </div>
-  <script>
-// --- Black Hole Devourer Game ---
-const canvas = document.getElementById('gameCanvas');
-const ctx = canvas.getContext('2d');
-
-const W = canvas.width;
-const H = canvas.height;
-
-const keys = {};
-document.addEventListener('keydown', e => { keys[e.key.toLowerCase()] = true; });
-document.addEventListener('keyup', e => { keys[e.key.toLowerCase()] = false; });
-
-let playing = false;
-let animationId = null;
-
-// Black hole object
-const blackhole = {
-  x: W/2,
-  y: H/2,
-  radius: 30,
-  speedMax: 8,
-  velocityX: 0,
-  velocityY: 0,
-  acceleration: 0.5,
-  friction: 0.9,
-  growthRate: 5,
-  minRadius: 20,
-  maxRadius: 150 // capped max size to avoid glitch
-};
-
-// Planet types with realistic colors and gradients
-const planetTypes = [
-  {
-    name: 'Earth-like',
-    baseColor: '#3a7bd5',
-    detailColors: ['#2d5a85', '#567fb3', '#7fbaec'],
-    sizeRange: [12, 18]
-  },
-  {
-    name: 'Mars-like',
-    baseColor: '#c1440e',
-    detailColors: ['#9f3200', '#d35400', '#e67e22'],
-    sizeRange: [10, 15]
-  },
-  {
-    name: 'Gas Giant',
-    baseColor: '#f5deb3',
-    detailColors: ['#d2b48c', '#deb887', '#f0e68c'],
-    sizeRange: [18, 30]
-  },
-  {
-    name: 'Ice Planet',
-    baseColor: '#a9d6e5',
-    detailColors: ['#7fb3d5', '#c0e0f2', '#d1f0ff'],
-    sizeRange: [15, 22]
-  },
-  {
-    name: 'Volcanic',
-    baseColor: '#8b1a1a',
-    detailColors: ['#b22222', '#dc143c', '#ff4500'],
-    sizeRange: [12, 20]
-  }
-];
-
-class Planet {
-  constructor(x, y, radius, type){
-    this.x = x;
-    this.y = y;
-    this.radius = radius;
-    this.type = type;
-    this.sucked = false;
-    this.angle = Math.random() * Math.PI * 2;
-    this.rotationSpeed = (Math.random() * 0.002) + 0.0005;
-
-    // Precompute lava spots if volcanic
-    if (type.name === 'Volcanic') {
-      this.lavaSpots = Array.from({length: 5}, () => ({
-        x: (Math.random()-0.5) * this.radius * 1.5,
-        y: (Math.random()-0.5) * this.radius * 1.5,
-        angle: Math.random() * Math.PI * 2
-      }));
-    }
-  }
-  draw(){
-    const {baseColor, detailColors} = this.type;
-
-    // Radial gradient for base planet
-    let grad = ctx.createRadialGradient(this.x - this.radius/3, this.y - this.radius/3, this.radius/5, this.x, this.y, this.radius);
-    grad.addColorStop(0, detailColors[2]);
-    grad.addColorStop(0.7, baseColor);
-    grad.addColorStop(1, detailColors[0]);
-
-    ctx.fillStyle = grad;
-    ctx.beginPath();
-    ctx.arc(this.x, this.y, this.radius, 0, Math.PI*2);
-    ctx.fill();
-
-    ctx.save();
-    ctx.translate(this.x, this.y);
-    ctx.rotate(this.angle);
-
-    if(this.type.name === 'Gas Giant'){
-      for(let i = -2; i <= 2; i++){
-        ctx.beginPath();
-        ctx.strokeStyle = detailColors[1];
-        ctx.lineWidth = 2;
-        ctx.arc(0, i*3, this.radius * 0.9, 0, Math.PI*2);
-        ctx.stroke();
-      }
-    }
-
-    if(this.type.name === 'Volcanic'){
-      for(let spot of this.lavaSpots){
-        ctx.beginPath();
-        ctx.fillStyle = detailColors[2];
-        ctx.ellipse(spot.x, spot.y, this.radius*0.15, this.radius*0.05, spot.angle, 0, Math.PI*2);
-        ctx.fill();
-      }
-    }
-
-    ctx.restore();
-
-    ctx.shadowColor = 'rgba(0,0,0,0.3)';
-    ctx.shadowBlur = 5;
-  }
-  update(){
-    this.angle += this.rotationSpeed;
-  }
-}
-
-let planets = [];
-
-function generatePlanets(num = 10){
-  for(let i=0; i<num; i++){
-    let type = planetTypes[Math.floor(Math.random()*planetTypes.length)];
-    let r = (Math.random() * (type.sizeRange[1] - type.sizeRange[0])) + type.sizeRange[0];
-    // Spawn avoiding blackhole center
-    let x, y, tries=0;
-    do {
-      x = r + Math.random()*(W - 2*r);
-      y = r + Math.random()*(H - 2*r);
-      tries++;
-      if(tries > 100) break;
-    } while(distance(x,y, blackhole.x, blackhole.y) < blackhole.radius * 6);
-
-    planets.push(new Planet(x,y,r,type));
-  }
-}
-
-function distance(x1,y1,x2,y2){
-  return Math.hypot(x2-x1, y2-y1);
-}
-
-// Suck objects within max suction range that grows with blackhole but caps at 250px
-function suckObject(obj) {
-  let dx = blackhole.x - obj.x;
-  let dy = blackhole.y - obj.y;
-  let dist = Math.hypot(dx, dy);
-
-  let maxSuctionDist = Math.min(blackhole.radius * 6, 250);
-  if(dist > maxSuctionDist) return;
-
-  if(dist > 1){
-    let clampedDist = Math.max(dist, blackhole.radius);
-    let speed = (blackhole.radius * 200) / (clampedDist * clampedDist);
-    speed = Math.min(speed, 12);
-    obj.x += (dx/dist) * speed;
-    obj.y += (dy/dist) * speed;
-  }
-}
-
-function showFact(){
-  const factBox = document.getElementById('factBox');
-  const facts = [
-    "Black holes warp space and time.",
-    "Black holes can spin near light speed.",
-    "They evaporate slowly via Hawking radiation.",
-    "Supermassive black holes exist at galaxy centers.",
-    "Nothing escapes past the event horizon."
-  ];
-  factBox.textContent = facts[Math.floor(Math.random()*facts.length)];
-  factBox.style.opacity = 1;
-  setTimeout(() => factBox.style.opacity = 0.6, 4000);
-}
-
-function drawBlackhole(){
-  // Outer orange glow
-  let glow = ctx.createRadialGradient(blackhole.x, blackhole.y, blackhole.radius * 0.4, blackhole.x, blackhole.y, blackhole.radius);
-  glow.addColorStop(0, 'rgba(255, 140, 0, 0.8)');
-  glow.addColorStop(1, 'rgba(255, 140, 0, 0)');
-
-  ctx.fillStyle = glow;
-  ctx.beginPath();
-  ctx.arc(blackhole.x, blackhole.y, blackhole.radius, 0, Math.PI*2);
-  ctx.fill();
-
-  // Inner black core with orange shadow glow
-  ctx.beginPath();
-  ctx.fillStyle = '#000000';
-  ctx.shadowColor = 'rgba(255, 140, 0, 0.9)';
-  ctx.shadowBlur = blackhole.radius * 0.6;
-  ctx.arc(blackhole.x, blackhole.y, blackhole.radius * 0.6, 0, Math.PI*2);
-  ctx.fill();
-
-  ctx.shadowBlur = 0;
-}
-
-function updatePlanetCounter(){
-  const counter = document.getElementById('planetCounter');
-  counter.textContent = `Planets: ${planets.length}`;
-}
-
-function update(){
-  if(!playing) return;
-
-  // Movement
-  if(keys['w']) blackhole.velocityY -= blackhole.acceleration;
-  if(keys['s']) blackhole.velocityY += blackhole.acceleration;
-  if(keys['a']) blackhole.velocityX -= blackhole.acceleration;
-  if(keys['d']) blackhole.velocityX += blackhole.acceleration;
-
-  blackhole.velocityX *= blackhole.friction;
-  blackhole.velocityY *= blackhole.friction;
-
-  blackhole.velocityX = Math.max(Math.min(blackhole.velocityX, blackhole.speedMax), -blackhole.speedMax);
-  blackhole.velocityY = Math.max(Math.min(blackhole.velocityY, blackhole.speedMax), -blackhole.speedMax);
-
-  blackhole.x += blackhole.velocityX;
-  blackhole.y += blackhole.velocityY;
-
-  blackhole.x = Math.min(Math.max(blackhole.radius, blackhole.x), W - blackhole.radius);
-  blackhole.y = Math.min(Math.max(blackhole.radius, blackhole.y), H - blackhole.radius);
-
-  // Planets behavior
-  for(let i = planets.length - 1; i >= 0; i--){
-    let p = planets[i];
-
-    p.update();
-
-    let distToBH = distance(p.x, p.y, blackhole.x, blackhole.y);
-
-    if(distToBH < blackhole.radius * 6) {
-      suckObject(p);
-      p.sucked = true;
-    }
-
-    if(distToBH < blackhole.radius + p.radius * 0.7){
-      // Increase black hole size but capped
-      blackhole.radius = Math.min(blackhole.radius + p.radius * 0.5, blackhole.maxRadius);
-      showFact();
-      planets.splice(i,1);  // Remove eaten planet
-      generatePlanets(1);   // Spawn new planet
-    }
-  }
-
-  updatePlanetCounter();
-}
-
-function draw(){
-  ctx.clearRect(0,0,W,H);
-
-  drawBlackhole();
-
-  for(let p of planets){
-    p.draw();
-  }
-}
-
-function gameLoop(){
-  update();
-  draw();
-  animationId = requestAnimationFrame(gameLoop);
-}
-
-// Start button functionality
-document.getElementById('startBtn').addEventListener('click', () => {
-  document.getElementById('menuOverlay').classList.add('hidden');
-  blackhole.radius = 30;
-  blackhole.x = W/2;
-  blackhole.y = H/2;
-  blackhole.velocityX = 0;
-  blackhole.velocityY = 0;
-  planets = [];
-  generatePlanets(10);
-  updatePlanetCounter();
-  draw(); // draw once immediately
-  playing = true;
-
-  if(animationId) cancelAnimationFrame(animationId);
-  gameLoop();
-});
-  </script>
-</section>
-
-<section id="probability">
-  <video autoplay muted loop class="bg-video">
-    <source src="https://cdn.pixabay.com/vimeo/525521233/milkyway-galaxy.mp4" type="video/mp4">
-  </video>
-  <h2>🔭 Probability of Aliens</h2>
-  <p style="text-align:center;">Adjust parameters to calculate alien civilization probability:</p>
-  <div class="slider-group">
-    <label>R* (Stars/year) <span id="valR">1</span></label><input type="range" id="R" min="0" max="20" value="1">
-  </div>
-  <div class="slider-group">
-    <label>fₚ (Stars with planets) <span id="valFp">0.5</span></label><input type="range" id="Fp" min="0" max="1" step="0.01" value="0.5">
-  </div>
-  <div class="slider-group">
-    <label>nₑ (Habitable planets/star) <span id="valNe">1</span></label><input type="range" id="Ne" min="0" max="5" step="0.1" value="1">
-  </div>
-  <div class="slider-group">
-    <label>fₗ (Life arises) <span id="valFl">0.5</span></label><input type="range" id="Fl" min="0" max="1" step="0.01" value="0.5">
-  </div>
-  <div class="slider-group">
-    <label>fᵢ (Intelligent life) <span id="valFi">0.5</span></label><input type="range" id="Fi" min="0" max="1" step="0.01" value="0.5">
-  </div>
-  <div class="slider-group">
-    <label>f𝚌 (Communicating civilizations) <span id="valFc">0.5</span></label><input type="range" id="Fc" min="0" max="1" step="0.01" value="0.5">
-  </div>
-  <div class="slider-group">
-    <label>L (Longevity of civilizations) <span id="valL">1000</span></label><input type="range" id="L" min="0" max="10000" step="100" value="1000">
-  </div>
-  <div id="result">Estimated civilizations: 1</div>
-</section>
-
-<section id="planets">
-  <video autoplay muted loop class="bg-video">
-    <source src="https://cdn.pixabay.com/vimeo/512389042/solar-system.mp4" type="video/mp4">
-  </video>
-  <h2>🪐 Solar System Planets</h2>
-  <ul style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;">
-    <li><img src="https://upload.wikimedia.org/wikipedia/commons/4/4a/Mercury_in_true_color.jpg" alt="Mercury" style="width:100%;border-radius:8px;box-shadow:0 0 8px #0ef;"> <b>Mercury</b><br>57.9 million km from Sun<br>Smallest planet, no atmosphere, extreme temps.</li>
-    <li><img src="https://upload.wikimedia.org/wikipedia/commons/e/e5/Venus-real_color.jpg" alt="Venus" style="width:100%;border-radius:8px;box-shadow:0 0 8px #0ef;"> <b>Venus</b><br>108.2 million km<br>Hottest planet, thick CO₂ clouds, volcanic.</li>
-    <li><img src="https://upload.wikimedia.org/wikipedia/commons/9/97/The_Earth_seen_from_Apollo_17.jpg" alt="Earth" style="width:100%;border-radius:8px;box-shadow:0 0 8px #0ef;"> <b>Earth</b><br>149.6 million km<br>Only known life, blue oceans, diverse climates.</li>
-    <li><img src="https://upload.wikimedia.org/wikipedia/commons/0/02/OSIRIS_Mars_true_color.jpg" alt="Mars" style="width:100%;border-radius:8px;box-shadow:0 0 8px #0ef;"> <b>Mars</b><br>227.9 million km<br>Red planet, thin atmosphere, ancient rivers.</li>
-    <li><img src="https://upload.wikimedia.org/wikipedia/commons/e/e2/Jupiter.jpg" alt="Jupiter" style="width:100%;border-radius:8px;box-shadow:0 0 8px #0ef;"> <b>Jupiter</b><br>778.3 million km<br>Largest planet, Great Red Spot, 79+ moons.</li>
-    <li><img src="https://upload.wikimedia.org/wikipedia/commons/c/c7/Saturn_during_Equinox.jpg" alt="Saturn" style="width:100%;border-radius:8px;box-shadow:0 0 8px #0ef;"> <b>Saturn</b><br>1.43 billion km<br>Famous rings, 82 moons, low density.</li>
-    <li><img src="https://upload.wikimedia.org/wikipedia/commons/3/3d/Uranus2.jpg" alt="Uranus" style="width:100%;border-radius:8px;box-shadow:0 0 8px #0ef;"> <b>Uranus</b><br>2.87 billion km<br>Blue-green, tilted axis, icy giant.</li>
-    <li><img src="https://upload.wikimedia.org/wikipedia/commons/5/56/Neptune_Full.jpg" alt="Neptune" style="width:100%;border-radius:8px;box-shadow:0 0 8px #0ef;"> <b>Neptune</b><br>4.5 billion km<br>Strongest winds, deep blue, 14 moons.</li>
-  </ul>
-</section>
-
-
-<section id="exoplanets">
-  <video autoplay muted loop class="bg-video">
-    <source src="https://cdn.pixabay.com/vimeo/523501835/exoplanets.mp4" type="video/mp4">
-  </video>
-  <h2>🌌 Most Important Exoplanets</h2>
-  <input type="text" id="exoSearch" placeholder="Search exoplanets...">
-  <ul id="exoList" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;">
-    <li class="exo-hover" data-info="First habitable zone planet found by Kepler. 2.4x Earth radius. Possible water.">
-      <img src="https://exoplanets.nasa.gov/internal_resources/1054/" alt="Kepler-22b" style="width:100%;border-radius:8px;box-shadow:0 0 8px #0ef;background:#3a7bd5;"> <b>Kepler-22b</b><br>600 ly, habitable zone
-    </li>
-    <li class="exo-hover" data-info="Earth-like, orbits G-type star, 60% larger than Earth. Discovered 2015.">
-      <img src="https://exoplanets.nasa.gov/internal_resources/1055/" alt="Kepler-452b" style="width:100%;border-radius:8px;box-shadow:0 0 8px #0ef;background:#3a7bd5;"> <b>Kepler-452b</b><br>1400 ly, Earth-like
-    </li>
-    <li class="exo-hover" data-info="Closest exoplanet to Earth. Rocky, may have liquid water. Orbits Proxima Centauri.">
-      <img src="https://exoplanets.nasa.gov/internal_resources/1056/" alt="Proxima Centauri b" style="width:100%;border-radius:8px;box-shadow:0 0 8px #0ef;background:#c1440e;"> <b>Proxima Centauri b</b><br>4.2 ly, rocky
-    </li>
-    <li class="exo-hover" data-info="One of 7 Earth-sized planets in TRAPPIST-1 system. Rocky, temperate, possible water.">
-      <img src="https://exoplanets.nasa.gov/internal_resources/1057/" alt="TRAPPIST-1e" style="width:100%;border-radius:8px;box-shadow:0 0 8px #0ef;background:#a9d6e5;"> <b>TRAPPIST-1e</b><br>39 ly, potentially habitable
-    </li>
-    <li class="exo-hover" data-info="Super-Earth, orbits red dwarf, 4.5x Earth mass, habitable zone.">
-      <img src="https://exoplanets.nasa.gov/internal_resources/1058/" alt="Gliese 667Cc" style="width:100%;border-radius:8px;box-shadow:0 0 8px #0ef;background:#f5deb3;"> <b>Gliese 667Cc</b><br>23.6 ly, super-Earth
-    </li>
-    <li class="exo-hover" data-info="Orbits two stars, first confirmed circumbinary planet. Saturn-mass.">
-      <img src="https://exoplanets.nasa.gov/internal_resources/1059/" alt="Kepler-16b" style="width:100%;border-radius:8px;box-shadow:0 0 8px #0ef;background:#f5deb3;"> <b>Kepler-16b</b><br>200 ly, Saturn-mass
-    </li>
-    <li class="exo-hover" data-info="First Earth-sized planet found by Kepler. Rocky, orbits Sun-like star.">
-      <img src="https://exoplanets.nasa.gov/internal_resources/1060/" alt="Kepler-20e" style="width:100%;border-radius:8px;box-shadow:0 0 8px #0ef;background:#3a7bd5;"> <b>Kepler-20e</b><br>950 ly, Earth-sized
-    </li>
-    <li class="exo-hover" data-info="Habitable zone, 70% larger than Earth. Orbits Sun-like star.">
-      <img src="https://exoplanets.nasa.gov/internal_resources/1061/" alt="Kepler-69c" style="width:100%;border-radius:8px;box-shadow:0 0 8px #0ef;background:#3a7bd5;"> <b>Kepler-69c</b><br>2,700 ly, super-Earth
-    </li>
-    <li class="exo-hover" data-info="Habitable zone, 1.4x Earth, orbits K-type star. Rocky.">
-      <img src="https://exoplanets.nasa.gov/internal_resources/1062/" alt="Kepler-62f" style="width:100%;border-radius:8px;box-shadow:0 0 8px #0ef;background:#3a7bd5;"> <b>Kepler-62f</b><br>1,200 ly, rocky
-    </li>
-    <li class="exo-hover" data-info="First Earth-sized planet in habitable zone. Rocky, orbits red dwarf.">
-      <img src="https://exoplanets.nasa.gov/internal_resources/1063/" alt="Kepler-186f" style="width:100%;border-radius:8px;box-shadow:0 0 8px #0ef;background:#3a7bd5;"> <b>Kepler-186f</b><br>500 ly, Earth-sized
-    </li>
-    <li class="exo-hover" data-info="First exoplanet seen transiting its star. Gas giant, 150 ly away.">
-      <img src="https://exoplanets.nasa.gov/internal_resources/1064/" alt="HD 209458 b" style="width:100%;border-radius:8px;box-shadow:0 0 8px #0ef;background:#f5deb3;"> <b>HD 209458 b</b><br>150 ly, gas giant
-    </li>
-    <li class="exo-hover" data-info="Hot Jupiter, very close to star, being distorted by gravity.">
-      <img src="https://exoplanets.nasa.gov/internal_resources/1065/" alt="WASP-12b" style="width:100%;border-radius:8px;box-shadow:0 0 8px #0ef;background:#f5deb3;"> <b>WASP-12b</b><br>1,400 ly, hot Jupiter
-    </li>
-  </ul>
-</section>
-<!-- Fun Cosmic Facts Section -->
-<section id="cosmic-facts">
-  <video autoplay muted loop class="bg-video"><source src="https://cdn.pixabay.com/vimeo/521982225/alien-nebula.mp4" type="video/mp4"></video>
-  <h2>✨ Fun Cosmic Facts</h2>
-  <ul style="font-size:1.2rem;max-width:700px;margin:0 auto;line-height:1.7;">
-    <li>There are more stars in the universe than grains of sand on all Earth's beaches.</li>
-    <li>Neutron stars can spin 600 times per second after birth.</li>
-    <li>Jupiter's Great Red Spot is a storm larger than Earth and has raged for centuries.</li>
-    <li>Some exoplanets orbit two suns, like Tatooine in Star Wars.</li>
-    <li>Black holes can warp time so much that a minute near one could be years elsewhere.</li>
-    <li>Saturn would float in water (if you could find a bathtub big enough!).</li>
-    <li>There are rogue planets drifting through space, not orbiting any star.</li>
-    <li>Our solar system orbits the center of the Milky Way every 230 million years.</li>
-    <li>Light from the Sun takes about 8 minutes to reach Earth.</li>
-    <li>Some galaxies are over 10 billion light years away from us.</li>
-  </ul>
-</section>
-</section>
-
-
-
-<section id="starwars">
-  <video autoplay muted loop class="bg-video"><source src="https://cdn.pixabay.com/vimeo/521982225/alien-nebula.mp4" type="video/mp4" /></video>
-  <h2>⭐ Star Wars Universe</h2>
-  <div style="max-width:800px;margin:0 auto;text-align:center;font-size:1.2rem;line-height:1.7;"></div>
-    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6c/Star_Wars_Logo.svg" alt="Star Wars Logo" style="width:220px;margin-bottom:24px;" />
-    <p>Explore the worlds, ships, and characters of the legendary Star Wars saga. From Tatooine's twin suns to the icy planet Hoth, the Star Wars universe is filled with adventure, mystery, and hope.</p>
-    <ul style="text-align:left;max-width:600px;margin:24px auto;">
-      <li><b>Tatooine:</b> Desert planet with twin suns, home to Luke Skywalker.</li>
-      <li><b>Hoth:</b> Icy world, site of the Rebel Alliance's secret base.</li>
-      <li><b>Coruscant:</b> City-covered planet, capital of the Republic.</li>
-      <li><b>Endor:</b> Forest moon, home to the Ewoks.</li>
-      <li><b>Death Star:</b> Massive space station and superweapon.</li>
-      <li><b>Millennium Falcon:</b> Han Solo's legendary ship.</li>
-      <li><b>Jedi:</b> Guardians of peace and justice, wielders of the Force.</li>
-      <li><b>Sith:</b> Dark side Force users, including Darth Vader and Emperor Palpatine.</li>
-    </ul>
-    <iframe width="560" height="315" src="https://www.youtube.com/embed/8Qn_spdM5Zg" title="Star Wars Trailer" frameborder="0" allowfullscreen style="margin:24px 0;"></iframe>
-    <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:24px;margin:32px 0;">
-      <div>
-        <img src="https://static.wikia.nocookie.net/starwars/images/9/9b/Yoda_SWSB.png" alt="Yoda" style="width:260px;border-radius:12px;box-shadow:0 0 8px #0ef;">
-        <p style="margin-top:8px;">Yoda</p>
-      </div>
-      <div>
-        <img src="https://static.wikia.nocookie.net/starwars/images/2/2e/Luke_vs_Vader.png" alt="Luke vs Vader" style="width:260px;border-radius:12px;box-shadow:0 0 8px #0ef;">
-        <p style="margin-top:8px;">Luke Skywalker vs Darth Vader (Return of the Jedi)</p>
-      </div>
-      <div>
-        <img src="https://static.wikia.nocookie.net/starwars/images/3/3e/Death_Star_II.png" alt="Death Star II" style="width:260px;border-radius:12px;box-shadow:0 0 8px #0ef;">
-        <p style="margin-top:8px;">Destruction of Death Star II (Episode VI)</p>
-      </div>
-      <div>
-        <img src="https://static.wikia.nocookie.net/starwars/images/4/4e/Yoda_Dagobah.png" alt="Yoda training Luke on Dagobah" style="width:260px;border-radius:12px;box-shadow:0 0 8px #0ef;">
-        <p style="margin-top:8px;">Yoda training Luke on Dagobah</p>
-      </div>
-    </div>
-    <p style="margin-top:18px;">May the Force be with you!</p>
-  </div>
+<!-- Mission Section -->
+<section id="mission" style="padding:100px 20px;max-width:900px;margin:0 auto;text-align:center;">
+  <h2 style="font-size:2.8rem;color:#0ef;text-shadow:0 0 24px #0ef,0 0 48px #fff;letter-spacing:2px;">🌟 Our Mission</h2>
+  <p style="font-size:1.3rem;line-height:1.8;background:rgba(10,10,35,0.8);padding:28px 36px;border-radius:18px;box-shadow:0 0 16px #0ef;max-width:700px;margin:32px auto;">To inspire curiosity, learning, and wonder about the universe through interactive games, videos, and facts. We believe space is for everyone—explore, play, and dream big!</p>
 </section>
 <!-- Astronauts Page -->
 <section id="astronauts">
@@ -1044,6 +1497,122 @@ document.getElementById('startBtn').addEventListener('click', () => {
 
 <!-- Space Technology Page -->
 <section id="technology">
+
+<!-- Cosmic Arcade Section -->
+<section id="cosmic-arcade" class="section">
+  <video autoplay muted loop class="bg-video"><source src="https://cdn.pixabay.com/vimeo/492122582/space-earth-view.mp4" type="video/mp4"></video>
+  <h2 style="font-size:3rem;color:#0ef;text-shadow:0 0 24px #0ef,0 0 48px #fff;letter-spacing:2px;">🕹️ Cosmic Arcade</h2>
+  <div style="max-width:1100px;margin:0 auto;text-align:center;font-size:1.2rem;line-height:1.8;background:rgba(10,10,35,0.7);padding:24px 32px;border-radius:18px;box-shadow:0 0 16px #0ef;">
+    <p>Welcome to the Cosmic Arcade! Play mini space-themed games and challenges. Test your skills and learn fun facts about the universe.</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:32px;margin:32px 0;">
+      <div style="background:rgba(20,20,50,0.85);border-radius:16px;padding:24px;box-shadow:0 0 12px #0ef;">
+        <h3 style="color:#0ef;">Asteroid Dodger</h3>
+        <canvas id="asteroidGame" width="320" height="220" style="width:100%;max-width:320px;border-radius:12px;box-shadow:0 0 8px #0ef;background:#111;margin-bottom:12px;"></canvas>
+        <button onclick="startAsteroidGame()" style="background:#0ef;color:#222;border:none;border-radius:8px;padding:8px 18px;font-size:1rem;cursor:pointer;">Play</button>
+        <div id="asteroidScore" style="margin-top:12px;color:#ff7f00;font-weight:bold;">Score: 0</div>
+      </div>
+      <div style="background:rgba(20,20,50,0.85);border-radius:16px;padding:24px;box-shadow:0 0 12px #0ef;">
+        <h3 style="color:#0ef;">Constellation Memory</h3>
+        <button onclick="startMemoryGame()" style="background:#0ef;color:#222;border:none;border-radius:8px;padding:8px 18px;font-size:1rem;cursor:pointer;">Play</button>
+        <div id="memoryGame" style="margin-top:12px;"></div>
+      </div>
+    </div>
+  </div>
+  <script>
+    // Asteroid Dodger Game
+    let asteroidGameRunning = false, asteroidScore = 0, asteroidPlayer, asteroids, asteroidAnim;
+    function startAsteroidGame() {
+      const canvas = document.getElementById('asteroidGame');
+      const ctx = canvas.getContext('2d');
+      asteroidScore = 0;
+      asteroidPlayer = { x: 160, y: 180, r: 16 };
+      asteroids = Array.from({length:8},()=>({x:Math.random()*320,y:-Math.random()*220,r:10+Math.random()*10,speed:2+Math.random()*3}));
+      asteroidGameRunning = true;
+      document.getElementById('asteroidScore').textContent = 'Score: 0';
+      function drawAsteroidGame() {
+        ctx.clearRect(0,0,320,220);
+        ctx.fillStyle = '#0ef';
+        ctx.beginPath();
+        ctx.arc(asteroidPlayer.x,asteroidPlayer.y,asteroidPlayer.r,0,Math.PI*2);
+        ctx.fill();
+        for(let a of asteroids){
+          ctx.fillStyle = '#888';
+          ctx.beginPath();
+          ctx.arc(a.x,a.y,a.r,0,Math.PI*2);
+          ctx.fill();
+        }
+      }
+      function updateAsteroidGame() {
+        for(let a of asteroids){
+          a.y += a.speed;
+          if(a.y > 220){
+            a.x = Math.random()*320;
+            a.y = -20;
+            a.r = 10+Math.random()*10;
+            a.speed = 2+Math.random()*3;
+            asteroidScore++;
+            document.getElementById('asteroidScore').textContent = 'Score: '+asteroidScore;
+          }
+          let dx = a.x-asteroidPlayer.x, dy = a.y-asteroidPlayer.y;
+          if(Math.hypot(dx,dy) < a.r+asteroidPlayer.r){
+            asteroidGameRunning = false;
+            document.getElementById('asteroidScore').textContent = 'Game Over! Final Score: '+asteroidScore;
+            cancelAnimationFrame(asteroidAnim);
+            return;
+          }
+        }
+      }
+      function loop(){
+        if(!asteroidGameRunning) return;
+        updateAsteroidGame();
+        drawAsteroidGame();
+        asteroidAnim = requestAnimationFrame(loop);
+      }
+      drawAsteroidGame();
+      loop();
+      window.onkeydown = e => {
+        if(!asteroidGameRunning) return;
+        if(e.key==='ArrowLeft') asteroidPlayer.x = Math.max(asteroidPlayer.x-18,asteroidPlayer.r);
+        if(e.key==='ArrowRight') asteroidPlayer.x = Math.min(asteroidPlayer.x+18,320-asteroidPlayer.r);
+      };
+    }
+    // Constellation Memory Game
+    let memoryGameRunning = false, memorySequence = [], memoryStep = 0;
+    function startMemoryGame(){
+      const container = document.getElementById('memoryGame');
+      container.innerHTML = '';
+      memoryGameRunning = true;
+      memorySequence = Array.from({length:6},()=>Math.floor(Math.random()*6));
+      memoryStep = 0;
+      let stars = [];
+      for(let i=0;i<6;i++){
+        let star = document.createElement('span');
+        star.textContent = '★';
+        star.style.fontSize = '2.2rem';
+        star.style.color = '#0ef';
+        star.style.margin = '0 8px';
+        star.style.cursor = 'pointer';
+        star.onclick = ()=>{
+          if(!memoryGameRunning) return;
+          if(i === memorySequence[memoryStep]){
+            star.style.color = '#ff7f00';
+            memoryStep++;
+            if(memoryStep === memorySequence.length){
+              container.innerHTML = '<span style="color:#0ef;font-size:1.5rem;">You Win!<br>Sequence: '+memorySequence.map(x=>x+1).join('-')+'</span>';
+              memoryGameRunning = false;
+            }
+          }else{
+            container.innerHTML = '<span style="color:#ff7f00;font-size:1.5rem;">Wrong Star! Try Again.</span>';
+            memoryGameRunning = false;
+          }
+        };
+        container.appendChild(star);
+        stars.push(star);
+      }
+      container.innerHTML += '<div style="margin-top:12px;color:#fff;">Repeat the sequence by clicking the correct stars in order!</div>';
+    }
+  </script>
+</section>
   <video autoplay muted loop class="bg-video"><source src="https://cdn.pixabay.com/vimeo/492122582/space-earth-view.mp4" type="video/mp4"></video>
   <h2>🛰️ Space Technology</h2>
   <div style="max-width:900px;margin:0 auto;">
@@ -1057,9 +1626,8 @@ document.getElementById('startBtn').addEventListener('click', () => {
   </div>
 </section>
       <!-- Authors grid only appears in the About Us section -->
-  <section id="about">
-    <video autoplay muted loop class="bg-video"><source src="https://cdn.pixabay.com/vimeo/492122582/space-earth-view.mp4" type="video/mp4"></video>
-    <h2>About Us</h2>
+  <section id="about" style="padding:100px 20px;max-width:900px;margin:0 auto;text-align:center;">
+    <h2 style="font-size:2.8rem;color:#0ef;text-shadow:0 0 24px #0ef,0 0 48px #fff;letter-spacing:2px;">👨‍🚀 About Us</h2>
     <div class="authors-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:32px;max-width:900px;margin:32px auto;">
       <div class="author-box" style="background:rgba(10,10,35,0.85);border-radius:16px;padding:24px;text-align:center;box-shadow:0 0 16px #0ef;">
         <img src="https://avatars.githubusercontent.com/u/11600000?v=4" alt="Pedro Henrique de Oliveira Francisco" style="width:140px;border-radius:12px;box-shadow:0 0 8px #0ef;">
@@ -1072,6 +1640,12 @@ document.getElementById('startBtn').addEventListener('click', () => {
         <h3 style="margin:12px 0 6px 0;">Benjamin Irani Fey</h3>
         <p style="font-weight:bold;color:#0ef;">Content Creator &amp; Researcher</p>
         <p style="font-size:1.1rem;">Benjamin curated the facts, wrote the educational content, and ensured scientific accuracy throughout the site.</p>
+      </div>
+      <div class="author-box" style="background:rgba(10,10,35,0.85);border-radius:16px;padding:24px;text-align:center;box-shadow:0 0 16px #0ef;">
+        <img src="https://avatars.githubusercontent.com/u/11600002?v=4" alt="Pavlo Barbira" style="width:140px;border-radius:12px;box-shadow:0 0 8px #0ef;">
+        <h3 style="margin:12px 0 6px 0;">Pavlo Barbira</h3>
+        <p style="font-weight:bold;color:#0ef;">Designer &amp; Idea Person</p>
+        <p style="font-size:1.1rem;">Pavlo crafted the visual design, user experience, and contributed many creative ideas that shaped the direction of Cosmic Explorer.</p>
       </div>
     </div>
   </section>
@@ -1105,6 +1679,58 @@ document.getElementById('startBtn').addEventListener('click', () => {
 <div id="factPopup"></div>
 
 <script>
+// Black Hole Gravitational Lensing Simulation
+function drawBlackHoleLensing(mass) {
+  const canvas = document.getElementById('bhSimCanvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  // Draw background stars
+  for (let i = 0; i < 60; i++) {
+    let x = Math.random() * canvas.width;
+    let y = Math.random() * canvas.height;
+    ctx.fillStyle = '#fff';
+    ctx.beginPath();
+    ctx.arc(x, y, Math.random() * 1.5 + 0.5, 0, Math.PI * 2);
+    ctx.fill();
+  }
+  // Draw lensed ring (Einstein ring)
+  const cx = canvas.width / 2;
+  const cy = canvas.height / 2;
+  const baseRadius = 40;
+  const ringRadius = baseRadius + (mass - 1) * 30;
+  ctx.save();
+  ctx.globalAlpha = 0.7;
+  ctx.strokeStyle = '#0ef';
+  ctx.lineWidth = 8;
+  ctx.beginPath();
+  ctx.arc(cx, cy, ringRadius, 0, Math.PI * 2);
+  ctx.stroke();
+  ctx.globalAlpha = 1.0;
+  ctx.restore();
+  // Draw black hole (event horizon)
+  ctx.save();
+  ctx.shadowColor = '#0ef';
+  ctx.shadowBlur = 24;
+  ctx.beginPath();
+  ctx.arc(cx, cy, baseRadius, 0, Math.PI * 2);
+  ctx.fillStyle = '#000';
+  ctx.fill();
+  ctx.restore();
+}
+
+function setupBlackHoleSim() {
+  const slider = document.getElementById('bhMassSlider');
+  const valueLabel = document.getElementById('bhMassValue');
+  if (!slider || !valueLabel) return;
+  function update() {
+    valueLabel.textContent = slider.value;
+    drawBlackHoleLensing(parseFloat(slider.value));
+  }
+  slider.addEventListener('input', update);
+  update();
+}
+window.addEventListener('DOMContentLoaded', setupBlackHoleSim);
 // Loading Screen with Rocket Flyby
 window.addEventListener('load', ()=>{
   // Show Home section by default
@@ -1140,8 +1766,13 @@ window.addEventListener('load', ()=>{
         loading.style.opacity='0';
         setTimeout(()=>{loading.style.display='none';},600);
       }, 900);
-    },1400);
+    },400);
   },50);
+  // Hide loading screen after 2 seconds if not already hidden
+  setTimeout(()=>{
+    loading.style.opacity='0';
+    setTimeout(()=>{loading.style.display='none';},600);
+  }, 2000);
 });
 // Add flash animation
 const style = document.createElement('style');
@@ -1254,6 +1885,7 @@ class Planet {
     this.sucked = false;
     this.angle = Math.random() * Math.PI * 2;
     this.rotationSpeed = (Math.random() * 0.002) + 0.0005;
+    this.glowPhase = Math.random() * Math.PI * 2;
     if (type.name === 'Volcanic') {
       this.lavaSpots = Array.from({length: 5}, () => ({
         x: (Math.random()-0.5) * this.radius * 1.5,
@@ -1265,6 +1897,19 @@ class Planet {
   draw(){
     if (!ctx) return;
     const {baseColor, detailColors} = this.type;
+    // Animated glow
+    let glow = ctx.createRadialGradient(this.x, this.y, this.radius*0.7 + Math.sin(Date.now()/400+this.glowPhase)*2, this.x, this.y, this.radius*1.1);
+    glow.addColorStop(0, 'rgba(255,255,255,0.15)');
+    glow.addColorStop(1, 'rgba(0,0,0,0)');
+    ctx.save();
+    ctx.globalAlpha = 0.7;
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.radius*1.1, 0, Math.PI*2);
+    ctx.fillStyle = glow;
+    ctx.fill();
+    ctx.globalAlpha = 1;
+    ctx.restore();
+    // Main planet body
     let grad = ctx.createRadialGradient(this.x - this.radius/3, this.y - this.radius/3, this.radius/5, this.x, this.y, this.radius);
     grad.addColorStop(0, detailColors[2]);
     grad.addColorStop(0.7, baseColor);
@@ -1341,14 +1986,52 @@ function showFact(){
     "Black holes can spin near light speed.",
     "They evaporate slowly via Hawking radiation.",
     "Supermassive black holes exist at galaxy centers.",
-    "Nothing escapes past the event horizon."
+    "Nothing escapes past the event horizon.",
+    "Accretion disks glow with X-rays.",
+    "Time slows near a black hole.",
+    "Some black holes eject jets of energy.",
+    "Black holes can merge and create ripples in spacetime (gravitational waves)."
   ];
   factBox.textContent = facts[Math.floor(Math.random()*facts.length)];
   factBox.style.opacity = 1;
+  // Score popup
+  let popup = document.createElement('div');
+  popup.id = 'factPopup';
+  popup.textContent = '+1 Planet!';
+  popup.style.position = 'fixed';
+  popup.style.left = (canvas.width/2-60)+'px';
+  popup.style.top = (canvas.height/2-60)+'px';
+  popup.style.background = 'rgba(0,0,0,0.8)';
+  popup.style.color = '#0ef';
+  popup.style.fontSize = '2rem';
+  popup.style.padding = '18px 32px';
+  popup.style.borderRadius = '16px';
+  popup.style.boxShadow = '0 0 16px #0ef';
+  popup.style.zIndex = 100;
+  popup.classList.add('show');
+  document.body.appendChild(popup);
+  setTimeout(()=>{popup.remove();},1200);
   setTimeout(() => factBox.style.opacity = 0.6, 4000);
+  // Sound effect
+  let snd = new Audio('https://cdn.pixabay.com/audio/2022/10/16/audio_12b6b1b2b7.mp3');
+  snd.volume = 0.2;
+  snd.play();
 }
 function drawBlackhole(){
   if (!ctx) return;
+  // Accretion disk
+  ctx.save();
+  ctx.translate(blackhole.x(), blackhole.y());
+  ctx.rotate(Date.now()/1200);
+  for(let i=0;i<18;i++){
+    ctx.beginPath();
+    ctx.strokeStyle = `rgba(255,140,0,${0.18+0.08*Math.sin(Date.now()/400+i)})`;
+    ctx.lineWidth = 6+2*Math.sin(Date.now()/400+i);
+    ctx.arc(0,0,blackhole.radius*1.2+2*Math.sin(Date.now()/400+i),i*Math.PI/9,(i+1)*Math.PI/9);
+    ctx.stroke();
+  }
+  ctx.restore();
+  // Black hole glow
   let glow = ctx.createRadialGradient(blackhole.x(), blackhole.y(), blackhole.radius * 0.4, blackhole.x(), blackhole.y(), blackhole.radius);
   glow.addColorStop(0, 'rgba(255, 140, 0, 0.8)');
   glow.addColorStop(1, 'rgba(255, 140, 0, 0)');
