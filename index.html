@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cosmic Explorer: Intergalactic Codex 🚀</title>
     <meta name="description" content="An epic space adventure hub with immersive games, detailed planet exploration, expanded UFO sightings, alien documentaries, Star Wars tributes, SpaceX mission tracking, cosmic timeline, AI chatbot, and surprises for space enthusiasts. Paste into W3Schools for a stellar experience!">
-    <meta name="keywords" content="space, planets, asteroid game, trivia, UFO, aliens, documentaries, Star Wars, SpaceX, videos, images, timeline, chatbot, multilingual, React, cosmic adventure, hackathon">
+    <meta name="keywords" content="space, planets, asteroid game, blackhole game, trivia, UFO, aliens, documentaries, Star Wars, SpaceX, videos, images, timeline, chatbot, multilingual, React, cosmic adventure, hackathon">
     <meta name="author" content="Cosmic Codex Team">
     <meta name="robots" content="index, follow">
     <meta property="og:title" content="Cosmic Explorer: Intergalactic Codex">
@@ -59,6 +59,7 @@
         .hero-overlay {
             position: absolute; inset: 0; background: rgba(0,0,0,0.5); z-index: 2;
             display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 1rem;
+            -webkit-backdrop-filter: blur(5px);
             backdrop-filter: blur(5px);
         }
         .hero-overlay h1 { font-family: 'Orbitron', sans-serif; font-size: clamp(2rem, 5vw, 3.5rem); color: var(--tertiary); }
@@ -76,12 +77,13 @@
         }
         .card:hover { transform: translateY(-5px); box-shadow: var(--shadow); }
         .planet-card {
-            cursor: pointer; border: 2px solid var(--tertiary); border-radius: 999px;
-            width: 100px; height: 100px; display: flex; align-items: center; justify-content: center;
-            margin: 0.5rem; background: var(--glass); font-family: 'ZCOOL KuaiLe', sans-serif; color: var(--tertiary);
-            transition: transform 0.2s ease;
+            cursor: pointer; border: 1px solid var(--glass); border-radius: 12px;
+            width: 160px; height: 160px; display: flex; align-items: center; justify-content: center;
+            margin: 0.5rem; background: var(--card-bg); color: var(--tertiary);
+            position: relative; overflow: hidden; transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
-        .planet-card:hover { transform: scale(1.15) rotate(5deg); }
+        .planet-card img { width: 100%; height: 100%; object-fit: cover; }
+        .planet-card:hover { transform: scale(1.05); box-shadow: var(--shadow); }
         .authors, .ufo-grid, .doc-grid, .starwars-grid, .mission-grid, .timeline-grid, .news-grid {
             display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;
         }
@@ -126,6 +128,18 @@
             100% { transform: rotate(360deg); }
         }
         .easter-egg.active img { animation: spin 2s linear infinite; }
+        /* Rocket animation for Event Tracker */
+        @keyframes flyRocket {
+            0% { left: -80px; bottom: 20px; transform: scale(1) rotate(0deg); }
+            50% { left: 50vw; bottom: 40vh; transform: scale(1.2) rotate(10deg); }
+            100% { left: 110vw; bottom: 60vh; transform: scale(1) rotate(0deg); }
+        }
+        .tracker-rocket {
+            position: fixed; left: -80px; bottom: 20px; font-size: 2rem; z-index: 2000; pointer-events: none;
+        }
+        .tracker-rocket.active {
+            animation: flyRocket 3s ease-in forwards;
+        }
         .chatbot {
             position: fixed; bottom: 140px; right: 20px; width: 320px; background: var(--card-bg); border-radius: 12px;
             border: 1px solid var(--glass); z-index: 100; display: flex; flex-direction: column; max-height: 450px;
@@ -178,12 +192,109 @@
         @media (max-width: 768px) {
             .hero-overlay h1 { font-size: 2rem; }
             .nav-btn { padding: 0.5rem 1rem; font-size: 0.8rem; }
-            .planet-card { width: 80px; height: 80px; font-size: 0.8rem; }
+            .planet-card { width: 120px; height: 120px; font-size: 0.8rem; }
             .ufo-grid, .doc-grid, .starwars-grid, .mission-grid, .timeline-grid, .news-grid { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
             .media-container img, .media-container video, .media-container iframe { height: 120px; }
             .chatbot { width: 90%; bottom: 100px; right: 5%; max-height: 350px; }
             .error-page img { width: 150px; height: 150px; }
             .loading-rocket { font-size: 2rem; bottom: 50px; }
+        }
+        /* Black Hole Game Styles (Integrated and Optimized) */
+        .blackhole-game {
+            position: relative;
+            margin: 0 auto;
+            max-width: 100%;
+            height: auto;
+            overflow: hidden;
+            background: radial-gradient(circle at center, #000000 0%, #111111 100%);
+            border: 1px solid #222;
+        }
+        .blackhole-game canvas {
+            display: block;
+            width: 100%;
+            height: auto;
+            background: radial-gradient(circle at center, #000000 0%, #111111 100%);
+            position: relative;
+            z-index: 1;
+        }
+        #factBox {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            max-width: 80%;
+            background: rgba(0,0,0,0.7);
+            border: 1px solid #444;
+            border-radius: 10px;
+            padding: 10px 15px;
+            font-size: clamp(12px, 2vw, 16px);
+            line-height: 1.4;
+            text-align: center;
+            pointer-events: none;
+            opacity: 0.6;
+            transition: opacity 0.5s ease;
+            z-index: 15;
+        }
+        #menuOverlay, #respawnOverlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.9);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 20;
+            color: #ff7f00;
+            font-family: 'Consolas', monospace;
+        }
+        #menuOverlay.hidden, #respawnOverlay.hidden {
+            display: none;
+        }
+        button {
+            background: #ff7f00;
+            border: none;
+            padding: 10px 20px;
+            color: #000;
+            font-size: clamp(16px, 3vw, 22px);
+            font-weight: bold;
+            border-radius: 12px;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: background 0.3s ease;
+        }
+        button:hover {
+            background: #cc6600;
+        }
+        #planetCounter {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-size: clamp(16px, 3vw, 22px);
+            background: rgba(0,0,0,0.7);
+            border-radius: 8px;
+            padding: 6px 10px;
+            color: #ff7f00;
+            font-weight: bold;
+            -webkit-user-select: none;
+            user-select: none;
+            z-index: 15;
+        }
+        @media (max-width: 768px) {
+            .blackhole-game canvas {
+                height: 400px; /* Adjust for mobile */
+            }
+            #factBox {
+                padding: 8px 12px;
+                font-size: 14px;
+            }
+            button {
+                padding: 8px 16px;
+                font-size: 18px;
+            }
+            #planetCounter {
+                font-size: 18px;
+                padding: 4px 8px;
+            }
         }
     </style>
 </head>
@@ -200,6 +311,7 @@
             const [loadingText, setLoadingText] = useState('Searching for website...');
             const [loadingStage, setLoadingStage] = useState(0);
             const [gameStarted, setGameStarted] = useState(false);
+            const [currentGame, setCurrentGame] = useState('asteroid');
             const [paused, setPaused] = useState(false);
             const [score, setScore] = useState(0);
             const [quizScore, setQuizScore] = useState(0);
@@ -211,34 +323,61 @@
             const [chatOpen, setChatOpen] = useState(false);
             const starfieldRef = useRef(document.querySelector('.starfield'));
             const gameCanvasRef = useRef(null);
+            const blackholeCanvasRef = useRef(null);
+            const factBoxRef = useRef(null);
+            const planetCounterRef = useRef(null);
+            const menuOverlayRef = useRef(null);
+            const respawnOverlayRef = useRef(null);
+            const startBtnRef = useRef(null);
+            const respawnBtnRef = useRef(null);
             const chatMessagesRef = useRef(null);
+            const [nextLaunchTime] = useState(new Date(Date.now() + 1000 * 60 * 60 * 72)); // +72h placeholder
+            const [nextEclipseTime] = useState(new Date(Date.now() + 1000 * 60 * 60 * 240)); // +10d placeholder
 
             const translations = {
                 en: {
                     welcome: 'Welcome to Cosmic Explorer!',
                     explore: 'Navigate planets, dodge asteroids, solve trivia, watch UFO and Star Wars videos, track SpaceX missions, chat with CosmoBot, and uncover cosmic history!',
                     home: 'Home', system: 'Solar System', games: 'Games', authors: 'Authors',
-                    ufo: 'UFO Sightings', trivia: 'Trivia', missions: 'Missions', timeline: 'Cosmic Timeline', 
-                    starwars: 'Star Wars Tribute', news: 'Space News', chatbot: 'CosmoBot',
+                    ufo: 'UFO Sightings', trivia: 'Trivia', missions: 'Missions', timeline: 'Cosmic Timeline',
+                    starwars: 'Star Wars Tribute', news: 'Space News', hub: 'Space Hub', events: 'Event Tracker', models: '3D Planet Models', musk: 'Elon Musk', chatbot: 'CosmoBot',
                     commence: 'Start Journey 🚀', back: 'Back', minigames: 'Mini-Games',
                     instructions: 'Use arrows + space to shoot asteroids. Survive to score!', pause: 'Pause', resume: 'Resume',
                     score: 'Score', replay: 'Replay', highScore: 'High Score', easterEgg: 'You found the Cosmic Codex!',
                     chatPlaceholder: 'Ask CosmoBot about space...', chatSend: 'Send', botGreeting: 'Hi! I’m CosmoBot, your space guide. Ask me anything about the universe!',
-                    error404: '404: Lost in Space!', errorDesc: 'This page is light-years away. Return to explore the cosmos!',
-                    errorBack: 'Back to Home'
+                    error404: 'Fascinating Space Facts', errorDesc: 'Explore these amazing facts about the universe!',
+                    errorBack: 'Back to Home',
+                    // Black Hole Game Translations (Added)
+                    blackHoleTitle: 'Black Hole Devourer',
+                    blackHoleInstructions: 'Use WASD to move the black hole.\nDevour planets to grow bigger and faster.\nAvoid space trash — it shrinks and slows you.\nIf you get too small, you die.\nPlanets get sucked in before being eaten.\n\nGood luck!',
+                    startGame: 'Start Game',
+                    youDied: 'You Died!',
+                    blackHoleDeath: 'The black hole shrunk too much.\nWould you like to respawn?',
+                    respawn: 'Respawn',
+                    eatPlanetFact: 'Eat a planet to see a black hole fact!',
+                    planetsLabel: 'Planets'
                 },
                 fr: {
                     welcome: 'Bienvenue dans Cosmic Explorer !',
                     explore: 'Naviguez les planètes, évitez les astéroïdes, résolvez des quiz, regardez des vidéos OVNI et Star Wars, suivez les missions SpaceX, discutez avec CosmoBot et découvrez l’histoire cosmique !',
                     home: 'Accueil', system: 'Système Solaire', games: 'Jeux', authors: 'Créateurs',
-                    ufo: 'Observations OVNI', trivia: 'Quiz', missions: 'Missions', timeline: 'Chronologie Cosmique', 
-                    starwars: 'Hommage Star Wars', news: 'Actualités Spatiales', chatbot: 'CosmoBot',
+                    ufo: 'Observations OVNI', trivia: 'Quiz', missions: 'Missions', timeline: 'Chronologie Cosmique',
+                    starwars: 'Hommage Star Wars', news: 'Actualités Spatiales', hub: 'Espace Hub', events: 'Suivi des Événements', models: 'Modèles 3D de Planètes', musk: 'Elon Musk', chatbot: 'CosmoBot',
                     commence: 'Commencer le voyage 🚀', back: 'Retour', minigames: 'Mini-Jeux',
                     instructions: 'Utilisez flèches + espace pour tirer sur les astéroïdes. Survivez pour marquer !', pause: 'Pause', resume: 'Reprendre',
                     score: 'Score', replay: 'Rejouer', highScore: 'Meilleur Score', easterEgg: 'Vous avez trouvé le Codex Cosmique !',
                     chatPlaceholder: 'Demandez à CosmoBot sur l’espace...', chatSend: 'Envoyer', botGreeting: 'Salut ! Je suis CosmoBot, votre guide spatial. Demandez-moi n’importe quoi sur l’univers !',
-                    error404: '404 : Perdu dans l’espace !', errorDesc: 'Cette page est à des années-lumière. Revenez explorer le cosmos !',
-                    errorBack: 'Retour à l’accueil'
+                    error404: 'Faits Fascinants sur l\'Espace', errorDesc: 'Explorez ces faits incroyables sur l\'univers !',
+                    errorBack: 'Retour à l’accueil',
+                    // Black Hole Game Translations (Added)
+                    blackHoleTitle: 'Dévoreur de Trou Noir',
+                    blackHoleInstructions: 'Utilisez WASD pour déplacer le trou noir.\nDévorez les planètes pour grandir et accélérer.\nÉvitez les déchets spatiaux — ils vous rétrécissent et ralentissent.\nSi vous devenez trop petit, vous mourez.\nLes planètes sont aspirées avant d’être mangées.\n\nBonne chance !',
+                    startGame: 'Commencer le Jeu',
+                    youDied: 'Vous êtes Mort !',
+                    blackHoleDeath: 'Le trou noir a trop rétréci.\nVoulez-vous réapparaître ?',
+                    respawn: 'Réapparaître',
+                    eatPlanetFact: 'Mangez une planète pour voir un fait sur les trous noirs !',
+                    planetsLabel: 'Planètes'
                 }
             };
 
@@ -261,11 +400,31 @@
                 }, 1500);
             }, []);
 
-            // Starfield Animation
+            // Simple countdown timers for Hub
+            useEffect(() => {
+                const fmt = (ms) => {
+                    const total = Math.max(0, Math.floor(ms / 1000));
+                    const d = Math.floor(total / 86400);
+                    const h = Math.floor((total % 86400) / 3600);
+                    const m = Math.floor((total % 3600) / 60);
+                    const s = total % 60;
+                    return `T- ${d}d ${h}h ${m}m ${s}s`;
+                };
+                const interval = setInterval(() => {
+                    const launchEl = document.getElementById('launchCountdown');
+                    const eclipseEl = document.getElementById('eclipseCountdown');
+                    if (launchEl) launchEl.textContent = fmt(nextLaunchTime - Date.now());
+                    if (eclipseEl) eclipseEl.textContent = fmt(nextEclipseTime - Date.now());
+                }, 1000);
+                return () => clearInterval(interval);
+            }, [nextLaunchTime, nextEclipseTime]);
+
+            // Starfield Animation (Optimized for performance)
             useEffect(() => {
                 const canvas = starfieldRef.current;
                 if (!canvas) return;
                 const ctx = canvas.getContext('2d');
+                let animationFrameId;
                 const resize = () => {
                     canvas.width = window.innerWidth;
                     canvas.height = window.innerHeight;
@@ -296,16 +455,19 @@
                         ctx.fill();
                     });
                     ctx.globalAlpha = 1;
-                    requestAnimationFrame(frame);
+                    animationFrameId = requestAnimationFrame(frame);
                 };
-                requestAnimationFrame(frame);
+                animationFrameId = requestAnimationFrame(frame);
                 window.addEventListener('resize', resize);
-                return () => window.removeEventListener('resize', resize);
+                return () => {
+                    cancelAnimationFrame(animationFrameId);
+                    window.removeEventListener('resize', resize);
+                };
             }, []);
 
-            // Asteroid Game with Scoring
+            // Asteroid Game Logic (Existing, with minor optimizations)
             useEffect(() => {
-                if (activeSection !== 'games' || !gameCanvasRef.current || !gameStarted) return;
+                if (activeSection !== 'games' || currentGame !== 'asteroid' || !gameCanvasRef.current || !gameStarted) return;
                 const canvas = gameCanvasRef.current;
                 const ctx = canvas.getContext('2d');
                 canvas.width = 400;
@@ -321,6 +483,7 @@
                 const keys = {};
                 let gameScore = 0;
                 let highScore = localStorage.getItem('highScore') || 0;
+                let animationFrameId;
 
                 const keyDown = e => {
                     keys[e.code] = true;
@@ -334,15 +497,15 @@
                     if (keys['ArrowRight'] && spaceship.x + spaceship.w < canvas.width) spaceship.x += spaceship.speed;
                     if (keys['ArrowUp'] && spaceship.y > 0) spaceship.y -= spaceship.speed;
                     if (keys['ArrowDown'] && spaceship.y + spaceship.h < canvas.height) spaceship.y += spaceship.speed;
-                    bullets.forEach((b, i) => {
-                        b.y -= b.sp;
-                        if (b.y < -10) bullets.splice(i, 1);
-                    });
-                    asteroids.forEach((a, i) => {
-                        a.y += a.sp;
-                        if (a.y > canvas.height + a.r) {
-                            a.y = -a.r;
-                            a.x = Math.random() * canvas.width;
+                    for (let i = bullets.length - 1; i >= 0; i--) {
+                        bullets[i].y -= bullets[i].sp;
+                        if (bullets[i].y < -10) bullets.splice(i, 1);
+                    }
+                    for (let i = asteroids.length - 1; i >= 0; i--) {
+                        asteroids[i].y += asteroids[i].sp;
+                        if (asteroids[i].y > canvas.height + asteroids[i].r) {
+                            asteroids[i].y = -asteroids[i].r;
+                            asteroids[i].x = Math.random() * canvas.width;
                             gameScore += 10;
                             setScore(gameScore);
                             if (gameScore > highScore) {
@@ -350,11 +513,11 @@
                                 localStorage.setItem('highScore', highScore);
                             }
                         }
-                        bullets.forEach((b, j) => {
-                            if (Math.hypot(b.x - a.x, b.y - a.y) < a.r) {
+                        for (let j = bullets.length - 1; j >= 0; j--) {
+                            if (Math.hypot(bullets[j].x - asteroids[i].x, bullets[j].y - asteroids[i].y) < asteroids[i].r) {
                                 bullets.splice(j, 1);
-                                a.y = -a.r;
-                                a.x = Math.random() * canvas.width;
+                                asteroids[i].y = -asteroids[i].r;
+                                asteroids[i].x = Math.random() * canvas.width;
                                 gameScore += 50;
                                 setScore(gameScore);
                                 if (gameScore > highScore) {
@@ -362,8 +525,8 @@
                                     localStorage.setItem('highScore', highScore);
                                 }
                             }
-                        });
-                    });
+                        }
+                    }
                 };
 
                 const draw = () => {
@@ -392,19 +555,414 @@
                 const frameLoop = () => {
                     update();
                     draw();
-                    requestAnimationFrame(frameLoop);
+                    animationFrameId = requestAnimationFrame(frameLoop);
                 };
                 window.addEventListener('keydown', keyDown);
                 window.addEventListener('keyup', keyUp);
-                requestAnimationFrame(frameLoop);
+                animationFrameId = requestAnimationFrame(frameLoop);
 
                 return () => {
+                    cancelAnimationFrame(animationFrameId);
                     window.removeEventListener('keydown', keyDown);
                     window.removeEventListener('keyup', keyUp);
                 };
-            }, [activeSection, gameStarted, paused, lang]);
+            }, [activeSection, gameStarted, paused, lang, currentGame]);
 
-            // Chatbot Logic
+            // Black Hole Game Logic (Integrated, Optimized, and Localized)
+            useEffect(() => {
+                if (activeSection !== 'games' || currentGame !== 'blackhole' || !blackholeCanvasRef.current || !gameStarted) return;
+
+                const canvas = blackholeCanvasRef.current;
+                const ctx = canvas.getContext('2d');
+                const factBox = factBoxRef.current;
+                const planetCounter = planetCounterRef.current;
+                const menuOverlay = menuOverlayRef.current;
+                const respawnOverlay = respawnOverlayRef.current;
+                const startBtn = startBtnRef.current;
+                const respawnBtn = respawnBtnRef.current;
+
+                // Responsive canvas size
+                const resizeCanvas = () => {
+                    canvas.width = Math.min(window.innerWidth - 40, 1200);
+                    canvas.height = Math.min(window.innerHeight - 200, 600);
+                };
+                resizeCanvas();
+                window.addEventListener('resize', resizeCanvas);
+
+                let W = canvas.width;
+                let H = canvas.height;
+
+                const keys = {};
+                const keyDown = e => { keys[e.key.toLowerCase()] = true; };
+                const keyUp = e => { keys[e.key.toLowerCase()] = false; };
+                window.addEventListener('keydown', keyDown);
+                window.addEventListener('keyup', keyUp);
+
+                let playing = false;
+                let animationId = null;
+
+                // Black hole object (Optimized with defaults)
+                const blackhole = {
+                    x: W / 2,
+                    y: H / 2,
+                    radius: 30,
+                    speedMax: 8,
+                    velocityX: 0,
+                    velocityY: 0,
+                    acceleration: 0.5,
+                    friction: 0.9,
+                    growthRate: 5,
+                    minRadius: 20,
+                    maxRadius: 150,
+                    slowFactor: 1
+                };
+
+                // Planet types (Unchanged, but added comments)
+                const planetTypes = [
+                    { name: 'Earth-like', baseColor: '#3a7bd5', detailColors: ['#2d5a85', '#567fb3', '#7fbaec'], sizeRange: [12, 18] },
+                    { name: 'Mars-like', baseColor: '#c1440e', detailColors: ['#9f3200', '#d35400', '#e67e22'], sizeRange: [10, 15] },
+                    { name: 'Gas Giant', baseColor: '#f5deb3', detailColors: ['#d2b48c', '#deb887', '#f0e68c'], sizeRange: [18, 30] },
+                    { name: 'Ice Planet', baseColor: '#a9d6e5', detailColors: ['#7fb3d5', '#c0e0f2', '#d1f0ff'], sizeRange: [15, 22] },
+                    { name: 'Volcanic', baseColor: '#8b1a1a', detailColors: ['#b22222', '#dc143c', '#ff4500'], sizeRange: [12, 20] }
+                ];
+
+                // Trash types
+                const trashTypes = [
+                    { color: '#888888', radius: 8, speedRange: [0.5, 1.5] },
+                    { color: '#aaaaaa', radius: 5, speedRange: [0.8, 2.0] }
+                ];
+
+                class Planet {
+                    constructor(x, y, radius, type) {
+                        this.x = x;
+                        this.y = y;
+                        this.radius = radius;
+                        this.type = type;
+                        this.sucked = false;
+                        this.angle = Math.random() * Math.PI * 2;
+                        this.rotationSpeed = (Math.random() * 0.002) + 0.0005;
+                        if (type.name === 'Volcanic') {
+                            this.lavaSpots = Array.from({ length: 5 }, () => ({
+                                x: (Math.random() - 0.5) * this.radius * 1.5,
+                                y: (Math.random() - 0.5) * this.radius * 1.5,
+                                angle: Math.random() * Math.PI * 2
+                            }));
+                        }
+                    }
+                    draw() {
+                        const { baseColor, detailColors } = this.type;
+                        let grad = ctx.createRadialGradient(this.x - this.radius / 3, this.y - this.radius / 3, this.radius / 5, this.x, this.y, this.radius);
+                        grad.addColorStop(0, detailColors[2]);
+                        grad.addColorStop(0.7, baseColor);
+                        grad.addColorStop(1, detailColors[0]);
+                        ctx.fillStyle = grad;
+                        ctx.beginPath();
+                        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                        ctx.fill();
+                        ctx.save();
+                        ctx.translate(this.x, this.y);
+                        ctx.rotate(this.angle);
+                        if (this.type.name === 'Gas Giant') {
+                            for (let i = -2; i <= 2; i++) {
+                                ctx.beginPath();
+                                ctx.strokeStyle = detailColors[1];
+                                ctx.lineWidth = 2;
+                                ctx.arc(0, i * 3, this.radius * 0.9, 0, Math.PI * 2);
+                                ctx.stroke();
+                            }
+                        }
+                        if (this.type.name === 'Volcanic') {
+                            for (let spot of this.lavaSpots) {
+                                ctx.beginPath();
+                                ctx.fillStyle = detailColors[2];
+                                ctx.ellipse(spot.x, spot.y, this.radius * 0.15, this.radius * 0.05, spot.angle, 0, Math.PI * 2);
+                                ctx.fill();
+                            }
+                        }
+                        ctx.restore();
+                        ctx.shadowColor = 'rgba(0,0,0,0.3)';
+                        ctx.shadowBlur = 5;
+                    }
+                    update() {
+                        this.angle += this.rotationSpeed;
+                    }
+                }
+
+                class Trash {
+                    constructor(x, y, type) {
+                        this.x = x;
+                        this.y = y;
+                        this.radius = type.radius;
+                        this.color = type.color;
+                        this.sucked = false;
+                        this.speedRange = type.speedRange;
+                        this.angle = Math.random() * Math.PI * 2;
+                        this.rotationSpeed = (Math.random() * 0.01) + 0.005;
+                    }
+                    draw() {
+                        ctx.save();
+                        ctx.translate(this.x, this.y);
+                        ctx.rotate(this.angle);
+                        ctx.fillStyle = this.color;
+                        ctx.beginPath();
+                        const spikes = 5;
+                        const step = Math.PI * 2 / spikes;
+                        for (let i = 0; i < spikes; i++) {
+                            const radius = this.radius * (0.7 + Math.random() * 0.6);
+                            const x = Math.cos(i * step) * radius;
+                            const y = Math.sin(i * step) * radius;
+                            if (i === 0) ctx.moveTo(x, y);
+                            else ctx.lineTo(x, y);
+                        }
+                        ctx.closePath();
+                        ctx.fill();
+                        ctx.restore();
+                        ctx.shadowColor = 'rgba(255,255,255,0.3)';
+                        ctx.shadowBlur = 3;
+                    }
+                    update() {
+                        this.angle += this.rotationSpeed;
+                    }
+                }
+
+                let planets = [];
+                let trashs = [];
+                let stars = [];
+
+                function generatePlanets(num = 10) {
+                    for (let i = 0; i < num; i++) {
+                        let type = planetTypes[Math.floor(Math.random() * planetTypes.length)];
+                        let r = (Math.random() * (type.sizeRange[1] - type.sizeRange[0])) + type.sizeRange[0];
+                        let x, y, tries = 0;
+                        do {
+                            x = r + Math.random() * (W - 2 * r);
+                            y = r + Math.random() * (H - 2 * r);
+                            tries++;
+                            if (tries > 100) break;
+                        } while (distance(x, y, blackhole.x, blackhole.y) < blackhole.radius * 6);
+                        planets.push(new Planet(x, y, r, type));
+                    }
+                }
+
+                function generateTrash(num = 7) {
+                    for (let i = 0; i < num; i++) {
+                        let type = trashTypes[Math.floor(Math.random() * trashTypes.length)];
+                        let r = type.radius;
+                        let x, y, tries = 0;
+                        do {
+                            x = r + Math.random() * (W - 2 * r);
+                            y = r + Math.random() * (H - 2 * r);
+                            tries++;
+                            if (tries > 100) break;
+                        } while (distance(x, y, blackhole.x, blackhole.y) < blackhole.radius * 4);
+                        trashs.push(new Trash(x, y, type));
+                    }
+                }
+
+                function generateStars(num = 150) {
+                    stars = [];
+                    for (let i = 0; i < num; i++) {
+                        stars.push({
+                            x: Math.random() * W,
+                            y: Math.random() * H,
+                            radius: Math.random() * 1.2 + 0.2,
+                            alpha: Math.random() * 0.8 + 0.2,
+                            twinkleSpeed: (Math.random() * 0.02) + 0.01,
+                            twinkleDir: 1
+                        });
+                    }
+                }
+
+                function twinkleStars() {
+                    for (let star of stars) {
+                        star.alpha += star.twinkleSpeed * star.twinkleDir;
+                        if (star.alpha >= 1) star.twinkleDir = -1;
+                        else if (star.alpha <= 0.2) star.twinkleDir = 1;
+                    }
+                }
+
+                function drawStars() {
+                    for (let star of stars) {
+                        ctx.beginPath();
+                        ctx.fillStyle = `rgba(255,255,255,${star.alpha.toFixed(2)})`;
+                        ctx.shadowColor = 'white';
+                        ctx.shadowBlur = 1;
+                        ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+                        ctx.fill();
+                    }
+                }
+
+                function distance(x1, y1, x2, y2) {
+                    return Math.hypot(x2 - x1, y2 - y1);
+                }
+
+                function suckObject(obj) {
+                    let dx = blackhole.x - obj.x;
+                    let dy = blackhole.y - obj.y;
+                    let dist = Math.hypot(dx, dy);
+                    let maxSuctionDist = Math.min(blackhole.radius * 6, 250);
+                    if (dist > maxSuctionDist) return;
+                    if (dist > 1) {
+                        let clampedDist = Math.max(dist, blackhole.radius);
+                        let speed = (blackhole.radius * 200) / (clampedDist * clampedDist);
+                        speed = Math.min(speed, 12);
+                        obj.x += (dx / dist) * speed;
+                        obj.y += (dy / dist) * speed;
+                    }
+                }
+
+                const facts = {
+                    en: [
+                        "Black holes warp space and time.",
+                        "Black holes can spin near light speed.",
+                        "They evaporate slowly via Hawking radiation.",
+                        "Supermassive black holes exist at galaxy centers.",
+                        "Nothing escapes past the event horizon."
+                    ],
+                    fr: [
+                        "Les trous noirs déforment l'espace et le temps.",
+                        "Les trous noirs peuvent tourner près de la vitesse de la lumière.",
+                        "Ils s'évaporent lentement via le rayonnement de Hawking.",
+                        "Des trous noirs supermassifs existent au centre des galaxies.",
+                        "Rien n'échappe au-delà de l'horizon des événements."
+                    ]
+                };
+
+                function showFact() {
+                    factBox.textContent = facts[lang][Math.floor(Math.random() * facts[lang].length)];
+                    factBox.style.opacity = 1;
+                    setTimeout(() => factBox.style.opacity = 0.6, 4000);
+                }
+
+                function drawBlackhole() {
+                    let glow = ctx.createRadialGradient(blackhole.x, blackhole.y, blackhole.radius * 0.4, blackhole.x, blackhole.y, blackhole.radius);
+                    glow.addColorStop(0, 'rgba(255, 140, 0, 0.8)');
+                    glow.addColorStop(1, 'rgba(255, 140, 0, 0)');
+                    ctx.fillStyle = glow;
+                    ctx.beginPath();
+                    ctx.arc(blackhole.x, blackhole.y, blackhole.radius, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.beginPath();
+                    ctx.fillStyle = '#000000';
+                    ctx.shadowColor = 'rgba(255, 140, 0, 0.9)';
+                    ctx.shadowBlur = blackhole.radius * 0.6;
+                    ctx.arc(blackhole.x, blackhole.y, blackhole.radius * 0.6, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.shadowBlur = 0;
+                }
+
+                function updatePlanetCounter() {
+                    planetCounter.textContent = `${translations[lang].planetsLabel}: ${planets.length}`;
+                }
+
+                function update() {
+                    if (!playing) return;
+                    let accel = blackhole.acceleration * blackhole.slowFactor;
+                    if (keys['w']) blackhole.velocityY -= accel;
+                    if (keys['s']) blackhole.velocityY += accel;
+                    if (keys['a']) blackhole.velocityX -= accel;
+                    if (keys['d']) blackhole.velocityX += accel;
+                    blackhole.velocityX *= blackhole.friction;
+                    blackhole.velocityY *= blackhole.friction;
+                    let speedMaxAdjusted = blackhole.speedMax * blackhole.slowFactor;
+                    blackhole.velocityX = Math.max(Math.min(blackhole.velocityX, speedMaxAdjusted), -speedMaxAdjusted);
+                    blackhole.velocityY = Math.max(Math.min(blackhole.velocityY, speedMaxAdjusted), -speedMaxAdjusted);
+                    blackhole.x += blackhole.velocityX;
+                    blackhole.y += blackhole.velocityY;
+                    blackhole.x = Math.min(Math.max(blackhole.radius, blackhole.x), W - blackhole.radius);
+                    blackhole.y = Math.min(Math.max(blackhole.radius, blackhole.y), H - blackhole.radius);
+
+                    for (let i = planets.length - 1; i >= 0; i--) {
+                        let p = planets[i];
+                        p.update();
+                        let distToBH = distance(p.x, p.y, blackhole.x, blackhole.y);
+                        if (distToBH < blackhole.radius * 6) {
+                            suckObject(p);
+                            p.sucked = true;
+                        }
+                        if (distToBH < blackhole.radius + p.radius * 0.7) {
+                            blackhole.radius = Math.min(blackhole.radius + p.radius * 0.5, blackhole.maxRadius);
+                            blackhole.slowFactor = Math.min(blackhole.slowFactor + 0.05, 1);
+                            showFact();
+                            planets.splice(i, 1);
+                            generatePlanets(1);
+                        }
+                    }
+
+                    for (let i = trashs.length - 1; i >= 0; i--) {
+                        let t = trashs[i];
+                        t.update();
+                        let distToBH = distance(t.x, t.y, blackhole.x, blackhole.y);
+                        if (distToBH < blackhole.radius * 6) {
+                            suckObject(t);
+                            t.sucked = true;
+                        }
+                        if (distToBH < blackhole.radius + t.radius * 0.7) {
+                            blackhole.radius -= t.radius * 0.9;
+                            blackhole.slowFactor = Math.max(blackhole.slowFactor - 0.15, 0.2);
+                            trashs.splice(i, 1);
+                            generateTrash(1);
+                            if (blackhole.radius < blackhole.minRadius) {
+                                playing = false;
+                                respawnOverlay.classList.remove('hidden');
+                            }
+                        }
+                    }
+                }
+
+                function draw() {
+                    ctx.clearRect(0, 0, W, H);
+                    drawStars();
+                    trashs.forEach(t => t.draw());
+                    planets.forEach(p => p.draw());
+                    drawBlackhole();
+                }
+
+                function gameLoop() {
+                    update();
+                    draw();
+                    updatePlanetCounter();
+                    twinkleStars();
+                    if (playing) {
+                        animationId = requestAnimationFrame(gameLoop);
+                    }
+                }
+
+                function startGame() {
+                    planets = [];
+                    trashs = [];
+                    generatePlanets(10);
+                    generateTrash(7);
+                    generateStars(150);
+                    blackhole.radius = 30;
+                    blackhole.x = W / 2;
+                    blackhole.y = H / 2;
+                    blackhole.velocityX = 0;
+                    blackhole.velocityY = 0;
+                    blackhole.slowFactor = 1;
+                    updatePlanetCounter();
+                    playing = true;
+                    menuOverlay.classList.add('hidden');
+                    respawnOverlay.classList.add('hidden');
+                    gameLoop();
+                }
+
+                startBtn.onclick = startGame;
+                respawnBtn.onclick = startGame;
+
+                // Show initial menu
+                menuOverlay.classList.remove('hidden');
+
+                // Cleanup
+                return () => {
+                    if (animationId) cancelAnimationFrame(animationId);
+                    window.removeEventListener('keydown', keyDown);
+                    window.removeEventListener('keyup', keyUp);
+                    window.removeEventListener('resize', resizeCanvas);
+                };
+            }, [activeSection, gameStarted, paused, lang, currentGame]);
+
+            // Chatbot Logic (Unchanged)
             const chatbotResponses = {
                 en: {
                     'hi|hello': 'Greetings, space traveler! I’m CosmoBot, your guide to the cosmos. Ask about planets, UFOs, Star Wars, or SpaceX!',
@@ -436,7 +994,7 @@
                 if (!chatInput.trim()) return;
                 const userMessage = chatInput.trim().toLowerCase();
                 setChatMessages(prev => [...prev, { text: chatInput, sender: 'user' }]);
-                const response = Object.keys(chatbotResponses[lang]).find(key => userMessage.match(key)) 
+                const response = Object.keys(chatbotResponses[lang]).find(key => userMessage.match(key))
                     ? chatbotResponses[lang][Object.keys(chatbotResponses[lang]).find(key => userMessage.match(key))]
                     : chatbotResponses[lang].default;
                 setTimeout(() => {
@@ -450,7 +1008,7 @@
                 }, 600);
             };
 
-            // Trivia Quiz
+            // Trivia Quiz (Unchanged)
             const triviaQuestions = [
                 { question: { en: 'Which planet is closest to the Sun?', fr: 'Quelle planète est la plus proche du Soleil ?' }, options: ['Venus', 'Mercury', 'Earth', 'Mars'], answer: 1 },
                 { question: { en: 'Which planet has prominent rings?', fr: 'Quelle planète a des anneaux proéminents ?' }, options: ['Mars', 'Saturn', 'Mercury', 'Venus'], answer: 1 },
@@ -476,7 +1034,7 @@
                 }
             };
 
-            // Easter Egg
+            // Easter Egg (Unchanged)
             const handleEasterEgg = () => {
                 setEasterEggActive(true);
                 alert(translations[lang].easterEgg);
@@ -525,9 +1083,9 @@
                 }
             ];
             const creators = [
-                { name: 'Benjamin', role: { en: 'Lead Developer', fr: 'Développeur Principal' }, img: 'https://i.pravatar.cc/100?img=1', bio: { en: 'Architected the app’s core systems, animations, and CosmoBot AI.', fr: 'A conçu les systèmes de base, animations et CosmoBot IA.' } },
-                { name: 'Pedro', role: { en: 'Story Writer', fr: 'Rédacteur' }, img: 'https://i.pravatar.cc/100?img=2', bio: { en: 'Crafted the cosmic narrative, Star Wars content, and news.', fr: 'A créé le récit cosmique, contenu Star Wars et actualités.' } },
-                { name: 'Pavlo', role: { en: 'VFX Specialist', fr: 'Spécialiste VFX' }, img: 'https://i.pravatar.cc/100?img=3', bio: { en: 'Designed stellar visual effects and media integration.', fr: 'A conçu des effets visuels stellaires et intégration média.' } }
+                { name: 'Benjamin', role: { en: 'Lead Developer', fr: 'Développeur Principal' }, bio: { en: 'Architected the app’s core systems, animations, and CosmoBot AI.', fr: 'A conçu les systèmes de base, animations et CosmoBot IA.' } },
+                { name: 'Pedro', role: { en: 'Story Writer', fr: 'Rédacteur' }, bio: { en: 'Crafted the cosmic narrative, Star Wars content, and news.', fr: 'A créé le récit cosmique, contenu Star Wars et actualités.' } },
+                { name: 'Pavlo', role: { en: 'VFX Specialist', fr: 'Spécialiste VFX' }, bio: { en: 'Designed stellar visual effects and media integration.', fr: 'A conçu des effets visuels stellaires et intégration média.' } }
             ];
             const ufoSightings = [
                 { media: 'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4', type: 'video', desc: { en: '1947, Washington: Kenneth Arnold’s sighting coined “flying saucers.”', fr: '1947, Washington : Observation de Kenneth Arnold a créé le terme “soucoupes volantes”.' } },
@@ -541,11 +1099,46 @@
                 { media: 'https://images.pexels.com/photos/1551644/pexels-photo-1551644.jpeg?auto=compress&cs=tinysrgb&w=200', type: 'image', desc: { en: '2010, Brazil: Strange craft over São Paulo, recorded by locals.', fr: '2010, Brésil : Engin étrange au-dessus de São Paulo, enregistré par des locaux.' } }
             ];
             const alienDocumentaries = [
-                { media: 'https://www.youtube.com/embed/1g3_CFmnU7k', type: 'iframe', desc: { en: 'Unacknowledged: An Exposé of the World’s Greatest Secret (2017)', fr: 'Unacknowledged : Une exposition du plus grand secret du monde (2017)' } },
-                { media: 'https://www.youtube.com/embed/5UfA_aKBGMc', type: 'iframe', desc: { en: 'Bob Lazar: Area 51 & Flying Saucers (2018)', fr: 'Bob Lazar : Area 51 et soucoupes volantes (2018)' } },
-                { media: 'https://www.youtube.com/embed/5UnjrG_N8hU', type: 'iframe', desc: { en: 'The Phenomenon: UFO Documentary (2020)', fr: 'Le Phénomène : Documentaire OVNI (2020)' } },
-                { media: 'https://www.youtube.com/embed/1g3_CFmnU7k', type: 'iframe', desc: { en: 'What If Aliens Exist? - Documentary (2021)', fr: 'Et si les extraterrestres existaient ? - Documentaire (2021)' } },
-                { media: 'https://www.youtube.com/embed/5UfA_aKBGMc', type: 'iframe', desc: { en: 'Ancient Aliens: The Evidence (2010)', fr: 'Anciens Extraterrestres : Les Preuves (2010)' } }
+                {
+                    media: 'https://www.youtube.com/embed?listType=search&list=Bob%20Lazar%3A%20Area%2051%20%26%20Flying%20Saucers%20(2018)%20official%20trailer',
+                    type: 'iframe',
+                    desc: {
+                        en: 'All videos: Bob Lazar: Area 51 & Flying Saucers (2018)',
+                        fr: 'Toutes les vidéos : Bob Lazar : Zone 51 et soucoupes volantes (2018)'
+                    }
+                },
+                {
+                    media: 'https://www.youtube.com/embed?listType=search&list=The%20Phenomenon%20UFO%20Documentary%20(2020)%20official%20trailer',
+                    type: 'iframe',
+                    desc: {
+                        en: 'All videos: The Phenomenon: UFO Documentary (2020)',
+                        fr: 'Toutes les vidéos : Le Phénomène : Documentaire OVNI (2020)'
+                    }
+                },
+                {
+                    media: 'https://www.youtube.com/embed?listType=search&list=Ancient%20Aliens%3A%20The%20Evidence%20(2010)%20full%20episode',
+                    type: 'iframe',
+                    desc: {
+                        en: 'All videos: Ancient Aliens: The Evidence (2010)',
+                        fr: 'Toutes les vidéos : Anciens Extraterrestres : Les Preuves (2010)'
+                    }
+                },
+                {
+                    media: 'https://www.youtube.com/embed?listType=search&list=What%20If%20Aliens%20Exist%3F%20Documentary%20(2021)',
+                    type: 'iframe',
+                    desc: {
+                        en: 'All videos: What If Aliens Exist? - Documentary (2021)',
+                        fr: 'Toutes les vidéos : Et si les extraterrestres existaient ? - Documentaire (2021)'
+                    }
+                },
+                {
+                    media: 'https://www.youtube.com/embed?listType=search&list=Unacknowledged%20documentary%20(2017)%20official%20trailer',
+                    type: 'iframe',
+                    desc: {
+                        en: 'All videos: Unacknowledged (2017)',
+                        fr: 'Toutes les vidéos : Unacknowledged (2017)'
+                    }
+                }
             ];
             const starWarsContent = {
                 facts: {
@@ -572,7 +1165,7 @@
                     desc: { en: 'Orbital refueling test, Oct 2025. Aims to prove in-space propellant transfer for lunar and Mars missions. Starship is fully reusable, designed for 100+ passengers to colonize Mars.', fr: 'Test de ravitaillement orbital, Oct 2025. Vise à prouver le transfert de propergol pour les missions lunaires et martiennes. Starship est entièrement réutilisable, conçu pour 100+ passagers pour coloniser Mars.' },
                     status: { en: 'Prepping', fr: 'Préparation' },
                     progress: 80,
-                    media: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Starship_SN15_landing_1.jpg/200px-Starship_SN15_landing_1.jpg', type: 'image'
+                    media: 'https://www.youtube.com/embed/a-T4x6tcM_U', type: 'iframe'
                 },
                 {
                     name: { en: 'Starlink V2', fr: 'Starlink V2' },
@@ -583,10 +1176,10 @@
                 },
                 {
                     name: { en: 'Mars City Alpha', fr: 'Ville Martienne Alpha' },
-                    desc: { en: '1M residents by 2050. First human colony on Mars, with plans for self-sustaining habitats, greenhouses, and solar power infrastructure.', fr: '1M résidents d’ici 2050. Première colonie humaine sur Mars, avec des plans pour des habitats autosuffisants, des serres et une infrastructure à énergie solaire.' },
+                    desc: { en: 'In the year 2025, Mars Base Alpha stands as a beacon of human achievement and the relentless pursuit of discovery. Journey with us as we explore life on the Martian frontier—where isolation meets innovation, where silence hides ancient mysteries, and where humanity’s dream of becoming multi-planetary becomes a reality. From eerie first contact with alien life to breathtaking scientific breakthroughs beneath the red dust, this is the story of survival, wonder, and the human spirit on Mars.', fr: 'En 2025, la Base Alpha sur Mars est un phare de l\'accomplissement humain et de la poursuite incessante de la découverte. Voyagez avec nous pour explorer la vie sur la frontière martienne — où l\'isolement rencontre l\'innovation, où le silence cache d\'anciens mystères, et où le rêve de l\'humanité de devenir multi-planétaire devient réalité. Du premier contact effrayant avec la vie extraterrestre aux percées scientifiques époustouflantes sous la poussière rouge, voici l\'histoire de la survie, de l\'émerveillement et de l\'esprit humain sur Mars.' },
                     status: { en: 'Planning', fr: 'Planification' },
                     progress: 20,
-                    media: 'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4', type: 'video'
+                    media: 'https://www.youtube.com/embed/oCGAfQxOk1w', type: 'iframe'
                 }
             ];
             const timelineEvents = [
@@ -607,6 +1200,13 @@
                     desc: { en: 'Starship: First crewed Mars mission planned by SpaceX, aiming for a permanent human presence.', fr: 'Starship : Première mission martienne habitée prévue par SpaceX, visant une présence humaine permanente.' }
                 }
             ];
+            const spaceFacts = [
+                { fact: { en: 'Jupiter and the Sun both orbit a point in space (known as a barycentre) that is 30,000km off of the Sun.', fr: 'Jupiter et le Soleil orbitent tous deux autour d’un point dans l’espace (connu sous le nom de barycentre) qui est à 30 000 km du Soleil.' }, img: 'https://www.learningresources.co.uk/media/wysiwyg/1_8.JPG' },
+                { fact: { en: 'Space isn\'t completely silent. The Moon is lemon-shaped. Milky Way smells of rum, raspberries and booze.', fr: 'L’espace n’est pas complètement silencieux. La Lune est en forme de citron. La Voie Lactée sent le rhum, les framboises et l’alcool.' }, img: 'https://latitudegrouptravel.com.au/wp-content/uploads/2018/08/space-facts-infographic.jpg' },
+                { fact: { en: 'One million Earths could fit inside the Sun – and the Sun is considered an average-size star.', fr: 'Un million de Terres pourraient rentrer dans le Soleil – et le Soleil est considéré comme une étoile de taille moyenne.' }, img: 'https://d1amk1w0mr5k0.cloudfront.net/blog/wp-content/uploads/2017/04/LCG_astronomy-day-infographic-464x600.jpg' },
+                { fact: { en: 'The Sun is 400 times larger than the Moon, but also 400 times as far away, making both objects appear to be the same size in our sky.', fr: 'Le Soleil est 400 fois plus grand que la Lune, mais aussi 400 fois plus éloigné, ce qui fait que les deux objets semblent avoir la même taille dans notre ciel.' }, img: 'https://blog.visual-paradigm.com/wp-content/uploads/2022/10/8-facts-about-space-horizontal-infographic.png' },
+                { fact: { en: 'Our solar system includes the Sun, eight planets, five officially named dwarf planets, hundreds of moons, and thousands of asteroids and comets.', fr: 'Notre système solaire comprend le Soleil, huit planètes, cinq planètes naines officiellement nommées, des centaines de lunes, et des milliers d’astéroïdes et de comètes.' }, img: 'https://new.boredteachers.com/wp-content/uploads/2025/03/10-Facts-Space-Facts-Infographic-724x1024.png' }
+            ];
 
             if (loading) {
                 return <div id="loading" className="glow-pulse">
@@ -615,14 +1215,22 @@
                 </div>;
             }
 
-            // 404 Page
-            if (!['home', 'system', 'games', 'trivia', 'ufo', 'missions', 'timeline', 'starwars', 'news', 'authors', 'chatbot', ...planets.map(p => p.name)].includes(activeSection)) {
+            if (!['home', 'system', 'games', 'trivia', 'ufo', 'missions', 'timeline', 'starwars', 'news', 'authors', 'hub', 'events', 'models', 'musk', 'secret', ...planets.map(p => p.name)].includes(activeSection)) {
                 return (
-                    <div className="error-page">
-                        <img src="https://images.pexels.com/photos/1551644/pexels-photo-1551644.jpeg?auto=compress&cs=tinysrgb&w=200" alt="Lost in Space" />
-                        <h1 className="glow-pulse">{translations[lang].error404}</h1>
-                        <p className="mb-4">{translations[lang].errorDesc}</p>
-                        <button onClick={() => showSection('home')} className="nav-btn">{translations[lang].errorBack}</button>
+                    <div className="card">
+                        <h1 className="font-Orbitron text-3xl text-center glow-pulse mb-4">{translations[lang].error404}</h1>
+                        <p className="text-center mb-4">{translations[lang].errorDesc}</p>
+                        <div className="news-grid">
+                            {spaceFacts.map((factItem, i) => (
+                                <div key={i} className="card">
+                                    <div className="media-container">
+                                        <img src={factItem.img} alt="Space Fact" loading="lazy" />
+                                        <div className="media-overlay">{factItem.fact[lang]}</div>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                        <button onClick={() => showSection('home')} className="nav-btn mt-4 mx-auto block">{translations[lang].errorBack}</button>
                     </div>
                 );
             }
@@ -658,7 +1266,7 @@
                             <button onClick={handleChatSubmit}>{translations[lang].chatSend}</button>
                         </div>
                     </div>
-                    <button className="chatbot-toggle" onClick={() => setChatOpen(prev => !prev)}>🤖</button>
+                        <button className="chatbot-toggle" onClick={() => setChatOpen(prev => !prev)}>🤖</button>
                     <header className="hero">
                         <video autoPlay loop muted playsInline>
                             <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" type="video/mp4" />
@@ -677,7 +1285,10 @@
                                 <button onClick={() => showSection('starwars')} className="nav-btn">⭐ {translations[lang].starwars}</button>
                                 <button onClick={() => showSection('news')} className="nav-btn">📰 {translations[lang].news}</button>
                                 <button onClick={() => showSection('authors')} className="nav-btn">👨‍🚀 {translations[lang].authors}</button>
-                                <button onClick={() => setChatOpen(true)} className="nav-btn">🤖 {translations[lang].chatbot}</button>
+                                <button onClick={() => showSection('hub')} className="nav-btn">🛰️ {translations[lang].hub}</button>
+                                <button onClick={() => showSection('events')} className="nav-btn">⏱️ {translations[lang].events}</button>
+                                <button onClick={() => showSection('models')} className="nav-btn">🪐 {translations[lang].models}</button>
+                                <button onClick={() => showSection('musk')} className="nav-btn">🚀 {translations[lang].musk}</button>
                             </div>
                         </div>
                     </header>
@@ -694,7 +1305,10 @@
                                 <h2 className="font-Orbitron text-3xl text-center glow-pulse mb-4">{translations[lang].system}</h2>
                                 <div className="flex flex-wrap justify-center">
                                     {planets.map(p => (
-                                        <div key={p.name} className="planet-card" onClick={() => showSection(p.name)}>{p.name}</div>
+                                        <div key={p.name} className="planet-card" onClick={() => showSection(p.name)}>
+                                            <img src={p.img} alt={p.name} loading="lazy" />
+                                            <div className="media-overlay" style={{ fontFamily: 'Orbitron, sans-serif', fontWeight: 700 }}>{p.name}</div>
+                                        </div>
                                     ))}
                                 </div>
                             </section>
@@ -714,17 +1328,54 @@
                         {activeSection === 'games' && (
                             <section className="game">
                                 <h2 className="font-Orbitron text-3xl text-center glow-pulse mb-4">{translations[lang].minigames}</h2>
-                                <p className="text-center mb-4">{translations[lang].instructions}</p>
                                 <div className="flex gap-4 justify-center mb-4">
-                                    <button onClick={() => { setGameStarted(true); setPaused(false); setScore(0); }} className="nav-btn">{lang === 'en' ? 'Start' : 'Démarrer'}</button>
-                                    <button onClick={() => setPaused(!paused)} className="nav-btn">
-                                        {paused ? translations[lang].resume : translations[lang].pause}
-                                    </button>
-                                    <button onClick={() => { setGameStarted(false); setScore(0); }} className="nav-btn">{translations[lang].replay}</button>
+                                    <button onClick={() => setCurrentGame('asteroid')} className={`nav-btn ${currentGame === 'asteroid' ? 'active' : ''}`}>Asteroid Game</button>
+                                    <button onClick={() => setCurrentGame('blackhole')} className={`nav-btn ${currentGame === 'blackhole' ? 'active' : ''}`}>Black Hole Game</button>
                                 </div>
-                                {gameStarted && <canvas ref={gameCanvasRef} />}
-                                <div className="mt-4 text-xl font-Orbitron">{translations[lang].score}: {score}</div>
-                                <div className="text-lg muted">{translations[lang].highScore}: {localStorage.getItem('highScore') || 0}</div>
+                                {currentGame === 'asteroid' && (
+                                    <>
+                                        <p className="text-center mb-4">{translations[lang].instructions}</p>
+                                        <div className="flex gap-4 justify-center mb-4">
+                                            <button onClick={() => { setGameStarted(true); setPaused(false); setScore(0); }} className="nav-btn">{lang === 'en' ? 'Start' : 'Démarrer'}</button>
+                                            <button onClick={() => setPaused(!paused)} className="nav-btn">
+                                                {paused ? translations[lang].resume : translations[lang].pause}
+                                            </button>
+                                            <button onClick={() => { setGameStarted(false); setScore(0); }} className="nav-btn">{translations[lang].replay}</button>
+                                        </div>
+                                        {gameStarted && <canvas ref={gameCanvasRef} />}
+                                        <div className="mt-4 text-xl font-Orbitron">{translations[lang].score}: {score}</div>
+                                        <div className="text-lg muted">{translations[lang].highScore}: {localStorage.getItem('highScore') || 0}</div>
+                                    </>
+                                )}
+                                {currentGame === 'blackhole' && (
+                                    <>
+                                        <p className="text-center mb-4">{translations[lang].blackHoleInstructions.replace(/\n/g, ' ')}</p>
+                                        <div className="flex gap-4 justify-center mb-4">
+                                            <button onClick={() => { setGameStarted(true); setPaused(false); }} className="nav-btn">{lang === 'en' ? 'Start' : 'Démarrer'}</button>
+                                            <button onClick={() => setPaused(!paused)} className="nav-btn">
+                                                {paused ? translations[lang].resume : translations[lang].pause}
+                                            </button>
+                                            <button onClick={() => setGameStarted(false)} className="nav-btn">{translations[lang].replay}</button>
+                                        </div>
+                                        {gameStarted && (
+                                            <div className="blackhole-game">
+                                                <canvas ref={blackholeCanvasRef}></canvas>
+                                                <div ref={factBoxRef} id="factBox">{translations[lang].eatPlanetFact}</div>
+                                                <div ref={planetCounterRef} id="planetCounter">{translations[lang].planetsLabel}: 0</div>
+                                                <div ref={menuOverlayRef} id="menuOverlay">
+                                                    <h1 style={{color: '#ff7f00'}}>{translations[lang].blackHoleTitle}</h1>
+                                                    <p style={{whiteSpace: 'pre-line', textAlign: 'center'}}>{translations[lang].blackHoleInstructions}</p>
+                                                    <button ref={startBtnRef} id="startBtn">{translations[lang].startGame}</button>
+                                                </div>
+                                                <div ref={respawnOverlayRef} id="respawnOverlay" className="hidden">
+                                                    <h1 style={{color: '#ff7f00'}}>{translations[lang].youDied}</h1>
+                                                    <p style={{whiteSpace: 'pre-line', textAlign: 'center'}}>{translations[lang].blackHoleDeath}</p>
+                                                    <button ref={respawnBtnRef} id="respawnBtn">{translations[lang].respawn}</button>
+                                                </div>
+                                            </div>
+                                        )}
+                                    </>
+                                )}
                             </section>
                         )}
                         {activeSection === 'trivia' && (
@@ -794,7 +1445,9 @@
                                     {missions.map((mission, i) => (
                                         <div key={i} className="card">
                                             <div className="media-container">
-                                                {mission.type === 'video' ? (
+                                                {mission.type === 'iframe' ? (
+                                                    <iframe src={mission.media} title={mission.name[lang]} allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
+                                                ) : mission.type === 'video' ? (
                                                     <video controls>
                                                         <source src={mission.media} type="video/mp4" />
                                                         {lang === 'en' ? 'Your browser does not support the video tag.' : 'Votre navigateur ne prend pas en charge la vidéo.'}
@@ -850,10 +1503,10 @@
                                     {starWarsContent.videos.map((video, i) => (
                                         <div key={i} className="card">
                                             <div className="media-container">
-                                                <iframe 
-                                                    src={video.media} 
-                                                    title={video.desc[lang]} 
-                                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                                <iframe
+                                                    src={video.media}
+                                                    title={video.desc[lang]}
+                                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                                     allowFullScreen
                                                 ></iframe>
                                                 <div className="media-overlay">{video.desc[lang]}</div>
@@ -863,27 +1516,352 @@
                                 </div>
                             </section>
                         )}
+                        {activeSection === 'hub' && (
+                            <section className="card">
+                                <h2 className="font-Orbitron text-3xl text-center glow-pulse mb-4">{translations[lang].hub}</h2>
+                                <div className="card mb-6">
+                                    <h3 className="font-Orbitron text-2xl mb-2">{lang === 'en' ? 'Space News Feed' : 'Fil d’Actualités Spatiales'}</h3>
+                                    <div className="news-grid">
+                                        {[{
+                                            media: 'https://upload.wikimedia.org/wikipedia/commons/3/3f/SMACS_0723_JWST.jpg',
+                                            desc: { en: 'Webb reveals ancient galaxies via gravitational lensing.', fr: 'Webb révèle des galaxies anciennes via la lentille gravitationnelle.' }
+                                        },{
+                                            media: 'https://upload.wikimedia.org/wikipedia/commons/3/3f/Starlink_Mission_%2848012660848%29.jpg',
+                                            desc: { en: 'Starlink launches continue to expand global coverage.', fr: 'Les lancements Starlink continuent d’étendre la couverture mondiale.' }
+                                        },{
+                                            media: 'https://upload.wikimedia.org/wikipedia/commons/7/7e/Blue_Origin_New_Glenn_render.jpg',
+                                            desc: { en: 'New Glenn nears maiden flight with pad testing.', fr: 'New Glenn approche du premier vol avec des tests au pas de tir.' }
+                                        }].map((n, i) => (
+                                            <div key={i} className="card">
+                                                <div className="media-container">
+                                                    <img src={n.media} alt="Space News" loading="lazy" />
+                                                    <div className="media-overlay">{n.desc[lang]}</div>
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                                <div className="card mb-6">
+                                    <h3 className="font-Orbitron text-2xl mb-2">{lang === 'en' ? 'Countdown to Real Space Events' : 'Compte à Rebours des Événements Spatiaux'}</h3>
+                                    <div className="flex flex-col sm:flex-row gap-4">
+                                        <div className="card" style={{ flex: 1 }}>
+                                            <h4 className="font-Orbitron mb-2">{lang === 'en' ? 'Next Rocket Launch' : 'Prochain Lancement'}</h4>
+                                            <div className="text-2xl" id="launchCountdown">T- Loading…</div>
+                                            <div className="media-container mt-2">
+                                                <iframe src="https://www.youtube.com/embed?listType=search&list=rocket%20launch%20live" title="Launch Stream" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
+                                            </div>
+                                        </div>
+                                        <div className="card" style={{ flex: 1 }}>
+                                            <h4 className="font-Orbitron mb-2">{lang === 'en' ? 'Next Solar Eclipse' : 'Prochaine Éclipse Solaire'}</h4>
+                                            <div className="text-2xl" id="eclipseCountdown">T- Loading…</div>
+                                            <div className="media-container mt-2">
+                                                <img src="https://upload.wikimedia.org/wikipedia/commons/2/2e/Solar_eclipse_1999_4_nr.jpg" alt="Solar Eclipse" loading="lazy" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="card mb-6">
+                                    <h3 className="font-Orbitron text-2xl mb-2">{lang === 'en' ? 'Resource Library' : 'Bibliothèque de Ressources'}</h3>
+                                    <ul className="list-disc pl-6">
+                                        <li><a href="https://www.nasa.gov" target="_blank" rel="noreferrer">NASA</a> — {lang === 'en' ? 'missions and discoveries' : 'missions et découvertes'}</li>
+                                        <li><a href="https://www.esa.int" target="_blank" rel="noreferrer">ESA</a> — {lang === 'en' ? 'European space missions' : 'missions spatiales européennes'}</li>
+                                        <li><a href="https://www.spacex.com" target="_blank" rel="noreferrer">SpaceX</a> — {lang === 'en' ? 'rockets and Starship' : 'fusées et Starship'}</li>
+                                        <li><a href="https://openstax.org/details/books/astronomy-2e" target="_blank" rel="noreferrer">OpenStax Astronomy</a> — {lang === 'en' ? 'free astronomy textbook' : 'manuel d’astronomie gratuit'}</li>
+                                        <li><a href="https://nssdc.gsfc.nasa.gov/planetary/" target="_blank" rel="noreferrer">NASA Planetary Data</a> — {lang === 'en' ? 'planet fact sheets' : 'fiches de faits planétaires'}</li>
+                                    </ul>
+                                </div>
+                                <div className="card">
+                                    <h3 className="font-Orbitron text-2xl mb-2">{lang === 'en' ? 'Glossary of Space Terms' : 'Glossaire des Termes Spatiaux'}</h3>
+                                    <div className="timeline-grid">
+                                        {[{
+                                            term: { en: 'Apogee', fr: 'Apogée' },
+                                            def: { en: 'Point in orbit farthest from Earth.', fr: 'Point de l’orbite le plus éloigné de la Terre.' }
+                                        },{
+                                            term: { en: 'Perigee', fr: 'Périgée' },
+                                            def: { en: 'Point in orbit closest to Earth.', fr: 'Point de l’orbite le plus proche de la Terre.' }
+                                        },{
+                                            term: { en: 'Delta-v', fr: 'Delta-v' },
+                                            def: { en: 'Change in velocity needed to perform a maneuver.', fr: 'Changement de vitesse nécessaire pour une manœuvre.' }
+                                        },{
+                                            term: { en: 'Light-year', fr: 'Année-lumière' },
+                                            def: { en: 'Distance light travels in one year (~9.46 trillion km).', fr: 'Distance parcourue par la lumière en un an (~9,46 Tkm).' }
+                                        }].map((g, i) => (
+                                            <div key={i} className="card">
+                                                <h4 className="font-Orbitron text-xl">{g.term[lang]}</h4>
+                                                <p>{g.def[lang]}</p>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            </section>
+                        )}
+                        {activeSection === 'events' && (
+                            <section className="card">
+                                <h2 className="font-Orbitron text-3xl text-center glow-pulse mb-4">{translations[lang].events}</h2>
+                                <div className="mission-grid">
+                                    {[{
+                                        title: { en: 'Next Rocket Launch', fr: 'Prochain Lancement' },
+                                        id: 'launchCountdown'
+                                    },{
+                                        title: { en: 'Next Solar Eclipse', fr: 'Prochaine Éclipse' },
+                                        id: 'eclipseCountdown'
+                                    }].map((c,i) => (
+                                        <div key={i} className="card">
+                                            <h3 className="font-Orbitron text-xl mb-2">{c.title[lang]}</h3>
+                                            <div className="text-2xl" id={c.id}>T- Loading…</div>
+                                        </div>
+                                    ))}
+                                </div>
+                                <div className="card mt-6">
+                                    <h3 className="font-Orbitron text-2xl mb-2">Media</h3>
+                                    <div className="news-grid">
+                                        <div className="card">
+                                            <div className="media-container">
+                                                <iframe src="https://www.youtube.com/embed?listType=search&list=space%20launch%20live" title="Launch Live" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
+                                                <div className="media-overlay">Launch Streams</div>
+                                            </div>
+                                        </div>
+                                        <div className="card">
+                                            <div className="media-container">
+                                                <img src="https://upload.wikimedia.org/wikipedia/commons/2/2e/Solar_eclipse_1999_4_nr.jpg" alt="Eclipse" loading="lazy" />
+                                                <div className="media-overlay">Solar Eclipse</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="text-center mt-4">
+                                    <button className="nav-btn" onClick={() => {
+                                        const el = document.getElementById('trackerRocket');
+                                        if (el) { el.classList.remove('active'); void el.offsetWidth; el.classList.add('active'); }
+                                    }}>{lang==='en'?'Launch Rocket Animation':'Lancer l’animation de fusée'}</button>
+                                </div>
+                                <div id="trackerRocket" className="tracker-rocket">🚀</div>
+                            </section>
+                        )}
+                        {activeSection === 'models' && (
+                            <section className="card">
+                                <h2 className="font-Orbitron text-3xl text-center glow-pulse mb-4">{translations[lang].models}</h2>
+                                <p className="mb-2">{lang==='en'?'Tip: Want other 3D bodies like Saturn or the Moon? We can add their GLTF viewers here.':'Astuce : Vous voulez d’autres corps 3D comme Saturne ou la Lune ? Nous pouvons ajouter leurs visionneuses GLTF ici.'}</p>
+                                <div className="doc-grid">
+                                    {[{
+                                        name: 'Earth', url: 'https://solarsystem.nasa.gov/gltf_embed/2393'
+                                    },{
+                                        name: 'Mars', url: 'https://solarsystem.nasa.gov/gltf_embed/2372'
+                                    },{
+                                        name: 'Jupiter', url: 'https://solarsystem.nasa.gov/gltf_embed/2375'
+                                    },{
+                                        name: 'Saturn', url: 'https://solarsystem.nasa.gov/gltf_embed/2414'
+                                    },{
+                                        name: 'Moon', url: 'https://solarsystem.nasa.gov/gltf_embed/2368'
+                                    }].map((m,i) => (
+                                        <div key={i} className="card">
+                                            <div className="media-container">
+                                                <iframe src={m.url} title={m.name} allowFullScreen></iframe>
+                                                <div className="media-overlay">{m.name}</div>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </section>
+                        )}
+                        {activeSection === 'musk' && (
+                            <section className="card">
+                                <h2 className="font-Orbitron text-3xl text-center glow-pulse mb-4">{lang === 'en' ? 'Elon Musk: Pushing Humanity to the Stars' : 'Elon Musk : Propulser l’humanité vers les étoiles'}</h2>
+                                <div className="media-container mb-4">
+                                    <img src="https://upload.wikimedia.org/wikipedia/commons/9/97/CRS-8_Launch_%2826204908962%29.jpg" alt="Falcon 9 Launch" loading="lazy" />
+                                    <div className="media-overlay">SpaceX Falcon 9</div>
+                                </div>
+                                <p className="mb-4">{lang === 'en' ? 'Profile of Elon Musk’s contributions to space — SpaceX, reusable rockets, and humanity’s multi-planetary future.' : 'Profil des contributions d’Elon Musk à l’espace — SpaceX, fusées réutilisables et avenir multi-planétaire de l’humanité.'}</p>
+
+                                <h3 className="font-Orbitron text-2xl mb-2">{lang === 'en' ? 'Biography' : 'Biographie'}</h3>
+                                <div className="timeline-grid mb-4">
+                                    {[{year:'1971',desc:{en:'Born in Pretoria, South Africa.',fr:'Né à Pretoria, Afrique du Sud.'}},
+                                      {year:'2002',desc:{en:'Founds SpaceX.',fr:'Fondateur de SpaceX.'}},
+                                      {year:'2008',desc:{en:'Falcon 1 reaches orbit.',fr:'Falcon 1 atteint l’orbite.'}},
+                                      {year:'2012',desc:{en:'Dragon berths with ISS.',fr:'Dragon s’amarre à l’ISS.'}},
+                                      {year:'2020+',desc:{en:'Starship development accelerates.',fr:'Le développement de Starship s’accélère.'}}].map((e,i)=> (
+                                        <div key={i} className="card">
+                                            <div className="media-container">
+                                                <img src="https://upload.wikimedia.org/wikipedia/commons/e/eb/SpaceX_COTS_demo_falcon_9_launch.jpg" alt={e.year} loading="lazy" />
+                                                <div className="media-overlay">{e.year}</div>
+                                            </div>
+                                            <p>{e.desc[lang]}</p>
+                                        </div>
+                                    ))}
+                                </div>
+
+                                <h3 className="font-Orbitron text-2xl mb-2">{lang === 'en' ? 'Space Achievements' : 'Réussites Spatiales'}</h3>
+                                <ul className="list-disc pl-6 mb-4">
+                                    <li>{lang === 'en' ? 'Reusable rockets: Falcon 9 and Falcon Heavy landings.' : 'Fusées réutilisables : atterrissages de Falcon 9 et Falcon Heavy.'}</li>
+                                    <li>{lang === 'en' ? 'Crewed missions to the ISS with Dragon.' : 'Missions habitées vers l’ISS avec Dragon.'}</li>
+                                    <li>{lang === 'en' ? 'Starlink satellite internet constellation.' : 'Constellation internet par satellites Starlink.'}</li>
+                                    <li>{lang === 'en' ? 'Starship for Mars colonization.' : 'Starship pour la colonisation de Mars.'}</li>
+                                </ul>
+
+                                <h3 className="font-Orbitron text-2xl mb-2">{lang === 'en' ? 'Interactive Features' : 'Fonctionnalités Interactives'}</h3>
+                                <div className="mission-grid mb-4">
+                                    <div className="card">
+                                        <h4 className="font-Orbitron mb-2">{lang === 'en' ? 'Rocket Simulator' : 'Simulateur de Fusée'}</h4>
+                                        <p className="mb-2">{lang === 'en' ? 'Click to attempt a virtual launch (simple demo).' : 'Cliquez pour tenter un lancement virtuel (démo simple).'}</p>
+                                        <button className="nav-btn" onClick={() => alert(lang==='en'?'Liftoff!':'Décollage !')}>{lang === 'en' ? 'Launch' : 'Lancer'}</button>
+                                    </div>
+                                    <div className="card">
+                                        <h4 className="font-Orbitron mb-2">{lang === 'en' ? 'Mission Planner' : 'Planificateur de Mission'}</h4>
+                                        <p className="mb-2">{lang === 'en' ? 'Design a simple mission (Mars or Moon).' : 'Concevez une mission simple (Mars ou Lune).'}</p>
+                                        <button className="nav-btn" onClick={() => alert(lang==='en'?'Mission planned!':'Mission planifiée !')}>{lang === 'en' ? 'Plan Mission' : 'Planifier'}</button>
+                                    </div>
+                                    <div className="card">
+                                        <h4 className="font-Orbitron mb-2">{lang === 'en' ? 'Quiz' : 'Quiz'}</h4>
+                                        <p className="mb-2">{lang === 'en' ? '3-question SpaceX trivia.' : 'Quiz SpaceX en 3 questions.'}</p>
+                                        <div className="card">
+                                            {[{
+                                                q:{en:'Which rocket pioneered routine reusability?',fr:'Quelle fusée a popularisé la réutilisabilité ?'},
+                                                a:['Falcon 9','Saturn V','Ariane 5','Delta IV'],
+                                                c:0
+                                            },{
+                                                q:{en:'What spacecraft ferries crew to the ISS?',fr:'Quel engin transporte des équipages vers l’ISS ?'},
+                                                a:['Dragon','Shuttle','Orion','Soyuz'],
+                                                c:0
+                                            },{
+                                                q:{en:'What is SpaceX’s Mars ship called?',fr:'Comment s’appelle le vaisseau pour Mars ?'},
+                                                a:['Starship','Starliner','Dream Chaser','New Shepard'],
+                                                c:0
+                                            }].map((qq,qi)=> (
+                                                <div key={qi} className="mb-3">
+                                                    <div className="font-Orbitron">Q{qi+1}. {qq.q[lang]}</div>
+                                                    <div className="flex flex-wrap gap-2 mt-1">
+                                                        {qq.a.map((opt,oi)=> (
+                                                            <button key={oi} className="nav-btn" onClick={(e)=>{
+                                                                const correct = oi===qq.c; e.currentTarget.textContent = correct ? (lang==='en'?'Correct':'Correct') : (lang==='en'?'Try again':'Réessayez');
+                                                            }}>{opt}</button>
+                                                        ))}
+                                                    </div>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <h3 className="font-Orbitron text-2xl mb-2">{lang === 'en' ? 'Videos & Media' : 'Vidéos & Médias'}</h3>
+                                <div className="doc-grid mb-4">
+                                    {[{media:'https://www.youtube.com/embed?listType=search&list=SpaceX%20landing%20Falcon%209',desc:{en:'Falcon 9 landings',fr:'Atterrissages Falcon 9'}},
+                                      {media:'https://www.youtube.com/embed?listType=search&list=Starship%20test%20flight',desc:{en:'Starship test flights',fr:'Vols d’essai Starship'}}].map((v,i)=>(
+                                        <div key={i} className="card">
+                                            <div className="media-container">
+                                                <iframe src={v.media} title={v.desc[lang]} allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
+                                                <div className="media-overlay">{v.desc[lang]}</div>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+
+                                <h3 className="font-Orbitron text-2xl mb-2">{lang === 'en' ? 'Achievements & Awards' : 'Récompenses & Distinctions'}</h3>
+                                <ul className="list-disc pl-6 mb-4">
+                                    <li>{lang === 'en' ? 'TIME Person of the Year (2021).' : 'TIME Person of the Year (2021).'} </li>
+                                    <li>{lang === 'en' ? 'Royal Aeronautical Society Gold Medal.' : 'Médaille d’or de la Royal Aeronautical Society.'}</li>
+                                </ul>
+
+                                <h3 className="font-Orbitron text-2xl mb-2">{lang === 'en' ? 'Quotes' : 'Citations'}</h3>
+                                <blockquote className="card mb-4">{lang === 'en' ? 'When something is important enough, you do it even if the odds are not in your favor.' : 'Quand quelque chose est assez important, vous le faites même si les chances ne sont pas en votre faveur.'}</blockquote>
+
+                                <h3 className="font-Orbitron text-2xl mb-2">{lang === 'en' ? 'News & Updates' : 'Actualités & Mises à Jour'}</h3>
+                                <div className="news-grid mb-4">
+                                    <div className="card">
+                                        <div className="media-container">
+                                            <iframe src="https://www.youtube.com/embed?listType=search&list=SpaceX%20news" title="SpaceX News" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
+                                            <div className="media-overlay">SpaceX News</div>
+                                        </div>
+                                    </div>
+                                    <div className="card">
+                                        <div className="media-container">
+                                            <img src="https://upload.wikimedia.org/wikipedia/commons/9/9d/Starship_SN9_on_Boca_Chica_launch_pad.jpg" alt="Starship" loading="lazy" />
+                                            <div className="media-overlay">Starship</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="text-center">
+                                    <button className="nav-btn" onClick={() => showSection('secret')}>{lang==='en'?'Notify Elon':'Notifier Elon'}</button>
+                                </div>
+
+                                <h3 className="font-Orbitron text-2xl mb-2">{lang === 'en' ? 'References & Links' : 'Références & Liens'}</h3>
+                                <ul className="list-disc pl-6">
+                                    <li><a href="https://www.spacex.com" target="_blank" rel="noreferrer">SpaceX</a></li>
+                                    <li><a href="https://www.tesla.com/elon-musk" target="_blank" rel="noreferrer">Elon Musk Bio</a></li>
+                                    <li><a href="https://www.nasa.gov" target="_blank" rel="noreferrer">NASA</a></li>
+                                </ul>
+                            </section>
+                        )}
+                        {activeSection === 'secret' && (
+                            <section className="card">
+                                <h2 className="font-Orbitron text-3xl text-center glow-pulse mb-4">{lang==='en'?'Notification Sent':'Notification envoyée'}</h2>
+                                <div className="media-container mb-4">
+                                    <img src="https://upload.wikimedia.org/wikipedia/commons/5/58/ISS-55_SpaceX_CRS-14_Dragon_arrival_%2840659058894%29.jpg" alt="SpaceX Docking" loading="lazy" />
+                                    <div className="media-overlay">{lang==='en'?'Please wait for a reply…':'Veuillez attendre une réponse…'}</div>
+                                </div>
+                                <p className="text-center">{lang==='en'?'You have notified Elon. Please wait to be replied to.':'Vous avez notifié Elon. Veuillez attendre une réponse.'}</p>
+                                <div className="text-center mt-4">
+                                    <button className="nav-btn" onClick={() => showSection('musk')}>{lang==='en'?'Back to Musk Page':'Retour à la page Musk'}</button>
+                                </div>
+                            </section>
+                        )}
                         {activeSection === 'news' && (
                             <section className="card">
                                 <h2 className="font-Orbitron text-3xl text-center glow-pulse mb-4">{translations[lang].news}</h2>
                                 <div className="news-grid">
                                     {[
                                         {
-                                            media: 'https://images.pexels.com/photos/586056/pexels-photo-586056.jpeg?auto=compress&cs=tinysrgb&w=200',
-                                            desc: { en: '2025: SpaceX Starship achieves first crewed Mars landing, a historic milestone.', fr: '2025 : SpaceX Starship réussit le premier atterrissage habité sur Mars, une étape historique.' }
+                                            media: 'https://upload.wikimedia.org/wikipedia/commons/7/7e/Blue_Origin_New_Glenn_render.jpg',
+                                            desc: { en: '2025: Blue Origin rolls out New Glenn first stage for pad testing ahead of debut flight.', fr: '2025 : Blue Origin déploie le premier étage de New Glenn pour des tests au pas de tir avant le vol inaugural.' }
                                         },
                                         {
-                                            media: 'https://images.pexels.com/photos/73937/pexels-photo-73937.jpeg?auto=compress&cs=tinysrgb&w=200',
-                                            desc: { en: '2025: James Webb Telescope discovers potential biosignatures in exoplanet atmosphere.', fr: '2025 : Le télescope James Webb découvre des biosignatures potentielles dans l’atmosphère d’une exoplanète.' }
+                                            media: 'https://upload.wikimedia.org/wikipedia/commons/3/3f/Starlink_Mission_%2848012660848%29.jpg',
+                                            desc: { en: '2025: SpaceX adds more Starlink satellites; veteran Falcon 9 booster flies again.', fr: '2025 : SpaceX ajoute des satellites Starlink ; un booster Falcon 9 vétéran revol.' }
                                         },
                                         {
-                                            media: 'https://images.pexels.com/photos/37728/pexels-photo-37728.jpeg?auto=compress&cs=tinysrgb&w=200',
-                                            desc: { en: '2025: China’s Tiangong space station expands with new modules.', fr: '2025 : La station spatiale Tiangong de la Chine s’agrandit avec de nouveaux modules.' }
+                                            media: 'https://upload.wikimedia.org/wikipedia/commons/4/4e/ESA_logo.png',
+                                            desc: { en: '2025: ESA and Avio outline a reusable upper stage concept to boost European launch capability.', fr: '2025 : L’ESA et Avio présentent un concept d’étage supérieur réutilisable pour renforcer les capacités européennes de lancement.' }
+                                        },
+                                        {
+                                            media: 'https://upload.wikimedia.org/wikipedia/commons/9/99/Dragon_CRS-20_approaching_the_ISS_%28cropped%29.jpg',
+                                            desc: { en: '2025: NASA–SpaceX Crew mission returns safely; Dragon splashes down in the Pacific.', fr: '2025 : La mission NASA–SpaceX Crew revient en toute sécurité ; Dragon amerrit dans le Pacifique.' }
+                                        },
+                                        {
+                                            media: 'https://upload.wikimedia.org/wikipedia/commons/3/3f/SMACS_0723_JWST.jpg',
+                                            desc: { en: '2025: Webb reveals new gravitational lensing vistas, refining dark matter maps.', fr: '2025 : Webb révèle de nouvelles vues de lentilles gravitationnelles, affinant les cartes de matière noire.' }
+                                        },
+                                        {
+                                            media: 'https://upload.wikimedia.org/wikipedia/commons/3/3b/Chang%27e-6_lander_and_ascender.jpg',
+                                            desc: { en: '2025: China’s lunar program advances with far-side sample operations planning.', fr: '2025 : Le programme lunaire chinois progresse avec la planification des opérations d’échantillonnage de la face cachée.' }
+                                        },
+                                        {
+                                            media: 'https://www.youtube.com/embed?listType=search&list=NASA%20black%20hole%20visualization',
+                                            type: 'iframe',
+                                            desc: { en: 'NASA: Dive into a black hole — new supercomputer visualization.', fr: 'NASA : Plongez dans un trou noir — nouvelle visualisation sur superordinateur.' }
+                                        },
+                                        {
+                                            media: 'https://www.youtube.com/embed?listType=search&list=NASA%20Sagittarius%20A*%20explainer',
+                                            type: 'iframe',
+                                            desc: { en: 'NASA explainer: Sagittarius A*, the Milky Way’s supermassive black hole.', fr: 'Explication NASA : Sagittarius A*, le trou noir supermassif de la Voie lactée.' }
+                                        },
+                                        {
+                                            media: 'https://www.youtube.com/embed?listType=search&list=NASA%20Black%20Hole%20Week',
+                                            type: 'iframe',
+                                            desc: { en: 'NASA Black Hole Week: curated videos, animations, and discoveries.', fr: 'Semaine des trous noirs NASA : vidéos, animations et découvertes.' }
                                         }
                                     ].map((news, i) => (
                                         <div key={i} className="card">
                                             <div className="media-container">
+                                                {news.type === 'iframe' ? (
+                                                    <iframe
+                                                        src={news.media}
+                                                        title={typeof news.desc === 'object' ? news.desc[lang] : 'Space News'}
+                                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                                        allowFullScreen
+                                                    ></iframe>
+                                                ) : (
                                                 <img src={news.media} alt="Space News" loading="lazy" />
+                                                )}
                                                 <div className="media-overlay">{news.desc[lang]}</div>
                                             </div>
                                         </div>
@@ -897,7 +1875,6 @@
                                 <div className="authors">
                                     {creators.map((creator, i) => (
                                         <div key={i} className="card">
-                                            <img src={creator.img} alt={creator.name} loading="lazy" />
                                             <h3 className="font-Orbitron text-xl mt-2">{creator.name}</h3>
                                             <p className="text-tertiary">{creator.role[lang]}</p>
                                             <p>{creator.bio[lang]}</p>
