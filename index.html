@@ -296,6 +296,43 @@
                 padding: 4px 8px;
             }
         }
+        /* Asteroid Shooter Styles */
+        .asteroid-game {
+            margin: 0;
+            background: #000;
+            color: #fff;
+            text-align: center;
+            font-family: 'Arial', sans-serif;
+        }
+        .asteroid-game canvas {
+            display: block;
+            margin: 20px auto;
+            border: 2px solid #fff;
+        }
+        .asteroid-game #score, .asteroid-game #highScore, .asteroid-game #level {
+            font-size: 20px;
+            margin: 5px;
+        }
+        .asteroid-game #gameOver {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            border: 2px solid #fff;
+            border-radius: 10px;
+        }
+        .asteroid-game button {
+            font-size: 18px;
+            padding: 10px 20px;
+            margin: 10px;
+            cursor: pointer;
+        }
+        .asteroid-game p {
+            margin: 5px;
+        }
     </style>
 </head>
 <body class="app">
@@ -314,6 +351,7 @@
             const [currentGame, setCurrentGame] = useState('asteroid');
             const [paused, setPaused] = useState(false);
             const [score, setScore] = useState(0);
+            const [snakeScore, setSnakeScore] = useState(0);
             const [quizScore, setQuizScore] = useState(0);
             const [currentQuestion, setCurrentQuestion] = useState(0);
             const [quizAnswers, setQuizAnswers] = useState({});
@@ -324,6 +362,7 @@
             const starfieldRef = useRef(document.querySelector('.starfield'));
             const gameCanvasRef = useRef(null);
             const blackholeCanvasRef = useRef(null);
+            const snakeCanvasRef = useRef(null);
             const factBoxRef = useRef(null);
             const planetCounterRef = useRef(null);
             const menuOverlayRef = useRef(null);
@@ -355,7 +394,10 @@
                     blackHoleDeath: 'The black hole shrunk too much.\nWould you like to respawn?',
                     respawn: 'Respawn',
                     eatPlanetFact: 'Eat a planet to see a black hole fact!',
-                    planetsLabel: 'Planets'
+                    planetsLabel: 'Planets',
+                    // Space Snake Translations
+                    snakeTitle: 'Space Snake',
+                    snakeInstructions: 'Use arrows or WASD to control the snake spaceship. Collect yellow asteroids to grow. Wrap around screen edges. Avoid crashing into yourself.'
                 },
                 fr: {
                     welcome: 'Bienvenue dans Cosmic Explorer !',
@@ -377,7 +419,10 @@
                     blackHoleDeath: 'Le trou noir a trop rétréci.\nVoulez-vous réapparaître ?',
                     respawn: 'Réapparaître',
                     eatPlanetFact: 'Mangez une planète pour voir un fait sur les trous noirs !',
-                    planetsLabel: 'Planètes'
+                    planetsLabel: 'Planètes',
+                    // Space Snake Translations
+                    snakeTitle: 'Serpent Spatial',
+                    snakeInstructions: 'Utilisez les flèches ou WASD pour contrôler le vaisseau serpent. Collectez les astéroïdes jaunes pour grandir. Enroulez autour des bords de l\'écran. Évitez de vous heurter à vous-même.'
                 }
             };
 
@@ -465,108 +510,366 @@
                 };
             }, []);
 
-            // Asteroid Game Logic (Existing, with minor optimizations)
+            // Asteroid Shooter Game Logic
             useEffect(() => {
-                if (activeSection !== 'games' || currentGame !== 'asteroid' || !gameCanvasRef.current || !gameStarted) return;
+                if (activeSection !== 'games' || currentGame !== 'asteroid' || !gameCanvasRef.current) return;
+
                 const canvas = gameCanvasRef.current;
-                const ctx = canvas.getContext('2d');
-                canvas.width = 400;
-                canvas.height = 400;
-                const spaceship = { x: canvas.width / 2, y: canvas.height - 50, w: 30, h: 30, speed: 5 };
-                const bullets = [];
-                const asteroids = Array.from({ length: 6 }, () => ({
-                    x: Math.random() * canvas.width,
-                    y: -20,
-                    r: Math.random() * 20 + 10,
-                    sp: Math.random() * 2 + 1
-                }));
-                const keys = {};
-                let gameScore = 0;
-                let highScore = localStorage.getItem('highScore') || 0;
-                let animationFrameId;
+                const ctx = canvas.getContext("2d");
+                const size = 20;
+                const cols = canvas.width / size;
+                const rows = canvas.height / size;
 
-                const keyDown = e => {
-                    keys[e.code] = true;
-                    if (e.code === 'Space') bullets.push({ x: spaceship.x + 15, y: spaceship.y, w: 4, h: 8, sp: 8 });
-                };
-                const keyUp = e => { keys[e.code] = false; };
+                let ship = { x: cols / 2, y: rows - 2, shield: false, rapidFire: false, lives: 3 };
+                let asteroids = [];
+                let bullets = [];
+                let particles = [];
+                let powerUps = [];
+                let vx = 0;
+                let score = 0;
+                let highScore = localStorage.getItem("highScore") ? parseInt(localStorage.getItem("highScore")) : 0;
+                let lastTime = 0;
+                let spawnInterval = 1000;
+                let powerUpInterval = 5000;
+                let spawnId, powerUpSpawnId;
+                let canShoot = true;
+                let destroyed = 0;
+                let level = 1;
+                let isPaused = false;
 
-                const update = () => {
-                    if (paused) return;
-                    if (keys['ArrowLeft'] && spaceship.x > 0) spaceship.x -= spaceship.speed;
-                    if (keys['ArrowRight'] && spaceship.x + spaceship.w < canvas.width) spaceship.x += spaceship.speed;
-                    if (keys['ArrowUp'] && spaceship.y > 0) spaceship.y -= spaceship.speed;
-                    if (keys['ArrowDown'] && spaceship.y + spaceship.h < canvas.height) spaceship.y += spaceship.speed;
-                    for (let i = bullets.length - 1; i >= 0; i--) {
-                        bullets[i].y -= bullets[i].sp;
-                        if (bullets[i].y < -10) bullets.splice(i, 1);
-                    }
-                    for (let i = asteroids.length - 1; i >= 0; i--) {
-                        asteroids[i].y += asteroids[i].sp;
-                        if (asteroids[i].y > canvas.height + asteroids[i].r) {
-                            asteroids[i].y = -asteroids[i].r;
-                            asteroids[i].x = Math.random() * canvas.width;
-                            gameScore += 10;
-                            setScore(gameScore);
-                            if (gameScore > highScore) {
-                                highScore = gameScore;
-                                localStorage.setItem('highScore', highScore);
-                            }
-                        }
-                        for (let j = bullets.length - 1; j >= 0; j--) {
-                            if (Math.hypot(bullets[j].x - asteroids[i].x, bullets[j].y - asteroids[i].y) < asteroids[i].r) {
-                                bullets.splice(j, 1);
-                                asteroids[i].y = -asteroids[i].r;
-                                asteroids[i].x = Math.random() * canvas.width;
-                                gameScore += 50;
-                                setScore(gameScore);
-                                if (gameScore > highScore) {
-                                    highScore = gameScore;
-                                    localStorage.setItem('highScore', highScore);
-                                }
-                            }
-                        }
-                    }
+                const shipSpeed = 5;
+                const asteroidBaseSpeed = 2;
+                let asteroidSpeed = asteroidBaseSpeed;
+                const bulletSpeed = 10;
+                const particleSpeed = 3;
+                const powerUpSpeed = 1.5;
+
+                // Sound effects
+                const sounds = {
+                    shoot: new Audio('data:audio/mp3;base64,//M4x...'), // Add base64 encoded shoot sound
+                    explosion: new Audio('data:audio/mp3;base64,//M4x...'), // Add base64 encoded explosion sound
+                    powerUp: new Audio('data:audio/mp3;base64,//M4x...'), // Add base64 encoded power-up sound
                 };
 
-                const draw = () => {
-                    ctx.clearRect(0, 0, canvas.width, canvas.height);
-                    ctx.fillStyle = '#ffffff';
-                    asteroids.forEach(a => {
-                        ctx.beginPath();
-                        ctx.arc(a.x, a.y, a.r, 0, Math.PI * 2);
-                        ctx.fill();
-                    });
-                    ctx.fillStyle = '#00ffff';
+                function draw() {
+                    ctx.fillStyle = "#000";
+                    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+                    // Draw ship
+                    const sx = ship.x * size;
+                    const sy = ship.y * size;
+                    ctx.fillStyle = ship.shield ? "#0ff" : "#0f0";
                     ctx.beginPath();
-                    ctx.moveTo(spaceship.x, spaceship.y + spaceship.h);
-                    ctx.lineTo(spaceship.x + spaceship.w / 2, spaceship.y);
-                    ctx.lineTo(spaceship.x + spaceship.w, spaceship.y + spaceship.h);
+                    ctx.moveTo(sx + size / 2, sy);
+                    ctx.lineTo(sx, sy + size);
+                    ctx.lineTo(sx + size, sy + size);
                     ctx.closePath();
                     ctx.fill();
-                    ctx.fillStyle = '#ffeb7b';
-                    bullets.forEach(b => ctx.fillRect(b.x, b.y, b.w, b.h));
-                    ctx.fillStyle = 'white';
-                    ctx.font = '16px Orbitron';
-                    ctx.fillText(`${translations[lang].score}: ${gameScore}`, 10, 20);
-                    ctx.fillText(`${translations[lang].highScore}: ${highScore}`, 10, 40);
+                    // Engines with animation
+                    ctx.fillStyle = "#ff0";
+                    ctx.fillRect(sx + size / 4, sy + size, size / 4, size / 4 * (Math.random() * 0.5 + 0.5));
+                    ctx.fillRect(sx + size / 2, sy + size, size / 4, size / 4 * (Math.random() * 0.5 + 0.5));
+
+                    // Draw asteroids
+                    asteroids.forEach(a => {
+                        const ax = a.x * size + size / 2;
+                        const ay = a.y * size + size / 2;
+                        ctx.save();
+                        ctx.translate(ax, ay);
+                        ctx.rotate(a.rotation);
+                        ctx.fillStyle = a.type === "large" ? "#f00" : "#f88";
+                        ctx.beginPath();
+                        ctx.moveTo(a.shape[0].dx, a.shape[0].dy);
+                        for (let i = 1; i < a.shape.length; i++) {
+                            ctx.lineTo(a.shape[i].dx, a.shape[i].dy);
+                        }
+                        ctx.closePath();
+                        ctx.fill();
+                        ctx.restore();
+                    });
+
+                    // Draw bullets
+                    ctx.fillStyle = "#fff";
+                    bullets.forEach(b => {
+                        ctx.beginPath();
+                        ctx.arc(b.x * size + size / 2, b.y * size + size / 4, 4, 0, Math.PI * 2);
+                        ctx.fill();
+                    });
+
+                    // Draw particles
+                    particles.forEach(p => {
+                        ctx.fillStyle = p.color;
+                        ctx.beginPath();
+                        ctx.arc(p.x * size, p.y * size, p.size, 0, Math.PI * 2);
+                        ctx.fill();
+                    });
+
+                    // Draw power-ups
+                    powerUps.forEach(p => {
+                        ctx.fillStyle = p.type === "shield" ? "#0ff" : "#ff0";
+                        ctx.beginPath();
+                        ctx.arc(p.x * size + size / 2, p.y * size + size / 2, size / 2, 0, Math.PI * 2);
+                        ctx.fill();
+                    });
+
+                    // Draw lives
+                    ctx.fillStyle = "#0f0";
+                    for (let i = 0; i < ship.lives; i++) {
+                        ctx.beginPath();
+                        ctx.moveTo(20 + i * 30, 30);
+                        ctx.lineTo(10 + i * 30, 50);
+                        ctx.lineTo(30 + i * 30, 50);
+                        ctx.closePath();
+                        ctx.fill();
+                    }
+                }
+
+                function update(delta) {
+                    if (isPaused) return;
+
+                    // Update ship
+                    ship.x += vx * shipSpeed * delta;
+                    ship.x = Math.max(0, Math.min(cols - 1, ship.x));
+
+                    // Update asteroids
+                    asteroids.forEach(a => {
+                        a.x += a.vx * delta;
+                        a.y += a.vy * delta;
+                        a.rotation += a.rotSpeed * delta;
+                    });
+                    asteroids = asteroids.filter(a => a.y < rows + 1 && a.y > -1 && a.x < cols + 1 && a.x > -1);
+
+                    // Update bullets
+                    bullets.forEach(b => {
+                        b.y -= bulletSpeed * delta;
+                    });
+                    bullets = bullets.filter(b => b.y > -1);
+
+                    // Update particles
+                    particles.forEach(p => {
+                        p.x += p.vx * delta;
+                        p.y += p.vy * delta;
+                        p.life -= delta;
+                    });
+                    particles = particles.filter(p => p.life > 0);
+
+                    // Update power-ups
+                    powerUps.forEach(p => {
+                        p.y += powerUpSpeed * delta;
+                    });
+                    powerUps = powerUps.filter(p => p.y < rows + 1);
+
+                    // Bullet-asteroid collisions
+                    for (let i = bullets.length - 1; i >= 0; i--) {
+                        for (let j = asteroids.length - 1; j >= 0; j--) {
+                            const dx = bullets[i].x - asteroids[j].x;
+                            const dy = bullets[i].y - asteroids[j].y;
+                            if (Math.sqrt(dx * dx + dy * dy) < 0.8) {
+                                bullets.splice(i, 1);
+                                if (asteroids[j].type === "large") {
+                                    // Split into smaller asteroids
+                                    for (let k = 0; k < 2; k++) {
+                                        spawnAsteroid(asteroids[j].x, asteroids[j].y, "small");
+                                    }
+                                }
+                                asteroids.splice(j, 1);
+                                score += asteroids[j].type === "large" ? 10 * level : 20 * level;
+                                destroyed++;
+                                spawnParticles(asteroids[j].x, asteroids[j].y, "#f00");
+                                // sounds.explosion.play();
+                                if (destroyed % 10 === 0) {
+                                    levelUp();
+                                }
+                                break;
+                            }
+                        }
+                    }
+
+                    // Ship-asteroid collision
+                    if (!ship.shield) {
+                        for (let a of asteroids) {
+                            const dx = ship.x - a.x;
+                            const dy = ship.y - a.y;
+                            if (Math.sqrt(dx * dx + dy * dy) < 1.2) {
+                                ship.lives--;
+                                spawnParticles(ship.x, ship.y, "#0f0");
+                                asteroids = asteroids.filter(ast => ast !== a);
+                                if (ship.lives <= 0) {
+                                    gameOver();
+                                } else {
+                                    ship.x = cols / 2;
+                                    ship.shield = true;
+                                    setTimeout(() => { ship.shield = false; }, 2000);
+                                }
+                                break;
+                            }
+                        }
+                    }
+
+                    // Ship-power-up collision
+                    for (let i = powerUps.length - 1; i >= 0; i--) {
+                        const dx = ship.x - powerUps[i].x;
+                        const dy = ship.y - powerUps[i].y;
+                        if (Math.sqrt(dx * dx + dy * dy) < 1) {
+                            activatePowerUp(powerUps[i].type);
+                            powerUps.splice(i, 1);
+                            // sounds.powerUp.play();
+                        }
+                    }
+
+                    score += delta * 5 * level;
+                    document.getElementById("score").textContent = "Score: " + Math.floor(score);
+                    document.getElementById("highScore").textContent = "High Score: " + Math.floor(highScore);
+                }
+
+                function spawnAsteroid(x = Math.random() * cols, y = -1, type = "large") {
+                    const a = {
+                        x,
+                        y,
+                        vx: (Math.random() - 0.5) * 2,
+                        vy: asteroidSpeed + Math.random() * (type === "large" ? 2 : 3),
+                        rotation: 0,
+                        rotSpeed: (Math.random() - 0.5) * Math.PI / 2,
+                        type,
+                        shape: []
+                    };
+                    const numPoints = Math.floor(6 + Math.random() * 4);
+                    const radius = type === "large" ? size / 2 : size / 3;
+                    for (let i = 0; i < numPoints; i++) {
+                        const ang = i * Math.PI * 2 / numPoints + Math.random() * 0.2;
+                        const r = radius * (0.7 + Math.random() * 0.6);
+                        a.shape.push({ dx: r * Math.cos(ang), dy: r * Math.sin(ang) });
+                    }
+                    asteroids.push(a);
+                }
+
+                function spawnPowerUp() {
+                    const types = ["shield", "rapidFire", "extraLife"];
+                    const type = types[Math.floor(Math.random() * types.length)];
+                    powerUps.push({ x: Math.random() * cols, y: -1, type });
+                }
+
+                function spawnParticles(x, y, color) {
+                    for (let i = 0; i < 10; i++) {
+                        particles.push({
+                            x,
+                            y,
+                            vx: (Math.random() - 0.5) * particleSpeed,
+                            vy: (Math.random() - 0.5) * particleSpeed,
+                            size: Math.random() * 3 + 2,
+                            life: Math.random() * 1 + 0.5,
+                            color
+                        });
+                    }
+                }
+
+                function activatePowerUp(type) {
+                    if (type === "shield") {
+                        ship.shield = true;
+                        setTimeout(() => { ship.shield = false; }, 5000);
+                    } else if (type === "rapidFire") {
+                        ship.rapidFire = true;
+                        setTimeout(() => { ship.rapidFire = false; }, 5000);
+                    } else if (type === "extraLife") {
+                        ship.lives = Math.min(ship.lives + 1, 5);
+                    }
+                }
+
+                function levelUp() {
+                    level++;
+                    asteroidSpeed += 0.5;
+                    clearInterval(spawnId);
+                    spawnInterval = Math.max(200, spawnInterval - 100);
+                    spawnId = setInterval(spawnAsteroid, spawnInterval);
+                    document.getElementById("level").textContent = "Level: " + level;
+                }
+
+                function shoot() {
+                    if (!canShoot) return;
+                    bullets.push({ x: ship.x, y: ship.y - 0.5 });
+                    // sounds.shoot.play();
+                    canShoot = false;
+                    const shootDelay = ship.rapidFire ? 100 : (300 - level * 10);
+                    setTimeout(() => { canShoot = true; }, Math.max(50, shootDelay));
+                }
+
+                function gameOver() {
+                    isPaused = true;
+                    if (score > highScore) {
+                        highScore = score;
+                        localStorage.setItem("highScore", highScore);
+                    }
+                    document.getElementById("finalScore").textContent = `Final Score: ${Math.floor(score)}`;
+                    document.getElementById("finalLevel").textContent = `Level: ${level}`;
+                    document.getElementById("finalDestroyed").textContent = `Asteroids Destroyed: ${destroyed}`;
+                    document.getElementById("gameOver").style.display = "block";
+                    clearInterval(spawnId);
+                    clearInterval(powerUpSpawnId);
+                }
+
+                function restartGame() {
+                    ship = { x: cols / 2, y: rows - 2, shield: false, rapidFire: false, lives: 3 };
+                    asteroids = [];
+                    bullets = [];
+                    particles = [];
+                    powerUps = [];
+                    vx = 0;
+                    score = 0;
+                    destroyed = 0;
+                    level = 1;
+                    asteroidSpeed = asteroidBaseSpeed;
+                    spawnInterval = 1000;
+                    spawnId = setInterval(spawnAsteroid, spawnInterval);
+                    powerUpSpawnId = setInterval(spawnPowerUp, powerUpInterval);
+                    document.getElementById("score").textContent = "Score: 0";
+                    document.getElementById("level").textContent = "Level: 1";
+                    document.getElementById("gameOver").style.display = "none";
+                    isPaused = false;
+                }
+
+                function loop(timestamp) {
+                    if (!lastTime) lastTime = timestamp;
+                    const delta = (timestamp - lastTime) / 1000;
+                    lastTime = timestamp;
+                    update(delta);
+                    draw();
+                    requestId = requestAnimationFrame(loop);
+                }
+
+                const keyDown = e => {
+                    if (e.key === "p" || e.key === "P") {
+                        isPaused = !isPaused;
+                    }
+                    if (isPaused) return;
+                    switch (e.key) {
+                        case "ArrowLeft": vx = -1; break;
+                        case "ArrowRight": vx = 1; break;
+                        case " ": shoot(); break;
+                    }
                 };
 
-                const frameLoop = () => {
-                    update();
-                    draw();
-                    animationFrameId = requestAnimationFrame(frameLoop);
+                const keyUp = e => {
+                    switch (e.key) {
+                        case "ArrowLeft":
+                        case "ArrowRight": vx = 0; break;
+                    }
                 };
-                window.addEventListener('keydown', keyDown);
-                window.addEventListener('keyup', keyUp);
-                animationFrameId = requestAnimationFrame(frameLoop);
+
+                document.addEventListener("keydown", keyDown);
+                document.addEventListener("keyup", keyUp);
+
+                document.getElementById("highScore").textContent = "High Score: " + Math.floor(highScore);
+                restartGame();
+                let requestId = requestAnimationFrame(loop);
 
                 return () => {
-                    cancelAnimationFrame(animationFrameId);
-                    window.removeEventListener('keydown', keyDown);
-                    window.removeEventListener('keyup', keyUp);
+                    cancelAnimationFrame(requestId);
+                    document.removeEventListener("keydown", keyDown);
+                    document.removeEventListener("keyup", keyUp);
+                    clearInterval(spawnId);
+                    clearInterval(powerUpSpawnId);
                 };
-            }, [activeSection, gameStarted, paused, lang, currentGame]);
+            }, [activeSection, currentGame, lang]);
 
             // Black Hole Game Logic (Integrated, Optimized, and Localized)
             useEffect(() => {
@@ -962,6 +1265,139 @@
                 };
             }, [activeSection, gameStarted, paused, lang, currentGame]);
 
+            // Space Snake Game Logic
+            useEffect(() => {
+                if (activeSection !== 'games' || currentGame !== 'snake' || !snakeCanvasRef.current || !gameStarted) return;
+
+                const canvas = snakeCanvasRef.current;
+                const ctx = canvas.getContext('2d');
+                canvas.width = 400;
+                canvas.height = 400;
+
+                const gridSize = 20;
+                const tileCount = canvas.width / gridSize;
+
+                let snake = [{ x: 10, y: 10 }];
+                let food = { x: 5, y: 5 };
+                let vx = 1, vy = 0;
+                let score = 0;
+                let speed = 150;
+                let asteroidSpawnRate = 3000;
+
+                let stars = [];
+                for (let i = 0; i < 100; i++) {
+                    stars.push({
+                        x: Math.random() * canvas.width,
+                        y: Math.random() * canvas.height
+                    });
+                }
+
+                const draw = () => {
+                    ctx.fillStyle = "#000";
+                    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+                    ctx.fillStyle = "#fff";
+                    stars.forEach(s => {
+                        ctx.fillRect(s.x, s.y, 1, 1);
+                    });
+
+                    ctx.fillStyle = "#00f";
+                    snake.forEach(s => ctx.fillRect(s.x * gridSize, s.y * gridSize, gridSize - 2, gridSize - 2));
+
+                    ctx.fillStyle = "yellow";
+                    ctx.beginPath();
+                    ctx.arc(
+                        food.x * gridSize + gridSize / 2,
+                        food.y * gridSize + gridSize / 2,
+                        gridSize / 2.5,
+                        0,
+                        Math.PI * 2
+                    );
+                    ctx.fill();
+                };
+
+                const update = () => {
+                    const head = { x: snake[0].x + vx, y: snake[0].y + vy };
+
+                    if (head.x < 0) head.x = tileCount - 1;
+                    if (head.x >= tileCount) head.x = 0;
+                    if (head.y < 0) head.y = tileCount - 1;
+                    if (head.y >= tileCount) head.y = 0;
+
+                    for (let i = 1; i < snake.length; i++) {
+                        if (snake[i].x === head.x && snake[i].y === head.y) {
+                            resetGame();
+                            return;
+                        }
+                    }
+
+                    snake.unshift(head);
+
+                    if (head.x === food.x && head.y === food.y) {
+                        score++;
+                        setSnakeScore(score);
+                        spawnAsteroid();
+                    } else {
+                        snake.pop();
+                    }
+                };
+
+                const spawnAsteroid = () => {
+                    food = {
+                        x: Math.floor(Math.random() * tileCount),
+                        y: Math.floor(Math.random() * tileCount)
+                    };
+                };
+
+                const resetGame = () => {
+                    alert(`${translations[lang].youDied} Final score: ${score}`);
+                    setGameStarted(false);
+                    setSnakeScore(0);
+                };
+
+                let timeoutId;
+                const gameLoop = () => {
+                    if (!paused) {
+                        update();
+                    }
+                    draw();
+                    timeoutId = setTimeout(gameLoop, speed);
+                };
+
+                gameLoop();
+
+                const keyDown = e => {
+                    switch (e.key) {
+                        case "ArrowUp":
+                        case "w":
+                            if (vy === 0) { vx = 0; vy = -1; }
+                            break;
+                        case "ArrowDown":
+                        case "s":
+                            if (vy === 0) { vx = 0; vy = 1; }
+                            break;
+                        case "ArrowLeft":
+                        case "a":
+                            if (vx === 0) { vx = -1; vy = 0; }
+                            break;
+                        case "ArrowRight":
+                        case "d":
+                            if (vx === 0) { vx = 1; vy = 0; }
+                            break;
+                    }
+                };
+
+                window.addEventListener("keydown", keyDown);
+
+                const autoSpawnId = setInterval(spawnAsteroid, asteroidSpawnRate);
+
+                return () => {
+                    clearTimeout(timeoutId);
+                    clearInterval(autoSpawnId);
+                    window.removeEventListener("keydown", keyDown);
+                };
+            }, [activeSection, gameStarted, paused, lang, currentGame]);
+
             // Chatbot Logic (Unchanged)
             const chatbotResponses = {
                 en: {
@@ -1085,7 +1521,8 @@
             const creators = [
                 { name: 'Benjamin', role: { en: 'Lead Developer', fr: 'Développeur Principal' }, bio: { en: 'Architected the app’s core systems, animations, and CosmoBot AI.', fr: 'A conçu les systèmes de base, animations et CosmoBot IA.' } },
                 { name: 'Pedro', role: { en: 'Story Writer', fr: 'Rédacteur' }, bio: { en: 'Crafted the cosmic narrative, Star Wars content, and news.', fr: 'A créé le récit cosmique, contenu Star Wars et actualités.' } },
-                { name: 'Pavlo', role: { en: 'VFX Specialist', fr: 'Spécialiste VFX' }, bio: { en: 'Designed stellar visual effects and media integration.', fr: 'A conçu des effets visuels stellaires et intégration média.' } }
+                { name: 'Pavlo', role: { en: 'VFX Specialist', fr: 'Spécialiste VFX' }, bio: { en: 'Designed stellar visual effects and media integration.', fr: 'A conçu des effets visuels stellaires et intégration média.' } },
+                { name: 'Oscar Bell', role: { en: 'Game Designer', fr: 'Concepteur de Jeux' }, bio: { en: 'Designed the immersive games including Space Snake.', fr: 'A conçu les jeux immersifs dont Space Snake.' } }
             ];
             const ufoSightings = [
                 { media: 'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4', type: 'video', desc: { en: '1947, Washington: Kenneth Arnold’s sighting coined “flying saucers.”', fr: '1947, Washington : Observation de Kenneth Arnold a créé le terme “soucoupes volantes”.' } },
@@ -1189,7 +1626,7 @@
                 },
                 {
                     year: '1977', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Voyager_spacecraft.jpg/200px-Voyager_spacecraft.jpg',
-                    desc: { en: 'Voyager Program: Probes explore outer planets, now in interstellar space, carrying humanity’s message.', fr: 'Programme Voyager : Sondes explorent les planètes extérieures, maintenant dans l’espace interstellaire, portant le message de l’humanité.' }
+                    desc: { en: 'Voyager Program: Probes explore outer planets, now in interstellar space, now carrying humanity’s message.', fr: 'Programme Voyager : Sondes explorent les planètes extérieures, maintenant dans l’espace interstellaire, portant le message de l’humanité.' }
                 },
                 {
                     year: '2004', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Opportunity_Rover.jpg/200px-Opportunity_Rover.jpg',
@@ -1266,10 +1703,11 @@
                             <button onClick={handleChatSubmit}>{translations[lang].chatSend}</button>
                         </div>
                     </div>
-                        <button className="chatbot-toggle" onClick={() => setChatOpen(prev => !prev)}>🤖</button>
+                    <button className="chatbot-toggle" onClick={() => setChatOpen(prev => !prev)}>🤖</button>
                     <header className="hero">
                         <video autoPlay loop muted playsInline>
                             <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" type="video/mp4" />
+                            <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.webm" type="video/webm" />
                             {lang === 'en' ? 'Your browser does not support the video tag.' : 'Votre navigateur ne prend pas en charge la vidéo.'}
                         </video>
                         <div className="hero-overlay">
@@ -1329,23 +1767,27 @@
                             <section className="game">
                                 <h2 className="font-Orbitron text-3xl text-center glow-pulse mb-4">{translations[lang].minigames}</h2>
                                 <div className="flex gap-4 justify-center mb-4">
-                                    <button onClick={() => setCurrentGame('asteroid')} className={`nav-btn ${currentGame === 'asteroid' ? 'active' : ''}`}>Asteroid Game</button>
+                                    <button onClick={() => setCurrentGame('asteroid')} className={`nav-btn ${currentGame === 'asteroid' ? 'active' : ''}`}>Asteroid Shooter</button>
                                     <button onClick={() => setCurrentGame('blackhole')} className={`nav-btn ${currentGame === 'blackhole' ? 'active' : ''}`}>Black Hole Game</button>
+                                    <button onClick={() => setCurrentGame('snake')} className={`nav-btn ${currentGame === 'snake' ? 'active' : ''}`}>Space Snake</button>
                                 </div>
                                 {currentGame === 'asteroid' && (
-                                    <>
-                                        <p className="text-center mb-4">{translations[lang].instructions}</p>
-                                        <div className="flex gap-4 justify-center mb-4">
-                                            <button onClick={() => { setGameStarted(true); setPaused(false); setScore(0); }} className="nav-btn">{lang === 'en' ? 'Start' : 'Démarrer'}</button>
-                                            <button onClick={() => setPaused(!paused)} className="nav-btn">
-                                                {paused ? translations[lang].resume : translations[lang].pause}
-                                            </button>
-                                            <button onClick={() => { setGameStarted(false); setScore(0); }} className="nav-btn">{translations[lang].replay}</button>
+                                    <div className="asteroid-game" style={{position: 'relative'}}>
+                                        <h1>🚀 Asteroid Shooter</h1>
+                                        <p id="score">Score: 0</p>
+                                        <p id="highScore">High Score: 0</p>
+                                        <p id="level">Level: 1</p>
+                                        <canvas ref={gameCanvasRef} id="game" width="400" height="400"></canvas>
+                                        <div id="gameOver">
+                                            <h2>Game Over</h2>
+                                            <p id="finalScore"></p>
+                                            <p id="finalLevel"></p>
+                                            <p id="finalDestroyed"></p>
+                                            <button id="restartBtn">Restart</button>
                                         </div>
-                                        {gameStarted && <canvas ref={gameCanvasRef} />}
-                                        <div className="mt-4 text-xl font-Orbitron">{translations[lang].score}: {score}</div>
-                                        <div className="text-lg muted">{translations[lang].highScore}: {localStorage.getItem('highScore') || 0}</div>
-                                    </>
+                                        <p>Controls: Left/Right arrows to move, Space to shoot, P to pause. Avoid or destroy asteroids!</p>
+                                        <p>Asteroids fall with varying speeds and directions. Shoot them to score points. Collect power-ups for bonuses. Every 10 destroyed asteroids increases the level, speeding up the game.</p>
+                                    </div>
                                 )}
                                 {currentGame === 'blackhole' && (
                                     <>
@@ -1374,6 +1816,20 @@
                                                 </div>
                                             </div>
                                         )}
+                                    </>
+                                )}
+                                {currentGame === 'snake' && (
+                                    <>
+                                        <p className="text-center mb-4">{translations[lang].snakeInstructions}</p>
+                                        <div className="flex gap-4 justify-center mb-4">
+                                            <button onClick={() => { setGameStarted(true); setPaused(false); setSnakeScore(0); }} className="nav-btn">{translations[lang].startGame}</button>
+                                            <button onClick={() => setPaused(!paused)} className="nav-btn">
+                                                {paused ? translations[lang].resume : translations[lang].pause}
+                                            </button>
+                                            <button onClick={() => { setGameStarted(false); setSnakeScore(0); }} className="nav-btn">{translations[lang].replay}</button>
+                                        </div>
+                                        {gameStarted && <canvas ref={snakeCanvasRef} width="400" height="400" />}
+                                        <div className="mt-4 text-xl font-Orbitron">{translations[lang].score}: {snakeScore}</div>
                                     </>
                                 )}
                             </section>
@@ -1603,7 +2059,7 @@
                                         title: { en: 'Next Rocket Launch', fr: 'Prochain Lancement' },
                                         id: 'launchCountdown'
                                     },{
-                                        title: { en: 'Next Solar Eclipse', fr: 'Prochaine Éclipse' },
+                                        title: { en: 'Next Solar Eclipse', fr: 'Prochaine Éclipse Solaire' },
                                         id: 'eclipseCountdown'
                                     }].map((c,i) => (
                                         <div key={i} className="card">
@@ -1860,7 +2316,7 @@
                                                         allowFullScreen
                                                     ></iframe>
                                                 ) : (
-                                                <img src={news.media} alt="Space News" loading="lazy" />
+                                                    <img src={news.media} alt="Space News" loading="lazy" />
                                                 )}
                                                 <div className="media-overlay">{news.desc[lang]}</div>
                                             </div>
