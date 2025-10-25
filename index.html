@@ -303,6 +303,7 @@
             color: #fff;
             text-align: center;
             font-family: 'Arial', sans-serif;
+            position: relative;
         }
         .asteroid-game canvas {
             display: block;
@@ -332,6 +333,117 @@
         }
         .asteroid-game p {
             margin: 5px;
+        }
+        /* Mobile Controls for Games */
+        .mobile-controls {
+            display: none;
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            right: 10px;
+            z-index: 10;
+        }
+        .mobile-controls button {
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid white;
+            color: white;
+            padding: 20px;
+            margin: 5px;
+            border-radius: 50%;
+            font-size: 18px;
+            width: 60px;
+            height: 60px;
+            cursor: pointer;
+        }
+        .joystick {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            width: 120px;
+            height: 120px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .joystick-knob {
+            width: 40px;
+            height: 40px;
+            background: white;
+            border-radius: 50%;
+            position: relative;
+        }
+        .shoot-btn {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 0, 0, 0.5);
+            border: 2px solid red;
+            border-radius: 50%;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        @media (max-width: 768px) {
+            .mobile-controls {
+                display: block;
+            }
+            .game canvas {
+                max-width: 100%;
+                height: auto;
+            }
+        }
+        /* Snake Game Mobile Controls */
+        .snake-controls {
+            display: none;
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+        }
+        .snake-controls button {
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid white;
+            color: white;
+            padding: 15px;
+            margin: 5px;
+            border-radius: 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        @media (max-width: 768px) {
+            .snake-controls {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 5px;
+            }
+            .snake-controls button {
+                min-width: 50px;
+            }
+        }
+        .author-img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 1rem;
+            display: block;
+            border: 2px solid var(--glass);
+        }
+        .trivia-img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 1rem;
         }
     </style>
 </head>
@@ -372,6 +484,8 @@
             const chatMessagesRef = useRef(null);
             const [nextLaunchTime] = useState(new Date(Date.now() + 1000 * 60 * 60 * 72)); // +72h placeholder
             const [nextEclipseTime] = useState(new Date(Date.now() + 1000 * 60 * 60 * 240)); // +10d placeholder
+
+            const isMobile = () => /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 
             const translations = {
                 en: {
@@ -510,15 +624,24 @@
                 };
             }, []);
 
-            // Asteroid Shooter Game Logic
+            // Asteroid Shooter Game Logic with Mobile Support
             useEffect(() => {
                 if (activeSection !== 'games' || currentGame !== 'asteroid' || !gameCanvasRef.current) return;
 
                 const canvas = gameCanvasRef.current;
                 const ctx = canvas.getContext("2d");
                 const size = 20;
-                const cols = canvas.width / size;
-                const rows = canvas.height / size;
+                let cols = canvas.width / size;
+                let rows = canvas.height / size;
+
+                const resizeCanvas = () => {
+                    canvas.width = Math.min(window.innerWidth - 40, 400);
+                    canvas.height = Math.min(window.innerHeight - 200, 400);
+                    cols = canvas.width / size;
+                    rows = canvas.height / size;
+                };
+                resizeCanvas();
+                window.addEventListener('resize', resizeCanvas);
 
                 let ship = { x: cols / 2, y: rows - 2, shield: false, rapidFire: false, lives: 3 };
                 let asteroids = [];
@@ -836,6 +959,7 @@
                     requestId = requestAnimationFrame(loop);
                 }
 
+                // Keyboard Controls
                 const keyDown = e => {
                     if (e.key === "p" || e.key === "P") {
                         isPaused = !isPaused;
@@ -844,7 +968,7 @@
                     switch (e.key) {
                         case "ArrowLeft": vx = -1; break;
                         case "ArrowRight": vx = 1; break;
-                        case " ": shoot(); break;
+                        case " ": shoot(); e.preventDefault(); break;
                     }
                 };
 
@@ -854,6 +978,38 @@
                         case "ArrowRight": vx = 0; break;
                     }
                 };
+
+                // Touch Controls for Mobile
+                let touchStartX = 0;
+                let isShooting = false;
+
+                const handleTouchStart = (e) => {
+                    e.preventDefault();
+                    touchStartX = e.touches[0].clientX;
+                };
+
+                const handleTouchMove = (e) => {
+                    if (!isMobile()) return;
+                    e.preventDefault();
+                    const touchX = e.touches[0].clientX;
+                    vx = touchX > touchStartX ? 1 : -1;
+                };
+
+                const handleTouchEnd = (e) => {
+                    if (!isMobile()) return;
+                    e.preventDefault();
+                    vx = 0;
+                };
+
+                const handleShootTouch = (e) => {
+                    if (!isMobile()) return;
+                    e.preventDefault();
+                    shoot();
+                };
+
+                canvas.addEventListener("touchstart", handleTouchStart);
+                canvas.addEventListener("touchmove", handleTouchMove);
+                canvas.addEventListener("touchend", handleTouchEnd);
 
                 document.addEventListener("keydown", keyDown);
                 document.addEventListener("keyup", keyUp);
@@ -868,10 +1024,14 @@
                     document.removeEventListener("keyup", keyUp);
                     clearInterval(spawnId);
                     clearInterval(powerUpSpawnId);
+                    canvas.removeEventListener("touchstart", handleTouchStart);
+                    canvas.removeEventListener("touchmove", handleTouchMove);
+                    canvas.removeEventListener("touchend", handleTouchEnd);
+                    window.removeEventListener('resize', resizeCanvas);
                 };
             }, [activeSection, currentGame, lang]);
 
-            // Black Hole Game Logic (Integrated, Optimized, and Localized)
+            // Black Hole Game Logic with Mobile Support
             useEffect(() => {
                 if (activeSection !== 'games' || currentGame !== 'blackhole' || !blackholeCanvasRef.current || !gameStarted) return;
 
@@ -900,6 +1060,25 @@
                 const keyUp = e => { keys[e.key.toLowerCase()] = false; };
                 window.addEventListener('keydown', keyDown);
                 window.addEventListener('keyup', keyUp);
+
+                // Touch controls for Black Hole
+                let touchStart = { x: 0, y: 0 };
+                const handleTouchMove = (e) => {
+                    if (!isMobile()) return;
+                    e.preventDefault();
+                    const touch = e.touches[0];
+                    const dx = touch.clientX - touchStart.x;
+                    const dy = touch.clientY - touchStart.y;
+                    blackhole.velocityX += dx * 0.01;
+                    blackhole.velocityY += dy * 0.01;
+                    touchStart = { x: touch.clientX, y: touch.clientY };
+                };
+
+                canvas.addEventListener('touchstart', (e) => {
+                    e.preventDefault();
+                    touchStart = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+                });
+                canvas.addEventListener('touchmove', handleTouchMove);
 
                 let playing = false;
                 let animationId = null;
@@ -1262,10 +1441,12 @@
                     window.removeEventListener('keydown', keyDown);
                     window.removeEventListener('keyup', keyUp);
                     window.removeEventListener('resize', resizeCanvas);
+                    canvas.removeEventListener('touchstart', handleTouchMove);
+                    canvas.removeEventListener('touchmove', handleTouchMove);
                 };
             }, [activeSection, gameStarted, paused, lang, currentGame]);
 
-            // Space Snake Game Logic
+            // Space Snake Game Logic with Mobile Support
             useEffect(() => {
                 if (activeSection !== 'games' || currentGame !== 'snake' || !snakeCanvasRef.current || !gameStarted) return;
 
@@ -1273,6 +1454,13 @@
                 const ctx = canvas.getContext('2d');
                 canvas.width = 400;
                 canvas.height = 400;
+
+                const resizeCanvas = () => {
+                    canvas.width = Math.min(window.innerWidth - 40, 400);
+                    canvas.height = canvas.width; // Square
+                };
+                resizeCanvas();
+                window.addEventListener('resize', resizeCanvas);
 
                 const gridSize = 20;
                 const tileCount = canvas.width / gridSize;
@@ -1366,6 +1554,7 @@
 
                 gameLoop();
 
+                // Keyboard Controls
                 const keyDown = e => {
                     switch (e.key) {
                         case "ArrowUp":
@@ -1387,7 +1576,34 @@
                     }
                 };
 
+                // Touch/Swipe Controls for Mobile
+                let touchStart = { x: 0, y: 0 };
+                const handleTouchStart = (e) => {
+                    if (!isMobile()) return;
+                    e.preventDefault();
+                    touchStart = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+                };
+
+                const handleTouchEnd = (e) => {
+                    if (!isMobile()) return;
+                    e.preventDefault();
+                    const touchEnd = { x: e.changedTouches[0].clientX, y: e.changedTouches[0].clientY };
+                    const dx = touchEnd.x - touchStart.x;
+                    const dy = touchEnd.y - touchStart.y;
+                    if (Math.abs(dx) > Math.abs(dy)) {
+                        // Horizontal swipe
+                        if (dx > 0 && vx === 0) { vx = 1; vy = 0; }
+                        else if (dx < 0 && vx === 0) { vx = -1; vy = 0; }
+                    } else {
+                        // Vertical swipe
+                        if (dy > 0 && vy === 0) { vx = 0; vy = 1; }
+                        else if (dy < 0 && vy === 0) { vx = 0; vy = -1; }
+                    }
+                };
+
                 window.addEventListener("keydown", keyDown);
+                canvas.addEventListener("touchstart", handleTouchStart);
+                canvas.addEventListener("touchend", handleTouchEnd);
 
                 const autoSpawnId = setInterval(spawnAsteroid, asteroidSpawnRate);
 
@@ -1395,6 +1611,9 @@
                     clearTimeout(timeoutId);
                     clearInterval(autoSpawnId);
                     window.removeEventListener("keydown", keyDown);
+                    canvas.removeEventListener("touchstart", handleTouchStart);
+                    canvas.removeEventListener("touchend", handleTouchEnd);
+                    window.removeEventListener('resize', resizeCanvas);
                 };
             }, [activeSection, gameStarted, paused, lang, currentGame]);
 
@@ -1444,14 +1663,14 @@
                 }, 600);
             };
 
-            // Trivia Quiz (Unchanged)
+            // Trivia Quiz (Enhanced with images)
             const triviaQuestions = [
-                { question: { en: 'Which planet is closest to the Sun?', fr: 'Quelle planète est la plus proche du Soleil ?' }, options: ['Venus', 'Mercury', 'Earth', 'Mars'], answer: 1 },
-                { question: { en: 'Which planet has prominent rings?', fr: 'Quelle planète a des anneaux proéminents ?' }, options: ['Mars', 'Saturn', 'Mercury', 'Venus'], answer: 1 },
-                { question: { en: 'Who manufactures Starship?', fr: 'Qui fabrique Starship ?' }, options: ['NASA', 'ESA', 'SpaceX', 'Roscosmos'], answer: 2 },
-                { question: { en: 'Who was the first human on the Moon?', fr: 'Qui fut le premier humain sur la Lune ?' }, options: ['Yuri Gagarin', 'Neil Armstrong', 'Buzz Aldrin', 'Elon Musk'], answer: 1 },
-                { question: { en: 'What is the largest volcano in the Solar System?', fr: 'Quel est le plus grand volcan du système solaire ?' }, options: ['Mount Everest', 'Mauna Loa', 'Olympus Mons', 'Vesuvius'], answer: 2 },
-                { question: { en: 'Which planet has the Great Red Spot?', fr: 'Quelle planète a la Grande Tache Rouge ?' }, options: ['Jupiter', 'Mars', 'Neptune', 'Uranus'], answer: 0 }
+                { question: { en: 'Which planet is closest to the Sun?', fr: 'Quelle planète est la plus proche du Soleil ?' }, options: ['Venus', 'Mercury', 'Earth', 'Mars'], answer: 1, img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Mercury_in_color_-_Prockter07-edit1.jpg/200px-Mercury_in_color_-_Prockter07-edit1.jpg' },
+                { question: { en: 'Which planet has prominent rings?', fr: 'Quelle planète a des anneaux proéminents ?' }, options: ['Mars', 'Saturn', 'Mercury', 'Venus'], answer: 1, img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Saturn_during_Equinox.jpg/200px-Saturn_during_Equinox.jpg' },
+                { question: { en: 'Who manufactures Starship?', fr: 'Qui fabrique Starship ?' }, options: ['NASA', 'ESA', 'SpaceX', 'Roscosmos'], answer: 2, img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/Starship_SN9_on_Boca_Chica_launch_pad.jpg/200px-Starship_SN9_on_Boca_Chica_launch_pad.jpg' },
+                { question: { en: 'Who was the first human on the Moon?', fr: 'Qui fut le premier humain sur la Lune ?' }, options: ['Yuri Gagarin', 'Neil Armstrong', 'Buzz Aldrin', 'Elon Musk'], answer: 1, img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/Apollo_11_first_step.jpg/200px-Apollo_11_first_step.jpg' },
+                { question: { en: 'What is the largest volcano in the Solar System?', fr: 'Quel est le plus grand volcan du système solaire ?' }, options: ['Mount Everest', 'Mauna Loa', 'Olympus Mons', 'Vesuvius'], answer: 2, img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/OSIRIS_Mars_true_color.jpg/200px-OSIRIS_Mars_true_color.jpg' },
+                { question: { en: 'Which planet has the Great Red Spot?', fr: 'Quelle planète a la Grande Tache Rouge ?' }, options: ['Jupiter', 'Mars', 'Neptune', 'Uranus'], answer: 0, img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Jupiter_and_its_shrunken_Great_Red_Spot.jpg/200px-Jupiter_and_its_shrunken_Great_Red_Spot.jpg' }
             ];
 
             const handleQuizAnswer = (index, selected) => {
@@ -1525,55 +1744,55 @@
                 { name: 'Oscar Bell', role: { en: 'Game Designer', fr: 'Concepteur de Jeux' }, bio: { en: 'Designed the immersive games including Space Snake.', fr: 'A conçu les jeux immersifs dont Space Snake.' } }
             ];
             const ufoSightings = [
-                { media: 'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4', type: 'video', desc: { en: '1947, Washington: Kenneth Arnold’s sighting coined “flying saucers.”', fr: '1947, Washington : Observation de Kenneth Arnold a créé le terme “soucoupes volantes”.' } },
-                { media: 'https://cdn.britannica.com/99/200099-050-5BBFA23F/UFO-farm-McMinnville-Oregon-1950.jpg', type: 'image', desc: { en: '1950, McMinnville, Oregon: Classic flying saucer photo, widely debated.', fr: '1950, McMinnville, Oregon : Photo classique de soucoupe volante, très débattue.' } },
-                { media: 'https://images.pexels.com/photos/73937/pexels-photo-73937.jpeg?auto=compress&cs=tinysrgb&w=200', type: 'image', desc: { en: '1952, Washington D.C.: UFOs over the Capitol, radar-confirmed.', fr: '1952, Washington D.C. : OVNIs au-dessus du Capitole, confirmés par radar.' } },
-                { media: 'https://www.rd.com/wp-content/uploads/2023/07/GettyImages-517392246-scaled-e1690484648656.jpg', type: 'image', desc: { en: '1965, Exeter, New Hampshire: Bright lights reported by police.', fr: '1965, Exeter, New Hampshire : Lumières vives signalées par la police.' } },
-                { media: 'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.webm', type: 'video', desc: { en: '1976, Tehran: Iranian Air Force chased a UFO with advanced tech.', fr: '1976, Téhéran : L’armée de l’air iranienne a poursuivi un OVNI avec technologie avancée.' } },
-                { media: 'https://images.pexels.com/photos/37728/pexels-photo-37728.jpeg?auto=compress&cs=tinysrgb&w=200', type: 'image', desc: { en: '1997, Phoenix: Mass sighting of glowing orbs, thousands witnessed.', fr: '1997, Phoenix : Observation massive d’orbes lumineux, vue par des milliers.' } },
-                { media: 'http://media.newyorker.com/photos/64ca89f569af7f8649142d29/master/pass/Wiley-UFO-03.jpg', type: 'image', desc: { en: '2004, Chile: Navy captured unexplained aerial phenomena on video.', fr: '2004, Chili : La marine a capturé des phénomènes aériens inexpliqués en vidéo.' } },
-                { media: 'https://www.telegraph.co.uk/multimedia/archive/01112/losangeles-1942_1112642i.jpg?imwidth=680', type: 'image', desc: { en: '1942, Los Angeles: Battle of LA UFO incident, anti-aircraft fire reported.', fr: '1942, Los Angeles : Incident OVNI de la Bataille de LA, tirs antiaériens signalés.' } },
-                { media: 'https://images.pexels.com/photos/1551644/pexels-photo-1551644.jpeg?auto=compress&cs=tinysrgb&w=200', type: 'image', desc: { en: '2010, Brazil: Strange craft over São Paulo, recorded by locals.', fr: '2010, Brésil : Engin étrange au-dessus de São Paulo, enregistré par des locaux.' } }
+                { media: 'https://www.youtube.com/embed/xLuHgsXGpqc', type: 'iframe', desc: { en: '1947, Washington: Kenneth Arnold’s sighting coined “flying saucers.” On June 24, 1947, private pilot Kenneth Arnold reported seeing nine shiny unidentified flying objects flying past Mount Rainier at speeds over 1,200 mph. He described them as saucer-like, leading to the term "flying saucers." This event is considered the start of the modern UFO era.', fr: '1947, Washington : Observation de Kenneth Arnold a créé le terme “soucoupes volantes”. Le 24 juin 1947, le pilote privé Kenneth Arnold a rapporté avoir vu neuf objets volants non identifiés brillants passant devant le mont Rainier à des vitesses supérieures à 1 200 mph. Il les a décrits comme des soucoupes, menant au terme "soucoupes volantes". Cet événement est considéré comme le début de l\'ère moderne des OVNI.' } },
+                { media: 'https://upload.wikimedia.org/wikipedia/en/0/0b/Mcminnville_UFO_photographs_1a.gif', type: 'image', desc: { en: '1950, McMinnville, Oregon: Classic flying saucer photo, widely debated. Taken by Paul and Evelyn Trent on their farm. Two photos of a metallic disc-shaped object. Considered one of the most famous and authentic UFO photos, though debated as a hoax or genuine.', fr: '1950, McMinnville, Oregon : Photo classique de soucoupe volante, très débattue. Prise par Paul et Evelyn Trent sur leur ferme. Deux photos d’un objet métallique en forme de disque. Considérée comme l’une des photos d’OVNI les plus célèbres et authentiques, bien que débattue comme un canular ou authentique.' } },
+                { media: 'https://upload.wikimedia.org/wikipedia/commons/5/5a/Washington_DC_UFO_incident_1952.jpg', type: 'image', desc: { en: '1952, Washington D.C.: UFOs over the Capitol, radar-confirmed. In July 1952, multiple UFOs were detected on radar and sighted visually over Washington D.C. Fighters were scrambled, but the objects evaded them. Caused national panic and a press conference denying threat.', fr: '1952, Washington D.C. : OVNIs au-dessus du Capitole, confirmés par radar. En juillet 1952, plusieurs OVNIs ont été détectés au radar et vus visuellement au-dessus de Washington D.C. Des chasseurs ont été envoyés, mais les objets les ont évités. A causé une panique nationale et une conférence de presse niant la menace.' } },
+                { media: 'https://upload.wikimedia.org/wikipedia/en/8/8e/Exeter_incident_map.png', type: 'image', desc: { en: '1965, Exeter, New Hampshire: Bright lights reported by police. On September 3, 1965, teenager Norman Muscarello and two police officers saw a large object with flashing red lights hovering silently. Described in detail in John G. Fuller\'s book "Incident at Exeter."', fr: '1965, Exeter, New Hampshire : Lumières vives signalées par la police. Le 3 septembre 1965, l’adolescent Norman Muscarello et deux policiers ont vu un grand objet avec des lumières rouges clignotantes planant silencieusement. Décrit en détail dans le livre de John G. Fuller "Incident at Exeter".' } },
+                { media: 'https://www.youtube.com/embed/tdoDpCIpcbM', type: 'iframe', desc: { en: '1976, Tehran: Iranian Air Force chased a UFO with advanced tech. On September 19, 1976, Iranian F-4 jets pursued a bright object over Tehran. When jets approached, their instruments and weapons failed; recovered when retreating. Confirmed by radar and multiple witnesses.', fr: '1976, Téhéran : L’armée de l’air iranienne a poursuivi un OVNI avec technologie avancée. Le 19 septembre 1976, des jets F-4 iraniens ont poursuivi un objet brillant au-dessus de Téhéran. Lorsque les jets s’approchaient, leurs instruments et armes échouaient ; récupérés en s’éloignant. Confirmé par radar et plusieurs témoins.' } },
+                { media: 'https://upload.wikimedia.org/wikipedia/commons/4/4d/Phoenix_Lights_1997.jpg', type: 'image', desc: { en: '1997, Phoenix: Mass sighting of glowing orbs, thousands witnessed. On March 13, 1997, thousands saw a massive V-shaped craft with lights over Phoenix, Arizona. Silent and miles wide. Military claimed it was flares, but witnesses dispute this.', fr: '1997, Phoenix : Observation massive d’orbes lumineux, vue par des milliers. Le 13 mars 1997, des milliers ont vu un engin massif en forme de V avec des lumières au-dessus de Phoenix, Arizona. Silencieux et de plusieurs kilomètres de large. L’armée a prétendu que c’était des fusées éclairantes, mais les témoins contestent cela.' } },
+                { media: 'https://www.youtube.com/embed/ZA-h3dIeD_A', type: 'iframe', desc: { en: '2004, Chile: Navy captured unexplained aerial phenomena on video. In November 2014, a Chilean Navy helicopter filmed a UFO ejecting an unknown substance. The object was visible on infrared but not visually. Analyzed for years and remains unexplained.', fr: '2004, Chili : La marine a capturé des phénomènes aériens inexpliqués en vidéo. En novembre 2014, un hélicoptère de la marine chilienne a filmé un OVNI éjectant une substance inconnue. L’objet était visible en infrarouge mais pas visuellement. Analysé pendant des années et reste inexpliqué.' } },
+                { media: 'https://upload.wikimedia.org/wikipedia/en/6/6e/Battle_of_Los_Angeles.jpg', type: 'image', desc: { en: '1942, Los Angeles: Battle of LA UFO incident, anti-aircraft fire reported. On February 25, 1942, air raid sirens sounded in Los Angeles, and over 1,400 anti-aircraft shells were fired at an unidentified object. No planes were found; possibly a weather balloon or UFO.', fr: '1942, Los Angeles : Incident OVNI de la Bataille de LA, tirs antiaériens signalés. Le 25 février 1942, des sirènes de raid aérien ont retenti à Los Angeles, et plus de 1 400 obus antiaériens ont été tirés sur un objet non identifié. Aucun avion trouvé ; possiblement un ballon météo ou OVNI.' } },
+                { media: 'https://nypost.com/wp-content/uploads/sites/2/2022/10/varginha-ufo-01.jpg', type: 'image', desc: { en: '2010, Brazil: Strange craft over São Paulo, recorded by locals.', fr: '2010, Brésil : Engin étrange au-dessus de São Paulo, enregistré par des locaux.' } }
             ];
             const alienDocumentaries = [
                 {
-                    media: 'https://www.youtube.com/embed?listType=search&list=Bob%20Lazar%3A%20Area%2051%20%26%20Flying%20Saucers%20(2018)%20official%20trailer',
+                    media: 'https://www.youtube.com/embed/SaXyhLC631U',
                     type: 'iframe',
                     desc: {
-                        en: 'All videos: Bob Lazar: Area 51 & Flying Saucers (2018)',
-                        fr: 'Toutes les vidéos : Bob Lazar : Zone 51 et soucoupes volantes (2018)'
+                        en: 'Bob Lazar: Area 51 & Flying Saucers (2018) - A documentary about physicist Bob Lazar, who in 1989 spilled the beans about the mysterious Area 51, shocking the whole world.',
+                        fr: 'Bob Lazar : Zone 51 et soucoupes volantes (2018) - Un documentaire sur le physicien Bob Lazar, qui en 1989 a révélé des informations sur la mystérieuse Zone 51, choquant le monde entier.'
                     }
                 },
                 {
-                    media: 'https://www.youtube.com/embed?listType=search&list=The%20Phenomenon%20UFO%20Documentary%20(2020)%20official%20trailer',
+                    media: 'https://www.youtube.com/embed/GnnEZaY9KME',
                     type: 'iframe',
                     desc: {
-                        en: 'All videos: The Phenomenon: UFO Documentary (2020)',
-                        fr: 'Toutes les vidéos : Le Phénomène : Documentaire OVNI (2020)'
+                        en: 'The Phenomenon: UFO Documentary (2020) - This explosive documentary is the most credible examination of the global mystery and cover-up involving UFOs.',
+                        fr: 'Le Phénomène : Documentaire OVNI (2020) - Ce documentaire explosif est l’examen le plus crédible du mystère mondial et de la couverture impliquant les OVNIs.'
                     }
                 },
                 {
-                    media: 'https://www.youtube.com/embed?listType=search&list=Ancient%20Aliens%3A%20The%20Evidence%20(2010)%20full%20episode',
+                    media: 'https://www.youtube.com/embed/KQ0XDHrb7pY',
                     type: 'iframe',
                     desc: {
-                        en: 'All videos: Ancient Aliens: The Evidence (2010)',
-                        fr: 'Toutes les vidéos : Anciens Extraterrestres : Les Preuves (2010)'
+                        en: 'Ancient Aliens: The Evidence (2010) - ANCIENT ALIENS examines 75 million years of the most credible alien evidence here on Earth, from the age of the dinosaurs to ancient Egypt.',
+                        fr: 'Anciens Extraterrestres : Les Preuves (2010) - ANCIENS EXTRATERRESTRES examine 75 millions d’années des preuves extraterrestres les plus crédibles sur Terre, de l’âge des dinosaures à l’Égypte ancienne.'
                     }
                 },
                 {
-                    media: 'https://www.youtube.com/embed?listType=search&list=What%20If%20Aliens%20Exist%3F%20Documentary%20(2021)',
+                    media: 'https://www.youtube.com/embed/dww8Hekngmg',
                     type: 'iframe',
                     desc: {
-                        en: 'All videos: What If Aliens Exist? - Documentary (2021)',
-                        fr: 'Toutes les vidéos : Et si les extraterrestres existaient ? - Documentaire (2021)'
+                        en: 'What If Aliens Exist? - Documentary (2021) - Are we alone? What might alien species look like? And what could we learn from them? Visions of Alien Life explores these questions.',
+                        fr: 'Et si les extraterrestres existaient ? - Documentaire (2021) - Sommes-nous seuls ? À quoi pourraient ressembler les espèces extraterrestres ? Et que pourrions-nous apprendre d’elles ? Visions de la Vie Extraterrestre explore ces questions.'
                     }
                 },
                 {
-                    media: 'https://www.youtube.com/embed?listType=search&list=Unacknowledged%20documentary%20(2017)%20official%20trailer',
+                    media: 'https://www.youtube.com/embed/RUlxjMy6ADU',
                     type: 'iframe',
                     desc: {
-                        en: 'All videos: Unacknowledged (2017)',
-                        fr: 'Toutes les vidéos : Unacknowledged (2017)'
+                        en: 'Unacknowledged (2017) - An exploration of the Alien presence on Earth and the reality of suppressed free energy technology.',
+                        fr: 'Unacknowledged (2017) - Une exploration de la présence extraterrestre sur Terre et de la réalité de la technologie d’énergie libre supprimée.'
                     }
                 }
             ];
@@ -1633,7 +1852,7 @@
                     desc: { en: 'Mars Rovers: Spirit and Opportunity land, confirm past water on Mars, paving way for future exploration.', fr: 'Rovers martiens : Spirit et Opportunity atterrissent, confirment l’eau passée sur Mars, ouvrant la voie à l’exploration future.' }
                 },
                 {
-                    year: '2025', img: 'https://images.pexels.com/photos/586056/pexels-photo-586056.jpeg?auto=compress&cs=tinysrgb&w=200',
+                    year: '2025', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/Starship_SN9_on_Boca_Chica_launch_pad.jpg/200px-Starship_SN9_on_Boca_Chica_launch_pad.jpg',
                     desc: { en: 'Starship: First crewed Mars mission planned by SpaceX, aiming for a permanent human presence.', fr: 'Starship : Première mission martienne habitée prévue par SpaceX, visant une présence humaine permanente.' }
                 }
             ];
@@ -1706,8 +1925,7 @@
                     <button className="chatbot-toggle" onClick={() => setChatOpen(prev => !prev)}>🤖</button>
                     <header className="hero">
                         <video autoPlay loop muted playsInline>
-                            <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" type="video/mp4" />
-                            <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.webm" type="video/webm" />
+                            <source src="https://svs.gsfc.nasa.gov/vis/a000000/a002900/a002983/Earth.4k.20160801.mp4" type="video/mp4" />
                             {lang === 'en' ? 'Your browser does not support the video tag.' : 'Votre navigateur ne prend pas en charge la vidéo.'}
                         </video>
                         <div className="hero-overlay">
@@ -1785,13 +2003,18 @@
                                             <p id="finalDestroyed"></p>
                                             <button id="restartBtn">Restart</button>
                                         </div>
-                                        <p>Controls: Left/Right arrows to move, Space to shoot, P to pause. Avoid or destroy asteroids!</p>
+                                        <p>Controls: Left/Right arrows to move, Space to shoot, P to pause. On mobile: Swipe left/right to move, tap to shoot. Avoid or destroy asteroids!</p>
                                         <p>Asteroids fall with varying speeds and directions. Shoot them to score points. Collect power-ups for bonuses. Every 10 destroyed asteroids increases the level, speeding up the game.</p>
+                                        {isMobile() && (
+                                            <div className="mobile-controls">
+                                                <button onClick={shoot}>🔫</button>
+                                            </div>
+                                        )}
                                     </div>
                                 )}
                                 {currentGame === 'blackhole' && (
                                     <>
-                                        <p className="text-center mb-4">{translations[lang].blackHoleInstructions.replace(/\n/g, ' ')}</p>
+                                        <p className="text-center mb-4">{translations[lang].blackHoleInstructions.replace(/\n/g, ' ')} On mobile: Drag to move.</p>
                                         <div className="flex gap-4 justify-center mb-4">
                                             <button onClick={() => { setGameStarted(true); setPaused(false); }} className="nav-btn">{lang === 'en' ? 'Start' : 'Démarrer'}</button>
                                             <button onClick={() => setPaused(!paused)} className="nav-btn">
@@ -1820,7 +2043,7 @@
                                 )}
                                 {currentGame === 'snake' && (
                                     <>
-                                        <p className="text-center mb-4">{translations[lang].snakeInstructions}</p>
+                                        <p className="text-center mb-4">{translations[lang].snakeInstructions} On mobile: Swipe to change direction.</p>
                                         <div className="flex gap-4 justify-center mb-4">
                                             <button onClick={() => { setGameStarted(true); setPaused(false); setSnakeScore(0); }} className="nav-btn">{translations[lang].startGame}</button>
                                             <button onClick={() => setPaused(!paused)} className="nav-btn">
@@ -1828,7 +2051,7 @@
                                             </button>
                                             <button onClick={() => { setGameStarted(false); setSnakeScore(0); }} className="nav-btn">{translations[lang].replay}</button>
                                         </div>
-                                        {gameStarted && <canvas ref={snakeCanvasRef} width="400" height="400" />}
+                                        {gameStarted && <canvas ref={snakeCanvasRef} width="400" height="400" style={{position: 'relative'}} />}
                                         <div className="mt-4 text-xl font-Orbitron">{translations[lang].score}: {snakeScore}</div>
                                     </>
                                 )}
@@ -1839,6 +2062,7 @@
                                 <h2 className="font-Orbitron text-3xl text-center glow-pulse mb-4">{translations[lang].trivia}</h2>
                                 {currentQuestion < triviaQuestions.length ? (
                                     <div className="card">
+                                        <img src={triviaQuestions[currentQuestion].img} alt="Trivia Image" className="trivia-img" loading="lazy" />
                                         <h3 className="font-Orbitron text-xl mb-4">Q{currentQuestion + 1}: {triviaQuestions[currentQuestion].question[lang]}</h3>
                                         {triviaQuestions[currentQuestion].options.map((option, i) => (
                                             <div
@@ -1868,11 +2092,8 @@
                                     {ufoSightings.map((sighting, i) => (
                                         <div key={i} className="card">
                                             <div className="media-container">
-                                                {sighting.type === 'video' ? (
-                                                    <video controls>
-                                                        <source src={sighting.media} type="video/mp4" />
-                                                        {lang === 'en' ? 'Your browser does not support the video tag.' : 'Votre navigateur ne prend pas en charge la vidéo.'}
-                                                    </video>
+                                                {sighting.type === 'iframe' ? (
+                                                    <iframe src={sighting.media} title={sighting.desc[lang]} allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
                                                 ) : (
                                                     <img src={sighting.media} alt="UFO sighting" loading="lazy" />
                                                 )}
@@ -2291,7 +2512,7 @@
                                             desc: { en: '2025: China’s lunar program advances with far-side sample operations planning.', fr: '2025 : Le programme lunaire chinois progresse avec la planification des opérations d’échantillonnage de la face cachée.' }
                                         },
                                         {
-                                            media: 'https://www.youtube.com/embed?listType=search&list=NASA%20black%20hole%20visualization',
+                                            media: 'https://www.youtube.com/embed/chhcwk4-esM',
                                             type: 'iframe',
                                             desc: { en: 'NASA: Dive into a black hole — new supercomputer visualization.', fr: 'NASA : Plongez dans un trou noir — nouvelle visualisation sur superordinateur.' }
                                         },
